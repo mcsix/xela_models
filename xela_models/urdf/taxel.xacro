@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="xela_taxel">
+
+  <!-- Import Rviz colors -->
+  <xacro:include filename="$(find xela_models)/urdf/materials.xacro" />
+  <xacro:macro name="taxel" params="sequence parent x:=0.0 y:=0.0 z:=0.0 rx:=0.0 ry:=0.0 rz:=0.0 col:='blue' zmod:=0.0">
+    <link name="${sequence}_base_link">
+      <visual>
+        <geometry>
+          <sphere radius="0.001"/>
+        </geometry>
+        <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+        <material name="${col}"/>
+      </visual>
+      <collision>
+        <geometry>
+          <sphere radius="0.001"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="${sequence}_base2x">
+      <visual>
+        <geometry>
+          <sphere radius="0.0001"/>
+        </geometry> 
+        <origin xyz="${x} ${y} ${z}" rpy="0 0 0"/>
+        <material name="${col}"/>
+      </visual> 
+      <collision>
+        <geometry>
+          <sphere radius="0.0001"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="${sequence}_x2y">
+      <visual>
+        <geometry>
+          <sphere radius="0.0001"/>
+        </geometry> 
+        <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+        <material name="${col}"/>
+      </visual> 
+      <collision>
+        <geometry>
+          <sphere radius="0.0001"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="${sequence}_joint_x" type="prismatic">
+      <origin xyz="${x} ${y} ${z}" rpy="${radians(rx)} ${radians(ry)} ${radians(rz)}"/>
+      <parent link="${parent}"/>
+      <child link="${sequence}_base2x"/>
+      <axis xyz="1 0 0"/>
+      <limit effort="100.0" lower="-0.0015" upper="0.0015" velocity="0.5"/>
+    </joint>
+    <joint name="${sequence}_joint_y" type="prismatic">
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <parent link="${sequence}_base2x"/>
+      <child link="${sequence}_x2y"/>
+      <axis xyz="0 1 0"/>
+      <limit effort="100.0" lower="-0.0015" upper="0.0015" velocity="0.5"/>
+    </joint>
+    <joint name="${sequence}_joint_z" type="prismatic">
+      <origin xyz="0.0 0.0 ${zmod}" rpy="0.0 0.0 0.0"/>
+      <parent link="${sequence}_x2y"/>
+      <child link="${sequence}_base_link"/>
+      <axis xyz="0 0 1"/>
+      <limit effort="100.0" lower="${-0.001-zmod}" upper="0.000" velocity="0.5"/>
+    </joint>
+  </xacro:macro>
+
+
+  <xacro:macro name="taxeltest" params="sequence parent x:=0.0 y:=0.0 z:=0.0 rx:=0.0 ry:=0.0 rz:=0.0">
+    <xacro:taxel sequence="${sequence}A"  x="${x}" y="${y}" z="${z}" rx="${rx}" ry="${ry}" rz="${rz}" parent="${parent}" />
+    <xacro:taxel sequence="${sequence}B"  x="${x}" y="${y}" z="${z}" rx="${rx}" ry="${ry}" rz="${rz}" parent="${parent}" col="red" zmod="-0.001" />
+  </xacro:macro>
+
+</robot>

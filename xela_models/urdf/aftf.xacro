@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<robot name="allegro_fingertip_flat" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Import XELA Data -->
+  <xacro:include filename="$(find xela_models)/urdf/xela.xacro" />
+
+  <!-- Used for fixing robot to Gazebo 'base_link' -->
+  <link name="world" />
+
+  <!-- Base Link -->
+  <joint name="fixed" type="fixed">
+    <parent link="world" />
+    <child link="base_link" />
+  </joint>
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <sphere radius="0.001"/>
+      </geometry>
+      <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <xacro:sensoraftf sequence="1" col="red" parent="base_link" />
+
+</robot>
