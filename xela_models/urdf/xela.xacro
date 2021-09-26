@@ -131,6 +131,12 @@
         </geometry>
         <material name="${col}"/>
       </visual>
+      <inertial><!-- TO FILL IN-->
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <mass value="0.0"/>
+        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+      </inertial>
+      
     </link>
 
     <link name="${sequence}_aftf_sensorbase_base_link">
@@ -139,7 +145,7 @@
           <sphere radius="0.001"/>
         </geometry>
         <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
-        <material name="black"/>
+        <material name="black" />
       </visual>
       <collision>
         <geometry>
@@ -153,7 +159,7 @@
           <sphere radius="0.00001"/>
         </geometry>
         <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
-        <material name="black"/>
+        <material name="black" />
       </visual>
       <collision>
         <geometry>
@@ -199,6 +205,11 @@
         </geometry>
         <material name="${col}"/>
       </visual>
+      <inertial><!-- TO FILL IN-->
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <mass value="0.0"/>
+        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+      </inertial>
     </link>
     <xacro:if value="${taxels == 1}">
       <xacro:taxel sequence="${sequence}_aftc_1"  x="0.0101" y="0.0306" z="0.01254" ry="90" rz="30" parent="${sequence}_aftc_base_link" />
@@ -253,6 +264,11 @@
         </geometry>
         <material name="${col}"/>
       </visual>
+      <inertial><!-- TO FILL IN (Allegro defaults)-->
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <mass value="0.0"/>
+        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+      </inertial>
     </link>
   </xacro:macro>
   <xacro:macro name="sensor4x4" params="sequence parent x:=0.0 y:=0.0 z:=0.0 rx:=0.0 ry:=0.0 rz:=0.0 col:='blue' body:=1 taxels:=1">
@@ -277,6 +293,11 @@
           <material name="${col}"/>
         </visual>
       </xacro:if>
+      <inertial><!-- TO FILL IN-->
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <mass value="0.0"/>
+        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+      </inertial>
     </link>
     <xacro:if value="${taxels == 1}">
       <xacro:taxel sequence="${sequence}_4x4_1"  x="${1*0.0046666+0.0007}" y="${4*0.00466666+0.00015}" z="0.004" parent="${sequence}_4x4_base_link" />
@@ -319,6 +340,11 @@
           <material name="${col}"/>
         </visual>
       </xacro:if>
+      <inertial><!-- TO FILL IN-->
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <mass value="0.0"/>
+        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+      </inertial>
     </link>
     <xacro:if value="${taxels == 1}">
       <xacro:taxel sequence="${sequence}_1x6_1" x="${1*0.0046666-0.0023}" y="${6*0.00466666-0.0023}" z="0.005" parent="${sequence}_1x6_base_link" />
@@ -351,6 +377,11 @@
           <material name="${col}"/>
         </visual>
       </xacro:if>
+      <inertial><!-- TO FILL IN-->
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <mass value="0.0"/>
+        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+      </inertial>
     </link>
     <xacro:if value="${taxels == 1}">
       <xacro:taxel sequence="${sequence}_4x6_1"  x="${1*0.00724+0.0030}" y="${4*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_base_link" />
@@ -403,6 +434,11 @@
           <box size="0.0408 0.1130 ${0.095}"/>
         </geometry>
       </collision>
+      <inertial><!-- TO FILL IN BASE-->
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <mass value="0.0"/>
+        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+      </inertial>
     </link>
     <joint name="${sequence}_ahr_fixed" type="fixed">
         <origin xyz="${x} ${y} ${z}" rpy="${radians(rx)} ${radians(ry)} ${radians(rz)}"/>
@@ -483,10 +519,15 @@
           </geometry>
           <origin rpy="0 0 0" xyz="0 0 ${0.0164/2+0.003}"/>
         </collision>
+        <inertial><!-- TO FILL IN-->
+          <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+          <mass value="0.0"/>
+          <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+        </inertial>
       </link>
       <joint name="${sequence}_finger_joint_${finger_num*4+0}" type="revolute">
         <axis xyz="0 0 1"/>
-        <limit effort="0" velocity="0" lower="${-0.57+0.1}" upper="${0.57-0.1}" />
+        <limit effort="15" velocity="7" lower="${-0.57+0.1}" upper="${0.57-0.1}" />
         <parent link="${parent}"/>
         <child link="${sequence}_finger_link_${finger_num*4+0}"/>
         <origin rpy="${finger_angle_r} 0 0" xyz="${offset_origin_x} ${offset_origin_y} ${offset_origin_z}"/>
@@ -501,15 +542,20 @@
               <mesh filename="package://xela_models/mesh/allegro/link_1_ns.stl"/>   
             </xacro:if>
           </geometry>
-          <material name="black"/>
+          <material name="black" />
         </visual>   
       
         <collision>
           <geometry>
-            <box size="${0.0196} ${0.0275} ${0.0540}"/>
+            <box size="${0.0196} ${0.0275} ${0.0164}"/>
           </geometry>
-          <origin rpy="0 0 0" xyz="0 0 ${0.0540/2}"/>
+          <origin rpy="0 0 0" xyz="0 0 ${0.0164/2}"/>
         </collision>
+        <inertial><!-- TO FILL IN-->
+          <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+          <mass value="0.0"/>
+          <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+        </inertial>
       </link>
       <xacro:if value="${covers == 1}">
         <link name="${sequence}_finger_link_${finger_num*4+1}_cover">	
@@ -525,11 +571,16 @@
             </geometry>
             <origin rpy="0 0 0" xyz="0 0 ${0.0177/2}"/>
           </collision>    
+          <inertial><!-- TO FILL IN-->
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <mass value="0.0"/>
+            <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+          </inertial>
         </link>
         <joint name="${sequence}_finger_link_${finger_num*4+1}_cover_joint" type="fixed">
-        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
-        <parent link="${sequence}_finger_link_${finger_num*4+1}" />
-        <child link="${sequence}_finger_link_${finger_num*4+1}_cover" />
+          <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+          <parent link="${sequence}_finger_link_${finger_num*4+1}" />
+          <child link="${sequence}_finger_link_${finger_num*4+1}_cover" />
         </joint>
       </xacro:if>
       <xacro:if value="${phalanges == 1}">
@@ -537,7 +588,7 @@
         <xacro:sensor4x4 sequence="${sequence}_finger_link_${finger_num*4+1}B" col="red" parent="${sequence}_finger_link_${finger_num*4+1}" ry="90" z="0.021" y="-0.012" x="0.0108" body="0" taxels="${taxels}" />
       </xacro:if>
       <joint name="${sequence}_finger_joint_${finger_num*4+1}" type="revolute">
-        <limit effort="0" velocity="0" lower="${-0.296+0.1}" upper="${1.71-0.1}" />
+        <limit effort="15" velocity="7" lower="${-0.296+0.1}" upper="${1.71-0.1}" />
         <axis xyz="0 1 0"/>
         <parent link="${sequence}_finger_link_${finger_num*4+0}"/>
         <child link="${sequence}_finger_link_${finger_num*4+1}"/>
@@ -553,14 +604,19 @@
               <mesh filename="package://xela_models/mesh/allegro/link_2_ns.stl"/>   
             </xacro:if>
           </geometry>
-          <material name="black"/>
+          <material name="black" />
         </visual>
         <collision>
           <geometry>
-            <box size="${0.0196} ${0.0275} ${0.0384}"/>
+            <box size="${0.0196} ${0.0275} ${0.0540}"/>
           </geometry>
-          <origin rpy="0 0 0" xyz="0 0 ${0.0384/2}"/>     
+          <origin rpy="0 0 0" xyz="0 0 ${0.0540/2}"/>     
         </collision>
+        <inertial><!-- TO FILL IN-->
+          <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+          <mass value="0.0"/>
+          <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+        </inertial>
       </link>
       <xacro:if value="${covers == 1}">
         <link name="${sequence}_finger_link_${finger_num*4+2}_cover">	
@@ -576,11 +632,16 @@
             </geometry>
             <origin rpy="0 0 0" xyz="0 0 ${0.0514/2}"/>
           </collision>    
+          <inertial><!-- TO FILL IN-->
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <mass value="0.0"/>
+            <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+          </inertial>
         </link>
         <joint name="${sequence}_finger_link_${finger_num*4+2}_cover_joint" type="fixed">
-        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
-        <parent link="${sequence}_finger_link_${finger_num*4+2}" />
-        <child link="${sequence}_finger_link_${finger_num*4+2}_cover" />
+          <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+          <parent link="${sequence}_finger_link_${finger_num*4+2}" />
+          <child link="${sequence}_finger_link_${finger_num*4+2}_cover" />
         </joint>
       </xacro:if>
       <xacro:if value="${phalanges == 1}">
@@ -588,7 +649,7 @@
       </xacro:if>
       <joint name="${sequence}_finger_joint_${finger_num*4+2}" type="revolute">
         <axis xyz="0 1 0"/>
-        <limit effort="0" velocity="0" lower="${-0.274+0.1}" upper="${1.809-0.1}" />
+        <limit effort="15" velocity="7" lower="${-0.274+0.1}" upper="${1.809-0.1}" />
         <parent link="${sequence}_finger_link_${finger_num*4+1}"/>
         <child link="${sequence}_finger_link_${finger_num*4+2}"/>
         <origin xyz="0 0 ${0.0540}"/>
@@ -598,21 +659,26 @@
           <geometry>
             <mesh filename="package://xela_models/mesh/allegro/link_3.0.STL" />
           </geometry>
-          <material name="black"/>
+          <material name="black" />
         </visual>
         <collision>
           <geometry>
-            <box size="${0.0196} ${0.0275} ${0.0387-0.0120}"/>
+            <box size="${0.0196} ${0.0275} ${0.0384-0.0120}"/>
           </geometry>
-          <origin rpy="0 0 0" xyz="0 0 ${(0.0387-0.0120)/2}"/>
-        </collision>   
+          <origin rpy="0 0 0" xyz="0 0 ${(0.0384-0.0120)/2}"/>
+        </collision>  
+        <inertial><!-- TO FILL IN-->
+          <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+          <mass value="0.0"/>
+          <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+        </inertial> 
       </link>
       <joint name="${sequence}_finger_joint_${finger_num*4+3}" type="revolute">
         <axis xyz="0 1 0"/>
-        <limit effort="0" velocity="0" lower="${-0.327+0.1}" upper="${1.718-0.1}" />
+        <limit effort="15" velocity="7" lower="${-0.327+0.1}" upper="${1.718-0.1}" />
         <parent link="${sequence}_finger_link_${finger_num*4+2}"/>
         <child link="${sequence}_finger_link_${finger_num*4+3}"/>
-        <origin xyz="0 0.0002 0.043"/>
+        <origin xyz="0 0.0 0.0384"/>
       </joint>
     <xacro:if value="${tip == 'flat'}">
       <xacro:sensoraftf sequence="${sequence}_finger_${finger_num}" col="red" parent="${sequence}_finger_link_${finger_num*4+3}" rx="90" rz="90" z="0.016" taxels="${taxels}" />
@@ -630,9 +696,7 @@
           <geometry>
             <mesh filename="package://xela_models/mesh/allegro/link_12.0_right.STL" />
           </geometry>
-          <material name="black">
-            <color rgba=".2 .2 .2 1"/>
-          </material>
+          <material name="grey" />
         </visual>
         <collision>
           <geometry>
@@ -640,10 +704,15 @@
           </geometry>
           <origin rpy="0 0 0" xyz="${-0.0358/2+0.0} ${.018/2} ${.029/2}"/>
         </collision>
+        <inertial><!-- TO FILL IN-->
+          <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+          <mass value="0.0"/>
+          <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+        </inertial>
       </link>
       <joint name="${sequence}_joint_${finger_num*4+0}" type="revolute">
         <axis xyz="-1 0 0"/>
-        <limit effort="0" velocity="0" lower="${0.363-0.1}" upper="${1.496-0.1}" />
+        <limit effort="15" velocity="7" lower="${0.363-0.1}" upper="${1.496-0.1}" />
         <parent link="${parent}"/>
         <child link="${sequence}_link_${finger_num*4+0}"/>
         <origin rpy="${finger_angle_r} ${finger_angle_p} ${finger_angle_y}" xyz="${offset_origin_x} ${offset_origin_y} ${offset_origin_z}"/>
@@ -653,16 +722,19 @@
           <geometry>
             <mesh filename="package://xela_models/mesh/allegro/link_13.0.STL" />
           </geometry>
-          <material name="black">
-            <color rgba=".2 .2 .2 1"/>
-          </material>
+          <material name="grey" />
         </visual>
         <collision>
           <geometry>
             <box size="${0.0196} ${0.0275} ${0.0177}"/>
           </geometry>
           <origin rpy="0 0 0" xyz="0 0 ${0.0177/2}"/>
-        </collision>    
+        </collision>   
+        <inertial><!-- TO FILL IN-->
+          <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+          <mass value="0.0"/>
+          <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+        </inertial> 
       </link>
       <xacro:if value="${covers == 1}">
         <link name="${sequence}_link_${finger_num*4+1}_cover">	
@@ -677,17 +749,22 @@
               <mesh filename="package://xela_models/mesh/allegro/thumb_1_cover.stl" />
             </geometry>
             <origin rpy="0 0 0" xyz="0 0 0"/>
-          </collision>    
+          </collision>   
+          <inertial><!-- TO FILL IN-->
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <mass value="0.0"/>
+            <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+          </inertial> 
         </link>
         <joint name="${sequence}_link_${finger_num*4+1}_cover_joint" type="fixed">
-        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
-        <parent link="${sequence}_link_${finger_num*4+2}" />
-        <child link="${sequence}_link_${finger_num*4+1}_cover" />
+          <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+          <parent link="${sequence}_link_${finger_num*4+2}" />
+          <child link="${sequence}_link_${finger_num*4+1}_cover" />
         </joint>
       </xacro:if>
       <joint name="${sequence}_joint_${finger_num*4+1}" type="revolute">
         <axis xyz="0 0 1"/>
-        <limit effort="0" velocity="0" lower="${-0.205+0.1}" upper="${1.263-0.1}" />
+        <limit effort="15" velocity="7" lower="${-0.205+0.1}" upper="${1.263-0.1}" />
         <parent link="${sequence}_link_${finger_num*4+0}"/>
         <child link="${sequence}_link_${finger_num*4+1}"/>   
         <origin xyz="-0.027 0.005 0.0399"/>
@@ -702,8 +779,7 @@
               <mesh filename="package://xela_models/mesh/allegro/thumb_1.1_ns.stl"/>   
             </xacro:if>
           </geometry>
-          <material name="black">
-          </material>
+          <material name="black" />
         </visual>
         <collision>
           <geometry>
@@ -711,6 +787,11 @@
           </geometry>
           <origin rpy="0 0 0" xyz="0 0 ${0.0514/2}"/>
         </collision>
+        <inertial><!-- TO FILL IN-->
+          <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+          <mass value="0.0"/>
+          <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+        </inertial>
       </link>
       <xacro:if value="${covers == 1}">
         <link name="${sequence}_link_${finger_num*4+2}_cover">	
@@ -725,12 +806,17 @@
               <mesh filename="package://xela_models/mesh/allegro/thumb_2_cover.stl" />
             </geometry>
             <origin rpy="0 0 0" xyz="0 0 0"/>
-          </collision>    
+          </collision>  
+          <inertial><!-- TO FILL IN-->
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <mass value="0.0"/>
+            <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+          </inertial>  
         </link>
         <joint name="${sequence}_link_${finger_num*4+2}_cover_joint" type="fixed">
-        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
-        <parent link="${sequence}_link_${finger_num*4+3}" />
-        <child link="${sequence}_link_${finger_num*4+2}_cover" />
+          <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+          <parent link="${sequence}_link_${finger_num*4+3}" />
+          <child link="${sequence}_link_${finger_num*4+2}_cover" />
         </joint>
       </xacro:if>
       <xacro:if value="${phalanges == 1}">
@@ -738,7 +824,7 @@
       </xacro:if>
       <joint name="${sequence}_joint_${finger_num*4+2}" type="revolute">
         <axis xyz="0 1 0"/>
-        <limit effort="0" velocity="0" lower="${-0.289+0.1}" upper="${1.744-0.1}" />
+        <limit effort="15" velocity="7" lower="${-0.289+0.1}" upper="${1.744-0.1}" />
         <parent link="${sequence}_link_${finger_num*4+1}"/>
         <child link="${sequence}_link_${finger_num*4+2}"/>
         <origin xyz="0 0 ${0.0177}"/>
@@ -753,8 +839,7 @@
               <mesh filename="package://xela_models/mesh/allegro/thumb_1.2_ns.stl"/>   
             </xacro:if> 
           </geometry>
-        <material name="black">
-        </material>
+        <material name="black" />
         </visual>
         <collision>
           <geometry>
@@ -762,13 +847,18 @@
           </geometry>
           <origin rpy="0 0 0" xyz="0 0 ${(0.0543-0.0120)/2}"/>
         </collision>
+        <inertial><!-- TO FILL IN-->
+          <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+          <mass value="0.0"/>
+          <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+        </inertial>
       </link>
       <xacro:if value="${phalanges == 1}">
         <xacro:sensor4x4 sequence="${sequence}_link_${finger_num*4+3}" parent="${sequence}_link_${finger_num*4+3}" ry="90" z="0.021" y="-0.012" x="0.011" body="0" taxels="${taxels}" />
       </xacro:if>
     <joint name="${sequence}_joint_${finger_num*4+3}" type="revolute">
       <axis xyz="0 1 0"/>
-      <limit effort="0" velocity="0" lower="${-0.262+0.1}" upper="${1.819-0.1}" />
+      <limit effort="15" velocity="7" lower="${-0.262+0.1}" upper="${1.819-0.1}" />
       <parent link="${sequence}_link_${finger_num*4+2}"/>
       <child link="${sequence}_link_${finger_num*4+3}"/>
       <origin xyz="0 0 ${0.0514}"/>
