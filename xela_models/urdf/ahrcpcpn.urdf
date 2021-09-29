@@ -6,16 +6,16 @@
 <robot name="allegro_hand_right">
   <!-- Rviz colors -->
   <material name="black">
-    <color rgba="0.0 0.0 0.0 1.0"/>
+    <color rgba="0.2 0.2 0.2 1.0"/>
   </material>
   <material name="blue">
-    <color rgba="0.0 0.0 0.8 1.0"/>
+    <color rgba="0.2 0.2 0.8 1.0"/>
   </material>
   <material name="green">
     <color rgba="0.0 0.8 0.0 1.0"/>
   </material>
   <material name="grey">
-    <color rgba="0.2 0.2 0.2 1.0"/>
+    <color rgba="0.4 0.4 0.4 1.0"/>
   </material>
   <material name="orange">
     <color rgba="1.0 0.4235294117647059 0.0392156862745098 1.0"/>
@@ -145,7 +145,7 @@
   </link>
   <joint name="1_hitosashi_finger_finger_joint_0" type="revolute">
     <axis xyz="0 0 1"/>
-    <limit effort="0" lower="-0.47" upper="0.47" velocity="0"/>
+    <limit effort="15" lower="-0.47" upper="0.47" velocity="7"/>
     <parent link="1_ahr_base_link"/>
     <child link="1_hitosashi_finger_finger_link_0"/>
     <origin rpy="-0.08726646259971647 0 0" xyz="0 0.0435 -0.001542"/>
@@ -159,9 +159,9 @@
     </visual>
     <collision>
       <geometry>
-        <box size="0.0196 0.0275 0.054"/>
+        <box size="0.0196 0.0275 0.0164"/>
       </geometry>
-      <origin rpy="0 0 0" xyz="0 0 0.027"/>
+      <origin rpy="0 0 0" xyz="0 0 0.0082"/>
     </collision>
   </link>
   <link name="1_hitosashi_finger_finger_link_1_cover">
@@ -210,7 +210,7 @@
     </collision>
   </link>
   <joint name="1_hitosashi_finger_finger_joint_1" type="revolute">
-    <limit effort="0" lower="-0.19599999999999998" upper="1.6099999999999999" velocity="0"/>
+    <limit effort="15" lower="-0.19599999999999998" upper="1.6099999999999999" velocity="7"/>
     <axis xyz="0 1 0"/>
     <parent link="1_hitosashi_finger_finger_link_0"/>
     <child link="1_hitosashi_finger_finger_link_1"/>
@@ -226,9 +226,9 @@
     </visual>
     <collision>
       <geometry>
-        <box size="0.0196 0.0275 0.0384"/>
+        <box size="0.0196 0.0275 0.054"/>
       </geometry>
-      <origin rpy="0 0 0" xyz="0 0 0.0192"/>
+      <origin rpy="0 0 0" xyz="0 0 0.027"/>
     </collision>
   </link>
   <link name="1_hitosashi_finger_finger_link_2_cover">
@@ -265,7 +265,7 @@
   </link>
   <joint name="1_hitosashi_finger_finger_joint_2" type="revolute">
     <axis xyz="0 1 0"/>
-    <limit effort="0" lower="-0.17400000000000002" upper="1.7089999999999999" velocity="0"/>
+    <limit effort="15" lower="-0.17400000000000002" upper="1.7089999999999999" velocity="7"/>
     <parent link="1_hitosashi_finger_finger_link_1"/>
     <child link="1_hitosashi_finger_finger_link_2"/>
     <origin xyz="0 0 0.054"/>
@@ -279,17 +279,17 @@
     </visual>
     <collision>
       <geometry>
-        <box size="0.0196 0.0275 0.026699999999999998"/>
+        <box size="0.0196 0.0275 0.026399999999999996"/>
       </geometry>
-      <origin rpy="0 0 0" xyz="0 0 0.013349999999999999"/>
+      <origin rpy="0 0 0" xyz="0 0 0.013199999999999998"/>
     </collision>
   </link>
   <joint name="1_hitosashi_finger_finger_joint_3" type="revolute">
     <axis xyz="0 1 0"/>
-    <limit effort="0" lower="-0.227" upper="1.6179999999999999" velocity="0"/>
+    <limit effort="15" lower="-0.227" upper="1.6179999999999999" velocity="7"/>
     <parent link="1_hitosashi_finger_finger_link_2"/>
     <child link="1_hitosashi_finger_finger_link_3"/>
-    <origin xyz="0 0.0002 0.043"/>
+    <origin xyz="0 0.0 0.0384"/>
   </joint>
   <joint name="1_hitosashi_finger_finger_0_aftc_fixed" type="fixed">
     <origin rpy="1.5707963267948966 0.0 1.5707963267948966" xyz="-0.013 0.0 0.016"/>
@@ -327,7 +327,7 @@
   </link>
   <joint name="1_naka_finger_finger_joint_4" type="revolute">
     <axis xyz="0 0 1"/>
-    <limit effort="0" lower="-0.47" upper="0.47" velocity="0"/>
+    <limit effort="15" lower="-0.47" upper="0.47" velocity="7"/>
     <parent link="1_ahr_base_link"/>
     <child link="1_naka_finger_finger_link_4"/>
     <origin rpy="0.0 0 0" xyz="0 0 0.0007"/>
@@ -341,9 +341,9 @@
     </visual>
     <collision>
       <geometry>
-        <box size="0.0196 0.0275 0.054"/>
+        <box size="0.0196 0.0275 0.0164"/>
       </geometry>
-      <origin rpy="0 0 0" xyz="0 0 0.027"/>
+      <origin rpy="0 0 0" xyz="0 0 0.0082"/>
     </collision>
   </link>
   <link name="1_naka_finger_finger_link_5_cover">
@@ -392,7 +392,7 @@
     </collision>
   </link>
   <joint name="1_naka_finger_finger_joint_5" type="revolute">
-    <limit effort="0" lower="-0.19599999999999998" upper="1.6099999999999999" velocity="0"/>
+    <limit effort="15" lower="-0.19599999999999998" upper="1.6099999999999999" velocity="7"/>
     <axis xyz="0 1 0"/>
     <parent link="1_naka_finger_finger_link_4"/>
     <child link="1_naka_finger_finger_link_5"/>
@@ -408,9 +408,9 @@
     </visual>
     <collision>
       <geometry>
-        <box size="0.0196 0.0275 0.0384"/>
+        <box size="0.0196 0.0275 0.054"/>
       </geometry>
-      <origin rpy="0 0 0" xyz="0 0 0.0192"/>
+      <origin rpy="0 0 0" xyz="0 0 0.027"/>
     </collision>
   </link>
   <link name="1_naka_finger_finger_link_6_cover">
@@ -447,7 +447,7 @@
   </link>
   <joint name="1_naka_finger_finger_joint_6" type="revolute">
     <axis xyz="0 1 0"/>
-    <limit effort="0" lower="-0.17400000000000002" upper="1.7089999999999999" velocity="0"/>
+    <limit effort="15" lower="-0.17400000000000002" upper="1.7089999999999999" velocity="7"/>
     <parent link="1_naka_finger_finger_link_5"/>
     <child link="1_naka_finger_finger_link_6"/>
     <origin xyz="0 0 0.054"/>
@@ -461,17 +461,17 @@
     </visual>
     <collision>
       <geometry>
-        <box size="0.0196 0.0275 0.026699999999999998"/>
+        <box size="0.0196 0.0275 0.026399999999999996"/>
       </geometry>
-      <origin rpy="0 0 0" xyz="0 0 0.013349999999999999"/>
+      <origin rpy="0 0 0" xyz="0 0 0.013199999999999998"/>
     </collision>
   </link>
   <joint name="1_naka_finger_finger_joint_7" type="revolute">
     <axis xyz="0 1 0"/>
-    <limit effort="0" lower="-0.227" upper="1.6179999999999999" velocity="0"/>
+    <limit effort="15" lower="-0.227" upper="1.6179999999999999" velocity="7"/>
     <parent link="1_naka_finger_finger_link_6"/>
     <child link="1_naka_finger_finger_link_7"/>
-    <origin xyz="0 0.0002 0.043"/>
+    <origin xyz="0 0.0 0.0384"/>
   </joint>
   <joint name="1_naka_finger_finger_1_aftc_fixed" type="fixed">
     <origin rpy="1.5707963267948966 0.0 1.5707963267948966" xyz="-0.013 0.0 0.016"/>
@@ -509,7 +509,7 @@
   </link>
   <joint name="1_kusuri_finger_finger_joint_8" type="revolute">
     <axis xyz="0 0 1"/>
-    <limit effort="0" lower="-0.47" upper="0.47" velocity="0"/>
+    <limit effort="15" lower="-0.47" upper="0.47" velocity="7"/>
     <parent link="1_ahr_base_link"/>
     <child link="1_kusuri_finger_finger_link_8"/>
     <origin rpy="0.08726646259971647 0 0" xyz="0 -0.0435 -0.001542"/>
@@ -523,9 +523,9 @@
     </visual>
     <collision>
       <geometry>
-        <box size="0.0196 0.0275 0.054"/>
+        <box size="0.0196 0.0275 0.0164"/>
       </geometry>
-      <origin rpy="0 0 0" xyz="0 0 0.027"/>
+      <origin rpy="0 0 0" xyz="0 0 0.0082"/>
     </collision>
   </link>
   <link name="1_kusuri_finger_finger_link_9_cover">
@@ -574,7 +574,7 @@
     </collision>
   </link>
   <joint name="1_kusuri_finger_finger_joint_9" type="revolute">
-    <limit effort="0" lower="-0.19599999999999998" upper="1.6099999999999999" velocity="0"/>
+    <limit effort="15" lower="-0.19599999999999998" upper="1.6099999999999999" velocity="7"/>
     <axis xyz="0 1 0"/>
     <parent link="1_kusuri_finger_finger_link_8"/>
     <child link="1_kusuri_finger_finger_link_9"/>
@@ -590,9 +590,9 @@
     </visual>
     <collision>
       <geometry>
-        <box size="0.0196 0.0275 0.0384"/>
+        <box size="0.0196 0.0275 0.054"/>
       </geometry>
-      <origin rpy="0 0 0" xyz="0 0 0.0192"/>
+      <origin rpy="0 0 0" xyz="0 0 0.027"/>
     </collision>
   </link>
   <link name="1_kusuri_finger_finger_link_10_cover">
@@ -629,7 +629,7 @@
   </link>
   <joint name="1_kusuri_finger_finger_joint_10" type="revolute">
     <axis xyz="0 1 0"/>
-    <limit effort="0" lower="-0.17400000000000002" upper="1.7089999999999999" velocity="0"/>
+    <limit effort="15" lower="-0.17400000000000002" upper="1.7089999999999999" velocity="7"/>
     <parent link="1_kusuri_finger_finger_link_9"/>
     <child link="1_kusuri_finger_finger_link_10"/>
     <origin xyz="0 0 0.054"/>
@@ -643,17 +643,17 @@
     </visual>
     <collision>
       <geometry>
-        <box size="0.0196 0.0275 0.026699999999999998"/>
+        <box size="0.0196 0.0275 0.026399999999999996"/>
       </geometry>
-      <origin rpy="0 0 0" xyz="0 0 0.013349999999999999"/>
+      <origin rpy="0 0 0" xyz="0 0 0.013199999999999998"/>
     </collision>
   </link>
   <joint name="1_kusuri_finger_finger_joint_11" type="revolute">
     <axis xyz="0 1 0"/>
-    <limit effort="0" lower="-0.227" upper="1.6179999999999999" velocity="0"/>
+    <limit effort="15" lower="-0.227" upper="1.6179999999999999" velocity="7"/>
     <parent link="1_kusuri_finger_finger_link_10"/>
     <child link="1_kusuri_finger_finger_link_11"/>
-    <origin xyz="0 0.0002 0.043"/>
+    <origin xyz="0 0.0 0.0384"/>
   </joint>
   <joint name="1_kusuri_finger_finger_2_aftc_fixed" type="fixed">
     <origin rpy="1.5707963267948966 0.0 1.5707963267948966" xyz="-0.013 0.0 0.016"/>
@@ -680,9 +680,7 @@
       <geometry>
         <mesh filename="package://xela_models/mesh/allegro/link_12.0_right.STL"/>
       </geometry>
-      <material name="black">
-        <color rgba=".2 .2 .2 1"/>
-      </material>
+      <material name="grey"/>
     </visual>
     <collision>
       <geometry>
@@ -693,7 +691,7 @@
   </link>
   <joint name="1_oya_finger_joint_12" type="revolute">
     <axis xyz="-1 0 0"/>
-    <limit effort="0" lower="0.263" upper="1.396" velocity="0"/>
+    <limit effort="15" lower="0.263" upper="1.396" velocity="7"/>
     <parent link="1_ahr_base_link"/>
     <child link="1_oya_finger_link_12"/>
     <origin rpy="0 -1.6580627893946132 -1.5707963267948966" xyz="-0.0182 0.019333 -0.045987"/>
@@ -703,9 +701,7 @@
       <geometry>
         <mesh filename="package://xela_models/mesh/allegro/link_13.0.STL"/>
       </geometry>
-      <material name="black">
-        <color rgba=".2 .2 .2 1"/>
-      </material>
+      <material name="grey"/>
     </visual>
     <collision>
       <geometry>
@@ -735,7 +731,7 @@
   </joint>
   <joint name="1_oya_finger_joint_13" type="revolute">
     <axis xyz="0 0 1"/>
-    <limit effort="0" lower="-0.10499999999999998" upper="1.1629999999999998" velocity="0"/>
+    <limit effort="15" lower="-0.10499999999999998" upper="1.1629999999999998" velocity="7"/>
     <parent link="1_oya_finger_link_12"/>
     <child link="1_oya_finger_link_13"/>
     <origin xyz="-0.027 0.005 0.0399"/>
@@ -745,8 +741,7 @@
       <geometry>
         <mesh filename="package://xela_models/mesh/allegro/thumb_1.1.stl"/>
       </geometry>
-      <material name="black">
-          </material>
+      <material name="black"/>
     </visual>
     <collision>
       <geometry>
@@ -789,7 +784,7 @@
   </link>
   <joint name="1_oya_finger_joint_14" type="revolute">
     <axis xyz="0 1 0"/>
-    <limit effort="0" lower="-0.18899999999999997" upper="1.644" velocity="0"/>
+    <limit effort="15" lower="-0.18899999999999997" upper="1.644" velocity="7"/>
     <parent link="1_oya_finger_link_13"/>
     <child link="1_oya_finger_link_14"/>
     <origin xyz="0 0 0.0177"/>
@@ -799,8 +794,7 @@
       <geometry>
         <mesh filename="package://xela_models/mesh/allegro/thumb_2.1.stl"/>
       </geometry>
-      <material name="black">
-        </material>
+      <material name="black"/>
     </visual>
     <collision>
       <geometry>
@@ -824,7 +818,7 @@
   </link>
   <joint name="1_oya_finger_joint_15" type="revolute">
     <axis xyz="0 1 0"/>
-    <limit effort="0" lower="-0.162" upper="1.7189999999999999" velocity="0"/>
+    <limit effort="15" lower="-0.162" upper="1.7189999999999999" velocity="7"/>
     <parent link="1_oya_finger_link_14"/>
     <child link="1_oya_finger_link_15"/>
     <origin xyz="0 0 0.0514"/>
@@ -853,3 +847,4 @@
   <!-- <xacro:allegro_hand_right sequence="2" parent="base_link" x="0.2" tips="curved" /> -->
   <!-- <xacro:allegro_hand_right sequence="3" parent="base_link" x="-0.2" covers="0" palm="0" phalanges="0" tips="default"/> -->
 </robot>
+
