@@ -78,6 +78,12 @@ To run the visualization of the model, use following command;
 
 
 ## Changelog and notes
+### _2021/10/04_
+* Add more options for custom use cases
+    * Inertias can be disabled for individual sensors if calculated into parent link
+    * Hand links can be with default names by using _defaultnames_ parameter
+* All links that move and sensors have defined inertias and masses for simulation (calculated with trimesh library for Python)
+
 ### _2021/09/13_ 
 * Replace the link between base and finger
 * Move finger up by 4 mm due to the change in the link

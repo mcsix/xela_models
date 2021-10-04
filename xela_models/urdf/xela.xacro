@@ -3,7 +3,7 @@
 
   <!-- Rviz colors -->
   <material name="black">
-    <color rgba="0.0 0.0 0.0 1.0"/>
+    <color rgba="0.1 0.1 0.1 1.0"/>
   </material>
 
   <material name="blue">
@@ -426,7 +426,13 @@
 
   <!-- Allegro Hands -->
   <xacro:macro name="allegro_hand_right" params="sequence parent x:=0.0 y:=0.0 z:=0.0 rx:=0.0 ry:=0.0 rz:=0.0 covers:=1 phalanges:=1 tips:='flat' palm:=1 taxels:=0 defaultnames:=0">
-    <link name="${sequence}_base_link">
+    <xacro:if value="${sequence == ''}">
+      <xacro:property name="seq" value=""/>
+    </xacro:if>
+    <xacro:unless value="${sequence == ''}">
+      <xacro:property name="seq" value="${sequence}_"/>
+    </xacro:unless>
+    <link name="${seq}base_link">
       <visual>
         <geometry>
           <xacro:if value="${palm == 1}">
@@ -462,20 +468,20 @@
         </inertial>
       </xacro:if>
     </link>
-    <joint name="${sequence}_ahr_fixed" type="fixed">
+    <joint name="${seq}ahr_fixed" type="fixed">
         <origin xyz="${x} ${y} ${z}" rpy="${radians(rx)} ${radians(ry)} ${radians(rz)}"/>
         <parent link="${parent}" />
-        <child link="${sequence}_base_link" />
+        <child link="${seq}base_link" />
       </joint>
     <xacro:if value="${palm == 1}">
-      <xacro:sensor4x6 sequence="${sequence}_ahr_palm_1" col="red" parent="${sequence}_base_link" x="0.013" y="-0.051" z="-0.0365"  rz="90" rx="90" ry="0.0" taxels="${taxels}" skipinertia="1" />
-      <xacro:sensor4x6 sequence="${sequence}_ahr_palm_2" col="green" parent="${sequence}_base_link" x="0.013" y="0.0523" z="-0.005"  rz="90" rx="90" ry="180.0" taxels="${taxels}" skipinertia="1" />
-      <xacro:sensor4x6 sequence="${sequence}_ahr_palm_3" col="blue" parent="${sequence}_base_link" x="0.013" y="-0.051" z="-0.068" rz="90" rx="90" ry="0.0" taxels="${taxels}" skipinertia="1" />
+      <xacro:sensor4x6 sequence="${seq}ahr_palm_1" col="red" parent="${seq}base_link" x="0.013" y="-0.051" z="-0.0365"  rz="90" rx="90" ry="0.0" taxels="${taxels}" skipinertia="1" />
+      <xacro:sensor4x6 sequence="${seq}ahr_palm_2" col="green" parent="${seq}base_link" x="0.013" y="0.0523" z="-0.005"  rz="90" rx="90" ry="180.0" taxels="${taxels}" skipinertia="1" />
+      <xacro:sensor4x6 sequence="${seq}ahr_palm_3" col="blue" parent="${seq}base_link" x="0.013" y="-0.051" z="-0.068" rz="90" rx="90" ry="0.0" taxels="${taxels}" skipinertia="1" />
     </xacro:if>
     <xacro:if value="${defaultnames == 1}">
     <xacro:finger 
-      sequence=			    "${sequence}"
-      parent=				    "${sequence}_base_link"
+      sequence=			    "${seq}"
+      parent=				    "${seq}base_link"
       finger_num=			  "0"
       offset_origin_x=	"${0}"	
       offset_origin_y=	"${0.0435}"
@@ -487,8 +493,8 @@
       taxels=           "${taxels}"
     />
     <xacro:finger
-      sequence=			    "${sequence}"
-      parent=				    "${sequence}_base_link"
+      sequence=			    "${seq}"
+      parent=				    "${seq}base_link"
       finger_num=			  "1" 
       offset_origin_x=	"${0}"	
       offset_origin_y=	"0" 
@@ -500,8 +506,8 @@
       taxels=           "${taxels}"
     />
     <xacro:finger 
-      sequence=			    "${sequence}"
-      parent=				    "${sequence}_base_link"
+      sequence=			    "${seq}"
+      parent=				    "${seq}base_link"
       finger_num=			  "2" 
       offset_origin_x=	"${0}"	
       offset_origin_y=	"-${0.0435}" 
@@ -513,8 +519,8 @@
       taxels=           "${taxels}"
     />
     <xacro:thumb_right
-      sequence=			    "${sequence}"
-      parent=				    "${sequence}_base_link"
+      sequence=			    "${seq}"
+      parent=				    "${seq}base_link"
       finger_num=			  "3" 
       offset_origin_x=	"-0.0182"	
       offset_origin_y=	"0.019333" 
@@ -530,8 +536,8 @@
     </xacro:if>
     <xacro:unless value="${defaultnames == 1}">
       <xacro:finger 
-        sequence=			    "${sequence}_hitosashi_finger"
-        parent=				    "${sequence}_base_link"
+        sequence=			    "${seq}hitosashi_finger"
+        parent=				    "${seq}base_link"
         finger_num=			  "0"
         offset_origin_x=	"${0}"	
         offset_origin_y=	"${0.0435}"
@@ -543,8 +549,8 @@
         taxels=           "${taxels}"
       />
       <xacro:finger
-        sequence=			    "${sequence}_naka_finger"
-        parent=				    "${sequence}_base_link"
+        sequence=			    "${seq}naka_finger"
+        parent=				    "${seq}base_link"
         finger_num=			  "1" 
         offset_origin_x=	"${0}"	
         offset_origin_y=	"0" 
@@ -556,8 +562,8 @@
         taxels=           "${taxels}"
       />
       <xacro:finger 
-        sequence=			    "${sequence}_kusuri_finger"
-        parent=				    "${sequence}_base_link"
+        sequence=			    "${seq}kusuri_finger"
+        parent=				    "${seq}base_link"
         finger_num=			  "2" 
         offset_origin_x=	"${0}"	
         offset_origin_y=	"-${0.0435}" 
@@ -569,8 +575,8 @@
         taxels=           "${taxels}"
       />
       <xacro:thumb_right
-        sequence=			    "${sequence}_oya_finger"
-        parent=				    "${sequence}_base_link"
+        sequence=			    "${seq}oya_finger"
+        parent=				    "${seq}base_link"
         finger_num=			  "3" 
         offset_origin_x=	"-0.0182"	
         offset_origin_y=	"0.019333" 

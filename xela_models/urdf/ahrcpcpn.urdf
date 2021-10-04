@@ -6,16 +6,16 @@
 <robot name="allegro_hand_right">
   <!-- Rviz colors -->
   <material name="black">
-    <color rgba="0.2 0.2 0.2 1.0"/>
+    <color rgba="0.1 0.1 0.1 1.0"/>
   </material>
   <material name="blue">
-    <color rgba="0.2 0.2 0.8 1.0"/>
+    <color rgba="0.0 0.0 0.8 1.0"/>
   </material>
   <material name="green">
     <color rgba="0.0 0.8 0.0 1.0"/>
   </material>
   <material name="grey">
-    <color rgba="0.4 0.4 0.4 1.0"/>
+    <color rgba="0.2 0.2 0.2 1.0"/>
   </material>
   <material name="orange">
     <color rgba="1.0 0.4235294117647059 0.0392156862745098 1.0"/>
@@ -30,24 +30,7 @@
     <color rgba="1.0 1.0 1.0 1.0"/>
   </material>
   <link name="world"/>
-  <joint name="fixed" type="fixed">
-    <parent link="world"/>
-    <child link="base_link"/>
-  </joint>
   <link name="base_link">
-    <visual>
-      <geometry>
-        <sphere radius="0.001"/>
-      </geometry>
-      <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
-    </visual>
-    <collision>
-      <geometry>
-        <sphere radius="0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <link name="1_ahr_base_link">
     <visual>
       <geometry>
         <mesh filename="package://xela_models/mesh/allegro/base.stl"/>
@@ -63,18 +46,23 @@
         <box size="0.0408 0.1130 0.095"/>
       </geometry>
     </collision>
+    <inertial>
+      <mass value="0.4288"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="2.04e-03" ixy="8.58e-06" ixz="8.58e-06" iyy="1.23e-03" iyz="0.0" izz="1.25e-03"/>
+    </inertial>
   </link>
-  <joint name="1_ahr_fixed" type="fixed">
+  <joint name="ahr_fixed" type="fixed">
     <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
-    <parent link="base_link"/>
-    <child link="1_ahr_base_link"/>
+    <parent link="world"/>
+    <child link="base_link"/>
   </joint>
-  <joint name="1_ahr_palm_1_4x6_fixed" type="fixed">
+  <joint name="ahr_palm_1_4x6_fixed" type="fixed">
     <origin rpy="1.5707963267948966 0.0 1.5707963267948966" xyz="0.013 -0.051 -0.0365"/>
-    <parent link="1_ahr_base_link"/>
-    <child link="1_ahr_palm_1_4x6_base_link"/>
+    <parent link="base_link"/>
+    <child link="ahr_palm_1_4x6_base_link"/>
   </joint>
-  <link name="1_ahr_palm_1_4x6_base_link">
+  <link name="ahr_palm_1_4x6_base_link">
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
@@ -89,12 +77,12 @@
       <material name="red"/>
     </visual>
   </link>
-  <joint name="1_ahr_palm_2_4x6_fixed" type="fixed">
+  <joint name="ahr_palm_2_4x6_fixed" type="fixed">
     <origin rpy="1.5707963267948966 3.141592653589793 1.5707963267948966" xyz="0.013 0.0523 -0.005"/>
-    <parent link="1_ahr_base_link"/>
-    <child link="1_ahr_palm_2_4x6_base_link"/>
+    <parent link="base_link"/>
+    <child link="ahr_palm_2_4x6_base_link"/>
   </joint>
-  <link name="1_ahr_palm_2_4x6_base_link">
+  <link name="ahr_palm_2_4x6_base_link">
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
@@ -109,12 +97,12 @@
       <material name="green"/>
     </visual>
   </link>
-  <joint name="1_ahr_palm_3_4x6_fixed" type="fixed">
+  <joint name="ahr_palm_3_4x6_fixed" type="fixed">
     <origin rpy="1.5707963267948966 0.0 1.5707963267948966" xyz="0.013 -0.051 -0.068"/>
-    <parent link="1_ahr_base_link"/>
-    <child link="1_ahr_palm_3_4x6_base_link"/>
+    <parent link="base_link"/>
+    <child link="ahr_palm_3_4x6_base_link"/>
   </joint>
-  <link name="1_ahr_palm_3_4x6_base_link">
+  <link name="ahr_palm_3_4x6_base_link">
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
@@ -129,7 +117,7 @@
       <material name="blue"/>
     </visual>
   </link>
-  <link name="1_hitosashi_finger_finger_link_0">
+  <link name="hitosashi_finger_finger_link_0">
     <visual>
       <geometry>
         <mesh filename="package://xela_models/mesh/allegro/link_0.0_ext.STL"/>
@@ -142,15 +130,20 @@
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0.011200000000000002"/>
     </collision>
+    <inertial>
+      <mass value="0.0127"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="1.38e-07" ixy="1.27e-10" ixz="4.83e-09" iyy="6.83e-08" iyz="0.0" izz="1.16e-07"/>
+    </inertial>
   </link>
-  <joint name="1_hitosashi_finger_finger_joint_0" type="revolute">
+  <joint name="hitosashi_finger_finger_joint_0" type="revolute">
     <axis xyz="0 0 1"/>
     <limit effort="15" lower="-0.47" upper="0.47" velocity="7"/>
-    <parent link="1_ahr_base_link"/>
-    <child link="1_hitosashi_finger_finger_link_0"/>
+    <parent link="base_link"/>
+    <child link="hitosashi_finger_finger_link_0"/>
     <origin rpy="-0.08726646259971647 0 0" xyz="0 0.0435 -0.001542"/>
   </joint>
-  <link name="1_hitosashi_finger_finger_link_1">
+  <link name="hitosashi_finger_finger_link_1">
     <visual>
       <geometry>
         <mesh filename="package://xela_models/mesh/allegro/link_1.1.stl"/>
@@ -163,8 +156,14 @@
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0.0082"/>
     </collision>
+    <inertial>
+      <mass value="0.0809"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="1.75e-05" ixy="0.0" ixz="5.66e-08" iyy="1.80e-05" iyz="0.0" izz="4.60e-06"/>
+    </inertial>
   </link>
-  <link name="1_hitosashi_finger_finger_link_1_cover">
+  <!--covers are always with sensors-->
+  <link name="hitosashi_finger_finger_link_1_cover">
     <visual>
       <geometry>
         <mesh filename="package://xela_models/mesh/allegro/link_1_cover.stl"/>
@@ -177,18 +176,19 @@
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0.00885"/>
     </collision>
+    <!--As link is fixed, inertias will be inside the main link-->
   </link>
-  <joint name="1_hitosashi_finger_finger_link_1_cover_joint" type="fixed">
+  <joint name="hitosashi_finger_finger_link_1_cover_joint" type="fixed">
     <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
-    <parent link="1_hitosashi_finger_finger_link_1"/>
-    <child link="1_hitosashi_finger_finger_link_1_cover"/>
+    <parent link="hitosashi_finger_finger_link_1"/>
+    <child link="hitosashi_finger_finger_link_1_cover"/>
   </joint>
-  <joint name="1_hitosashi_finger_finger_link_1A_4x4_fixed" type="fixed">
+  <joint name="hitosashi_finger_finger_link_1A_4x4_fixed" type="fixed">
     <origin rpy="0.0 -1.5707963267948966 3.141592653589793" xyz="0.0108 0.012 0.033"/>
-    <parent link="1_hitosashi_finger_finger_link_1"/>
-    <child link="1_hitosashi_finger_finger_link_1A_4x4_base_link"/>
+    <parent link="hitosashi_finger_finger_link_1"/>
+    <child link="hitosashi_finger_finger_link_1A_4x4_base_link"/>
   </joint>
-  <link name="1_hitosashi_finger_finger_link_1A_4x4_base_link">
+  <link name="hitosashi_finger_finger_link_1A_4x4_base_link">
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
@@ -196,12 +196,12 @@
       </geometry>
     </collision>
   </link>
-  <joint name="1_hitosashi_finger_finger_link_1B_4x4_fixed" type="fixed">
+  <joint name="hitosashi_finger_finger_link_1B_4x4_fixed" type="fixed">
     <origin rpy="0.0 1.5707963267948966 0.0" xyz="0.0108 -0.012 0.021"/>
-    <parent link="1_hitosashi_finger_finger_link_1"/>
-    <child link="1_hitosashi_finger_finger_link_1B_4x4_base_link"/>
+    <parent link="hitosashi_finger_finger_link_1"/>
+    <child link="hitosashi_finger_finger_link_1B_4x4_base_link"/>
   </joint>
-  <link name="1_hitosashi_finger_finger_link_1B_4x4_base_link">
+  <link name="hitosashi_finger_finger_link_1B_4x4_base_link">
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
@@ -209,15 +209,15 @@
       </geometry>
     </collision>
   </link>
-  <joint name="1_hitosashi_finger_finger_joint_1" type="revolute">
+  <joint name="hitosashi_finger_finger_joint_1" type="revolute">
     <limit effort="15" lower="-0.19599999999999998" upper="1.6099999999999999" velocity="7"/>
     <axis xyz="0 1 0"/>
-    <parent link="1_hitosashi_finger_finger_link_0"/>
-    <child link="1_hitosashi_finger_finger_link_1"/>
+    <parent link="hitosashi_finger_finger_link_0"/>
+    <child link="hitosashi_finger_finger_link_1"/>
     <origin xyz="0 0 0.0204"/>
     <!-- New height on fingers -->
   </joint>
-  <link name="1_hitosashi_finger_finger_link_2">
+  <link name="hitosashi_finger_finger_link_2">
     <visual>
       <geometry>
         <mesh filename="package://xela_models/mesh/allegro/link_2.1.stl"/>
@@ -230,8 +230,14 @@
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0.027"/>
     </collision>
+    <!--covers are always with sensors-->
+    <inertial>
+      <mass value="0.0447"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="3.80e-07" ixy="0.0" ixz="7.15e-09" iyy="2.26e-07" iyz="1.34e-09" izz="1.86e-07"/>
+    </inertial>
   </link>
-  <link name="1_hitosashi_finger_finger_link_2_cover">
+  <link name="hitosashi_finger_finger_link_2_cover">
     <visual>
       <geometry>
         <mesh filename="package://xela_models/mesh/allegro/link_2_cover.stl"/>
@@ -245,17 +251,17 @@
       <origin rpy="0 0 0" xyz="0 0 0.0257"/>
     </collision>
   </link>
-  <joint name="1_hitosashi_finger_finger_link_2_cover_joint" type="fixed">
+  <joint name="hitosashi_finger_finger_link_2_cover_joint" type="fixed">
     <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
-    <parent link="1_hitosashi_finger_finger_link_2"/>
-    <child link="1_hitosashi_finger_finger_link_2_cover"/>
+    <parent link="hitosashi_finger_finger_link_2"/>
+    <child link="hitosashi_finger_finger_link_2_cover"/>
   </joint>
-  <joint name="1_hitosashi_finger_finger_link_2_4x4_fixed" type="fixed">
+  <joint name="hitosashi_finger_finger_link_2_4x4_fixed" type="fixed">
     <origin rpy="0.0 1.5707963267948966 0.0" xyz="0.01 -0.012 0.0445"/>
-    <parent link="1_hitosashi_finger_finger_link_2"/>
-    <child link="1_hitosashi_finger_finger_link_2_4x4_base_link"/>
+    <parent link="hitosashi_finger_finger_link_2"/>
+    <child link="hitosashi_finger_finger_link_2_4x4_base_link"/>
   </joint>
-  <link name="1_hitosashi_finger_finger_link_2_4x4_base_link">
+  <link name="hitosashi_finger_finger_link_2_4x4_base_link">
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
@@ -263,14 +269,14 @@
       </geometry>
     </collision>
   </link>
-  <joint name="1_hitosashi_finger_finger_joint_2" type="revolute">
+  <joint name="hitosashi_finger_finger_joint_2" type="revolute">
     <axis xyz="0 1 0"/>
     <limit effort="15" lower="-0.17400000000000002" upper="1.7089999999999999" velocity="7"/>
-    <parent link="1_hitosashi_finger_finger_link_1"/>
-    <child link="1_hitosashi_finger_finger_link_2"/>
+    <parent link="hitosashi_finger_finger_link_1"/>
+    <child link="hitosashi_finger_finger_link_2"/>
     <origin xyz="0 0 0.054"/>
   </joint>
-  <link name="1_hitosashi_finger_finger_link_3">
+  <link name="hitosashi_finger_finger_link_3">
     <visual>
       <geometry>
         <mesh filename="package://xela_models/mesh/allegro/link_3.0.STL"/>
@@ -283,20 +289,25 @@
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0.013199999999999998"/>
     </collision>
+    <inertial>
+      <mass value="0.0404"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="3.64e-06" ixy="0.0" ixz="0.0" iyy="3.33e-06" iyz="0.0" izz="1.92e-06"/>
+    </inertial>
   </link>
-  <joint name="1_hitosashi_finger_finger_joint_3" type="revolute">
+  <joint name="hitosashi_finger_finger_joint_3" type="revolute">
     <axis xyz="0 1 0"/>
     <limit effort="15" lower="-0.227" upper="1.6179999999999999" velocity="7"/>
-    <parent link="1_hitosashi_finger_finger_link_2"/>
-    <child link="1_hitosashi_finger_finger_link_3"/>
+    <parent link="hitosashi_finger_finger_link_2"/>
+    <child link="hitosashi_finger_finger_link_3"/>
     <origin xyz="0 0.0 0.0384"/>
   </joint>
-  <joint name="1_hitosashi_finger_finger_0_aftc_fixed" type="fixed">
+  <joint name="hitosashi_finger_finger_0_aftc_fixed" type="fixed">
     <origin rpy="1.5707963267948966 0.0 1.5707963267948966" xyz="-0.013 0.0 0.016"/>
-    <parent link="1_hitosashi_finger_finger_link_3"/>
-    <child link="1_hitosashi_finger_finger_0_aftc_base_link"/>
+    <parent link="hitosashi_finger_finger_link_3"/>
+    <child link="hitosashi_finger_finger_0_aftc_base_link"/>
   </joint>
-  <link name="1_hitosashi_finger_finger_0_aftc_base_link">
+  <link name="hitosashi_finger_finger_0_aftc_base_link">
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
@@ -311,7 +322,7 @@
       <material name="red"/>
     </visual>
   </link>
-  <link name="1_naka_finger_finger_link_4">
+  <link name="naka_finger_finger_link_4">
     <visual>
       <geometry>
         <mesh filename="package://xela_models/mesh/allegro/link_0.0_ext.STL"/>
@@ -324,15 +335,20 @@
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0.011200000000000002"/>
     </collision>
+    <inertial>
+      <mass value="0.0127"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="1.38e-07" ixy="1.27e-10" ixz="4.83e-09" iyy="6.83e-08" iyz="0.0" izz="1.16e-07"/>
+    </inertial>
   </link>
-  <joint name="1_naka_finger_finger_joint_4" type="revolute">
+  <joint name="naka_finger_finger_joint_4" type="revolute">
     <axis xyz="0 0 1"/>
     <limit effort="15" lower="-0.47" upper="0.47" velocity="7"/>
-    <parent link="1_ahr_base_link"/>
-    <child link="1_naka_finger_finger_link_4"/>
+    <parent link="base_link"/>
+    <child link="naka_finger_finger_link_4"/>
     <origin rpy="0.0 0 0" xyz="0 0 0.0007"/>
   </joint>
-  <link name="1_naka_finger_finger_link_5">
+  <link name="naka_finger_finger_link_5">
     <visual>
       <geometry>
         <mesh filename="package://xela_models/mesh/allegro/link_1.1.stl"/>
@@ -345,8 +361,14 @@
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0.0082"/>
     </collision>
+    <inertial>
+      <mass value="0.0809"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="1.75e-05" ixy="0.0" ixz="5.66e-08" iyy="1.80e-05" iyz="0.0" izz="4.60e-06"/>
+    </inertial>
   </link>
-  <link name="1_naka_finger_finger_link_5_cover">
+  <!--covers are always with sensors-->
+  <link name="naka_finger_finger_link_5_cover">
     <visual>
       <geometry>
         <mesh filename="package://xela_models/mesh/allegro/link_1_cover.stl"/>
@@ -359,18 +381,19 @@
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0.00885"/>
     </collision>
+    <!--As link is fixed, inertias will be inside the main link-->
   </link>
-  <joint name="1_naka_finger_finger_link_5_cover_joint" type="fixed">
+  <joint name="naka_finger_finger_link_5_cover_joint" type="fixed">
     <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
-    <parent link="1_naka_finger_finger_link_5"/>
-    <child link="1_naka_finger_finger_link_5_cover"/>
+    <parent link="naka_finger_finger_link_5"/>
+    <child link="naka_finger_finger_link_5_cover"/>
   </joint>
-  <joint name="1_naka_finger_finger_link_5A_4x4_fixed" type="fixed">
+  <joint name="naka_finger_finger_link_5A_4x4_fixed" type="fixed">
     <origin rpy="0.0 -1.5707963267948966 3.141592653589793" xyz="0.0108 0.012 0.033"/>
-    <parent link="1_naka_finger_finger_link_5"/>
-    <child link="1_naka_finger_finger_link_5A_4x4_base_link"/>
+    <parent link="naka_finger_finger_link_5"/>
+    <child link="naka_finger_finger_link_5A_4x4_base_link"/>
   </joint>
-  <link name="1_naka_finger_finger_link_5A_4x4_base_link">
+  <link name="naka_finger_finger_link_5A_4x4_base_link">
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
@@ -378,12 +401,12 @@
       </geometry>
     </collision>
   </link>
-  <joint name="1_naka_finger_finger_link_5B_4x4_fixed" type="fixed">
+  <joint name="naka_finger_finger_link_5B_4x4_fixed" type="fixed">
     <origin rpy="0.0 1.5707963267948966 0.0" xyz="0.0108 -0.012 0.021"/>
-    <parent link="1_naka_finger_finger_link_5"/>
-    <child link="1_naka_finger_finger_link_5B_4x4_base_link"/>
+    <parent link="naka_finger_finger_link_5"/>
+    <child link="naka_finger_finger_link_5B_4x4_base_link"/>
   </joint>
-  <link name="1_naka_finger_finger_link_5B_4x4_base_link">
+  <link name="naka_finger_finger_link_5B_4x4_base_link">
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
@@ -391,15 +414,15 @@
       </geometry>
     </collision>
   </link>
-  <joint name="1_naka_finger_finger_joint_5" type="revolute">
+  <joint name="naka_finger_finger_joint_5" type="revolute">
     <limit effort="15" lower="-0.19599999999999998" upper="1.6099999999999999" velocity="7"/>
     <axis xyz="0 1 0"/>
-    <parent link="1_naka_finger_finger_link_4"/>
-    <child link="1_naka_finger_finger_link_5"/>
+    <parent link="naka_finger_finger_link_4"/>
+    <child link="naka_finger_finger_link_5"/>
     <origin xyz="0 0 0.0204"/>
     <!-- New height on fingers -->
   </joint>
-  <link name="1_naka_finger_finger_link_6">
+  <link name="naka_finger_finger_link_6">
     <visual>
       <geometry>
         <mesh filename="package://xela_models/mesh/allegro/link_2.1.stl"/>
@@ -412,8 +435,14 @@
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0.027"/>
     </collision>
+    <!--covers are always with sensors-->
+    <inertial>
+      <mass value="0.0447"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="3.80e-07" ixy="0.0" ixz="7.15e-09" iyy="2.26e-07" iyz="1.34e-09" izz="1.86e-07"/>
+    </inertial>
   </link>
-  <link name="1_naka_finger_finger_link_6_cover">
+  <link name="naka_finger_finger_link_6_cover">
     <visual>
       <geometry>
         <mesh filename="package://xela_models/mesh/allegro/link_2_cover.stl"/>
@@ -427,17 +456,17 @@
       <origin rpy="0 0 0" xyz="0 0 0.0257"/>
     </collision>
   </link>
-  <joint name="1_naka_finger_finger_link_6_cover_joint" type="fixed">
+  <joint name="naka_finger_finger_link_6_cover_joint" type="fixed">
     <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
-    <parent link="1_naka_finger_finger_link_6"/>
-    <child link="1_naka_finger_finger_link_6_cover"/>
+    <parent link="naka_finger_finger_link_6"/>
+    <child link="naka_finger_finger_link_6_cover"/>
   </joint>
-  <joint name="1_naka_finger_finger_link_6_4x4_fixed" type="fixed">
+  <joint name="naka_finger_finger_link_6_4x4_fixed" type="fixed">
     <origin rpy="0.0 1.5707963267948966 0.0" xyz="0.01 -0.012 0.0445"/>
-    <parent link="1_naka_finger_finger_link_6"/>
-    <child link="1_naka_finger_finger_link_6_4x4_base_link"/>
+    <parent link="naka_finger_finger_link_6"/>
+    <child link="naka_finger_finger_link_6_4x4_base_link"/>
   </joint>
-  <link name="1_naka_finger_finger_link_6_4x4_base_link">
+  <link name="naka_finger_finger_link_6_4x4_base_link">
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
@@ -445,14 +474,14 @@
       </geometry>
     </collision>
   </link>
-  <joint name="1_naka_finger_finger_joint_6" type="revolute">
+  <joint name="naka_finger_finger_joint_6" type="revolute">
     <axis xyz="0 1 0"/>
     <limit effort="15" lower="-0.17400000000000002" upper="1.7089999999999999" velocity="7"/>
-    <parent link="1_naka_finger_finger_link_5"/>
-    <child link="1_naka_finger_finger_link_6"/>
+    <parent link="naka_finger_finger_link_5"/>
+    <child link="naka_finger_finger_link_6"/>
     <origin xyz="0 0 0.054"/>
   </joint>
-  <link name="1_naka_finger_finger_link_7">
+  <link name="naka_finger_finger_link_7">
     <visual>
       <geometry>
         <mesh filename="package://xela_models/mesh/allegro/link_3.0.STL"/>
@@ -465,20 +494,25 @@
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0.013199999999999998"/>
     </collision>
+    <inertial>
+      <mass value="0.0404"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="3.64e-06" ixy="0.0" ixz="0.0" iyy="3.33e-06" iyz="0.0" izz="1.92e-06"/>
+    </inertial>
   </link>
-  <joint name="1_naka_finger_finger_joint_7" type="revolute">
+  <joint name="naka_finger_finger_joint_7" type="revolute">
     <axis xyz="0 1 0"/>
     <limit effort="15" lower="-0.227" upper="1.6179999999999999" velocity="7"/>
-    <parent link="1_naka_finger_finger_link_6"/>
-    <child link="1_naka_finger_finger_link_7"/>
+    <parent link="naka_finger_finger_link_6"/>
+    <child link="naka_finger_finger_link_7"/>
     <origin xyz="0 0.0 0.0384"/>
   </joint>
-  <joint name="1_naka_finger_finger_1_aftc_fixed" type="fixed">
+  <joint name="naka_finger_finger_1_aftc_fixed" type="fixed">
     <origin rpy="1.5707963267948966 0.0 1.5707963267948966" xyz="-0.013 0.0 0.016"/>
-    <parent link="1_naka_finger_finger_link_7"/>
-    <child link="1_naka_finger_finger_1_aftc_base_link"/>
+    <parent link="naka_finger_finger_link_7"/>
+    <child link="naka_finger_finger_1_aftc_base_link"/>
   </joint>
-  <link name="1_naka_finger_finger_1_aftc_base_link">
+  <link name="naka_finger_finger_1_aftc_base_link">
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
@@ -493,7 +527,7 @@
       <material name="red"/>
     </visual>
   </link>
-  <link name="1_kusuri_finger_finger_link_8">
+  <link name="kusuri_finger_finger_link_8">
     <visual>
       <geometry>
         <mesh filename="package://xela_models/mesh/allegro/link_0.0_ext.STL"/>
@@ -506,15 +540,20 @@
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0.011200000000000002"/>
     </collision>
+    <inertial>
+      <mass value="0.0127"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="1.38e-07" ixy="1.27e-10" ixz="4.83e-09" iyy="6.83e-08" iyz="0.0" izz="1.16e-07"/>
+    </inertial>
   </link>
-  <joint name="1_kusuri_finger_finger_joint_8" type="revolute">
+  <joint name="kusuri_finger_finger_joint_8" type="revolute">
     <axis xyz="0 0 1"/>
     <limit effort="15" lower="-0.47" upper="0.47" velocity="7"/>
-    <parent link="1_ahr_base_link"/>
-    <child link="1_kusuri_finger_finger_link_8"/>
+    <parent link="base_link"/>
+    <child link="kusuri_finger_finger_link_8"/>
     <origin rpy="0.08726646259971647 0 0" xyz="0 -0.0435 -0.001542"/>
   </joint>
-  <link name="1_kusuri_finger_finger_link_9">
+  <link name="kusuri_finger_finger_link_9">
     <visual>
       <geometry>
         <mesh filename="package://xela_models/mesh/allegro/link_1.1.stl"/>
@@ -527,8 +566,14 @@
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0.0082"/>
     </collision>
+    <inertial>
+      <mass value="0.0809"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="1.75e-05" ixy="0.0" ixz="5.66e-08" iyy="1.80e-05" iyz="0.0" izz="4.60e-06"/>
+    </inertial>
   </link>
-  <link name="1_kusuri_finger_finger_link_9_cover">
+  <!--covers are always with sensors-->
+  <link name="kusuri_finger_finger_link_9_cover">
     <visual>
       <geometry>
         <mesh filename="package://xela_models/mesh/allegro/link_1_cover.stl"/>
@@ -541,18 +586,19 @@
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0.00885"/>
     </collision>
+    <!--As link is fixed, inertias will be inside the main link-->
   </link>
-  <joint name="1_kusuri_finger_finger_link_9_cover_joint" type="fixed">
+  <joint name="kusuri_finger_finger_link_9_cover_joint" type="fixed">
     <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
-    <parent link="1_kusuri_finger_finger_link_9"/>
-    <child link="1_kusuri_finger_finger_link_9_cover"/>
+    <parent link="kusuri_finger_finger_link_9"/>
+    <child link="kusuri_finger_finger_link_9_cover"/>
   </joint>
-  <joint name="1_kusuri_finger_finger_link_9A_4x4_fixed" type="fixed">
+  <joint name="kusuri_finger_finger_link_9A_4x4_fixed" type="fixed">
     <origin rpy="0.0 -1.5707963267948966 3.141592653589793" xyz="0.0108 0.012 0.033"/>
-    <parent link="1_kusuri_finger_finger_link_9"/>
-    <child link="1_kusuri_finger_finger_link_9A_4x4_base_link"/>
+    <parent link="kusuri_finger_finger_link_9"/>
+    <child link="kusuri_finger_finger_link_9A_4x4_base_link"/>
   </joint>
-  <link name="1_kusuri_finger_finger_link_9A_4x4_base_link">
+  <link name="kusuri_finger_finger_link_9A_4x4_base_link">
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
@@ -560,12 +606,12 @@
       </geometry>
     </collision>
   </link>
-  <joint name="1_kusuri_finger_finger_link_9B_4x4_fixed" type="fixed">
+  <joint name="kusuri_finger_finger_link_9B_4x4_fixed" type="fixed">
     <origin rpy="0.0 1.5707963267948966 0.0" xyz="0.0108 -0.012 0.021"/>
-    <parent link="1_kusuri_finger_finger_link_9"/>
-    <child link="1_kusuri_finger_finger_link_9B_4x4_base_link"/>
+    <parent link="kusuri_finger_finger_link_9"/>
+    <child link="kusuri_finger_finger_link_9B_4x4_base_link"/>
   </joint>
-  <link name="1_kusuri_finger_finger_link_9B_4x4_base_link">
+  <link name="kusuri_finger_finger_link_9B_4x4_base_link">
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
@@ -573,15 +619,15 @@
       </geometry>
     </collision>
   </link>
-  <joint name="1_kusuri_finger_finger_joint_9" type="revolute">
+  <joint name="kusuri_finger_finger_joint_9" type="revolute">
     <limit effort="15" lower="-0.19599999999999998" upper="1.6099999999999999" velocity="7"/>
     <axis xyz="0 1 0"/>
-    <parent link="1_kusuri_finger_finger_link_8"/>
-    <child link="1_kusuri_finger_finger_link_9"/>
+    <parent link="kusuri_finger_finger_link_8"/>
+    <child link="kusuri_finger_finger_link_9"/>
     <origin xyz="0 0 0.0204"/>
     <!-- New height on fingers -->
   </joint>
-  <link name="1_kusuri_finger_finger_link_10">
+  <link name="kusuri_finger_finger_link_10">
     <visual>
       <geometry>
         <mesh filename="package://xela_models/mesh/allegro/link_2.1.stl"/>
@@ -594,8 +640,14 @@
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0.027"/>
     </collision>
+    <!--covers are always with sensors-->
+    <inertial>
+      <mass value="0.0447"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="3.80e-07" ixy="0.0" ixz="7.15e-09" iyy="2.26e-07" iyz="1.34e-09" izz="1.86e-07"/>
+    </inertial>
   </link>
-  <link name="1_kusuri_finger_finger_link_10_cover">
+  <link name="kusuri_finger_finger_link_10_cover">
     <visual>
       <geometry>
         <mesh filename="package://xela_models/mesh/allegro/link_2_cover.stl"/>
@@ -609,17 +661,17 @@
       <origin rpy="0 0 0" xyz="0 0 0.0257"/>
     </collision>
   </link>
-  <joint name="1_kusuri_finger_finger_link_10_cover_joint" type="fixed">
+  <joint name="kusuri_finger_finger_link_10_cover_joint" type="fixed">
     <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
-    <parent link="1_kusuri_finger_finger_link_10"/>
-    <child link="1_kusuri_finger_finger_link_10_cover"/>
+    <parent link="kusuri_finger_finger_link_10"/>
+    <child link="kusuri_finger_finger_link_10_cover"/>
   </joint>
-  <joint name="1_kusuri_finger_finger_link_10_4x4_fixed" type="fixed">
+  <joint name="kusuri_finger_finger_link_10_4x4_fixed" type="fixed">
     <origin rpy="0.0 1.5707963267948966 0.0" xyz="0.01 -0.012 0.0445"/>
-    <parent link="1_kusuri_finger_finger_link_10"/>
-    <child link="1_kusuri_finger_finger_link_10_4x4_base_link"/>
+    <parent link="kusuri_finger_finger_link_10"/>
+    <child link="kusuri_finger_finger_link_10_4x4_base_link"/>
   </joint>
-  <link name="1_kusuri_finger_finger_link_10_4x4_base_link">
+  <link name="kusuri_finger_finger_link_10_4x4_base_link">
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
@@ -627,14 +679,14 @@
       </geometry>
     </collision>
   </link>
-  <joint name="1_kusuri_finger_finger_joint_10" type="revolute">
+  <joint name="kusuri_finger_finger_joint_10" type="revolute">
     <axis xyz="0 1 0"/>
     <limit effort="15" lower="-0.17400000000000002" upper="1.7089999999999999" velocity="7"/>
-    <parent link="1_kusuri_finger_finger_link_9"/>
-    <child link="1_kusuri_finger_finger_link_10"/>
+    <parent link="kusuri_finger_finger_link_9"/>
+    <child link="kusuri_finger_finger_link_10"/>
     <origin xyz="0 0 0.054"/>
   </joint>
-  <link name="1_kusuri_finger_finger_link_11">
+  <link name="kusuri_finger_finger_link_11">
     <visual>
       <geometry>
         <mesh filename="package://xela_models/mesh/allegro/link_3.0.STL"/>
@@ -647,20 +699,25 @@
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0.013199999999999998"/>
     </collision>
+    <inertial>
+      <mass value="0.0404"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="3.64e-06" ixy="0.0" ixz="0.0" iyy="3.33e-06" iyz="0.0" izz="1.92e-06"/>
+    </inertial>
   </link>
-  <joint name="1_kusuri_finger_finger_joint_11" type="revolute">
+  <joint name="kusuri_finger_finger_joint_11" type="revolute">
     <axis xyz="0 1 0"/>
     <limit effort="15" lower="-0.227" upper="1.6179999999999999" velocity="7"/>
-    <parent link="1_kusuri_finger_finger_link_10"/>
-    <child link="1_kusuri_finger_finger_link_11"/>
+    <parent link="kusuri_finger_finger_link_10"/>
+    <child link="kusuri_finger_finger_link_11"/>
     <origin xyz="0 0.0 0.0384"/>
   </joint>
-  <joint name="1_kusuri_finger_finger_2_aftc_fixed" type="fixed">
+  <joint name="kusuri_finger_finger_2_aftc_fixed" type="fixed">
     <origin rpy="1.5707963267948966 0.0 1.5707963267948966" xyz="-0.013 0.0 0.016"/>
-    <parent link="1_kusuri_finger_finger_link_11"/>
-    <child link="1_kusuri_finger_finger_2_aftc_base_link"/>
+    <parent link="kusuri_finger_finger_link_11"/>
+    <child link="kusuri_finger_finger_2_aftc_base_link"/>
   </joint>
-  <link name="1_kusuri_finger_finger_2_aftc_base_link">
+  <link name="kusuri_finger_finger_2_aftc_base_link">
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
@@ -675,7 +732,7 @@
       <material name="red"/>
     </visual>
   </link>
-  <link name="1_oya_finger_link_12">
+  <link name="oya_finger_link_12">
     <visual>
       <geometry>
         <mesh filename="package://xela_models/mesh/allegro/link_12.0_right.STL"/>
@@ -688,15 +745,20 @@
       </geometry>
       <origin rpy="0 0 0" xyz="-0.0179 0.009 0.0145"/>
     </collision>
+    <inertial>
+      <mass value="0.0176"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="3.36e-06" ixy="0.0" ixz="1.76e-08" iyy="3.84e-06" iyz="2.46e-07" izz="2.59e-06"/>
+    </inertial>
   </link>
-  <joint name="1_oya_finger_joint_12" type="revolute">
+  <joint name="oya_finger_joint_12" type="revolute">
     <axis xyz="-1 0 0"/>
     <limit effort="15" lower="0.263" upper="1.396" velocity="7"/>
-    <parent link="1_ahr_base_link"/>
-    <child link="1_oya_finger_link_12"/>
+    <parent link="base_link"/>
+    <child link="oya_finger_link_12"/>
     <origin rpy="0 -1.6580627893946132 -1.5707963267948966" xyz="-0.0182 0.019333 -0.045987"/>
   </joint>
-  <link name="1_oya_finger_link_13">
+  <link name="oya_finger_link_13">
     <visual>
       <geometry>
         <mesh filename="package://xela_models/mesh/allegro/link_13.0.STL"/>
@@ -709,8 +771,13 @@
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0.00885"/>
     </collision>
+    <inertial>
+      <mass value="0.0127"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="1.38e-07" ixy="1.27e-10" ixz="4.83e-09" iyy="6.83e-08" iyz="0.0" izz="1.16e-07"/>
+    </inertial>
   </link>
-  <link name="1_oya_finger_link_13_cover">
+  <link name="oya_finger_link_14_cover">
     <visual>
       <geometry>
         <mesh filename="package://xela_models/mesh/allegro/thumb_1_cover.stl"/>
@@ -724,19 +791,19 @@
       <origin rpy="0 0 0" xyz="0 0 0"/>
     </collision>
   </link>
-  <joint name="1_oya_finger_link_13_cover_joint" type="fixed">
+  <joint name="oya_finger_link_14_cover_joint" type="fixed">
     <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
-    <parent link="1_oya_finger_link_14"/>
-    <child link="1_oya_finger_link_13_cover"/>
+    <parent link="oya_finger_link_14"/>
+    <child link="oya_finger_link_14_cover"/>
   </joint>
-  <joint name="1_oya_finger_joint_13" type="revolute">
+  <joint name="oya_finger_joint_13" type="revolute">
     <axis xyz="0 0 1"/>
     <limit effort="15" lower="-0.10499999999999998" upper="1.1629999999999998" velocity="7"/>
-    <parent link="1_oya_finger_link_12"/>
-    <child link="1_oya_finger_link_13"/>
+    <parent link="oya_finger_link_12"/>
+    <child link="oya_finger_link_13"/>
     <origin xyz="-0.027 0.005 0.0399"/>
   </joint>
-  <link name="1_oya_finger_link_14">
+  <link name="oya_finger_link_14">
     <visual>
       <geometry>
         <mesh filename="package://xela_models/mesh/allegro/thumb_1.1.stl"/>
@@ -749,8 +816,14 @@
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0.0257"/>
     </collision>
+    <!--covers are always with sensors-->
+    <inertial>
+      <mass value="0.0457"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="3.20e-06" ixy="9.14e-09" ixz="1.46e-07" iyy="3.03e-06" iyz="0.0" izz="1.47e-06"/>
+    </inertial>
   </link>
-  <link name="1_oya_finger_link_14_cover">
+  <link name="oya_finger_link_15_cover">
     <visual>
       <geometry>
         <mesh filename="package://xela_models/mesh/allegro/thumb_2_cover.stl"/>
@@ -764,17 +837,17 @@
       <origin rpy="0 0 0" xyz="0 0 0"/>
     </collision>
   </link>
-  <joint name="1_oya_finger_link_14_cover_joint" type="fixed">
+  <joint name="oya_finger_link_15_cover_joint" type="fixed">
     <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
-    <parent link="1_oya_finger_link_15"/>
-    <child link="1_oya_finger_link_14_cover"/>
+    <parent link="oya_finger_link_15"/>
+    <child link="oya_finger_link_15_cover"/>
   </joint>
-  <joint name="1_oya_finger_link_14_4x4_fixed" type="fixed">
+  <joint name="oya_finger_link_14_4x4_fixed" type="fixed">
     <origin rpy="0.0 1.5707963267948966 0.0" xyz="0.011 -0.012 0.023"/>
-    <parent link="1_oya_finger_link_14"/>
-    <child link="1_oya_finger_link_14_4x4_base_link"/>
+    <parent link="oya_finger_link_14"/>
+    <child link="oya_finger_link_14_4x4_base_link"/>
   </joint>
-  <link name="1_oya_finger_link_14_4x4_base_link">
+  <link name="oya_finger_link_14_4x4_base_link">
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
@@ -782,14 +855,14 @@
       </geometry>
     </collision>
   </link>
-  <joint name="1_oya_finger_joint_14" type="revolute">
+  <joint name="oya_finger_joint_14" type="revolute">
     <axis xyz="0 1 0"/>
     <limit effort="15" lower="-0.18899999999999997" upper="1.644" velocity="7"/>
-    <parent link="1_oya_finger_link_13"/>
-    <child link="1_oya_finger_link_14"/>
+    <parent link="oya_finger_link_13"/>
+    <child link="oya_finger_link_14"/>
     <origin xyz="0 0 0.0177"/>
   </joint>
-  <link name="1_oya_finger_link_15">
+  <link name="oya_finger_link_15">
     <visual>
       <geometry>
         <mesh filename="package://xela_models/mesh/allegro/thumb_2.1.stl"/>
@@ -802,13 +875,18 @@
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0.021150000000000002"/>
     </collision>
+    <inertial>
+      <mass value="0.0753"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="2.90e-05" ixy="0.0" ixz="0.0" iyy="2.90e-05" iyz="0.0" izz="6.88e-06"/>
+    </inertial>
   </link>
-  <joint name="1_oya_finger_link_15_4x4_fixed" type="fixed">
+  <joint name="oya_finger_link_15_4x4_fixed" type="fixed">
     <origin rpy="0.0 1.5707963267948966 0.0" xyz="0.011 -0.012 0.021"/>
-    <parent link="1_oya_finger_link_15"/>
-    <child link="1_oya_finger_link_15_4x4_base_link"/>
+    <parent link="oya_finger_link_15"/>
+    <child link="oya_finger_link_15_4x4_base_link"/>
   </joint>
-  <link name="1_oya_finger_link_15_4x4_base_link">
+  <link name="oya_finger_link_15_4x4_base_link">
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
@@ -816,19 +894,19 @@
       </geometry>
     </collision>
   </link>
-  <joint name="1_oya_finger_joint_15" type="revolute">
+  <joint name="oya_finger_joint_15" type="revolute">
     <axis xyz="0 1 0"/>
     <limit effort="15" lower="-0.162" upper="1.7189999999999999" velocity="7"/>
-    <parent link="1_oya_finger_link_14"/>
-    <child link="1_oya_finger_link_15"/>
+    <parent link="oya_finger_link_14"/>
+    <child link="oya_finger_link_15"/>
     <origin xyz="0 0 0.0514"/>
   </joint>
-  <joint name="1_oya_finger_3_aftc_fixed" type="fixed">
+  <joint name="oya_finger_3_aftc_fixed" type="fixed">
     <origin rpy="1.5707963267948966 0.0 1.5707963267948966" xyz="-0.013 0.0 0.0315"/>
-    <parent link="1_oya_finger_link_15"/>
-    <child link="1_oya_finger_3_aftc_base_link"/>
+    <parent link="oya_finger_link_15"/>
+    <child link="oya_finger_3_aftc_base_link"/>
   </joint>
-  <link name="1_oya_finger_3_aftc_base_link">
+  <link name="oya_finger_3_aftc_base_link">
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
@@ -844,7 +922,7 @@
     </visual>
   </link>
   <!-- Enable the following 2 if you would like to see different options the same time -->
-  <!-- <xacro:allegro_hand_right sequence="2" parent="base_link" x="0.2" tips="curved" /> -->
-  <!-- <xacro:allegro_hand_right sequence="3" parent="base_link" x="-0.2" covers="0" palm="0" phalanges="0" tips="default"/> -->
+  <!-- <xacro:allegro_hand_right sequence="2" parent="world" x="0.2" tips="curved" /> -->
+  <!-- <xacro:allegro_hand_right sequence="3" parent="world" x="-0.2" covers="0" palm="0" phalanges="0" tips="default"/> -->
 </robot>
 
