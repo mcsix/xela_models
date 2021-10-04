@@ -5,7 +5,7 @@
 <xacro:include filename="$(find xela_models)/urdf/xela.xacro" />
 
 <link name="world" />
-
+<!-- 
 <joint name="fixed" type="fixed">
     <parent link="world" />
     <child link="base_link" />
@@ -23,14 +23,14 @@
         <sphere radius="0.001"/>
       </geometry>
     </collision>
-  </link>
+  </link> -->
   
 <!-- Notes
 Back controller covers can be disabled by setting covers to 0
 tips can be either "flat" or "curved", default is original tip
 Palm sensors can be disabled by setting palm to 0
 -->
-	<xacro:allegro_hand_right sequence="1" tips="curved" parent="base_link" />
+	<xacro:allegro_hand_right sequence="1" tips="curved" parent="world" />
   <!-- Enable the following 2 if you would like to see different options the same time -->
 	<!-- <xacro:allegro_hand_right sequence="2" parent="base_link" x="0.2" tips="curved" /> -->
 	<!-- <xacro:allegro_hand_right sequence="3" parent="base_link" x="-0.2" covers="0" palm="0" phalanges="0" tips="default"/> -->
