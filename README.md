@@ -75,9 +75,15 @@ To run the visualization of the model, use following command;
 | palm | To enable or disable sensors on the palm | palm=”0”<br>Default: palm=”1” |
 | phalanges | To enable or disable phalange sensors | phalanges=”0”<br>__Default__: phalanges=”1” |
 | tips | To set the type of fingertips<br>_curved_, _flat_, _default_<br>__Note__: default means Allegro Hand’s own tips<br>You can also set to none to have no tips | tips=”curved”<br>__Default__: tips=”flat”<br>__Note__: set to _default_ if you wish the original tips without sensors |
+| defaultnames | To enforce using default link and joint names | defaultnames=1<br>__Default__: defaultnames=0 |
+| baseispalm | enforce naming of the hand's __base_link__ to be called __palm_link__ _(allegro default)_ | baseispalm=1<br>__Default__: baseispalm=0 |
 
 
 ## Changelog and notes
+### _2021/10/12_
+* Add _baseispalm_ parameter to enforce default name for allegro ROS node
+* Update link names to be fully compatible with allegro's
+
 ### _2021/10/04_
 * Add more options for custom use cases
     * Inertias can be disabled for individual sensors if calculated into parent link

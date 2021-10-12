@@ -36,7 +36,7 @@
 
   <!-- Taxels -->
   <xacro:macro name="taxel" params="sequence parent x:=0.0 y:=0.0 z:=0.0 rx:=0.0 ry:=0.0 rz:=0.0 col:='blue' zmod:=0.0">
-    <link name="${sequence}_taxel_base_link">
+    <link name="${sequence}_taxel_${base}">
       <visual>
         <geometry>
           <sphere radius="0.001"/>
@@ -98,7 +98,7 @@
     <joint name="${sequence}_joint_z" type="prismatic">
       <origin xyz="0.0 0.0 ${zmod}" rpy="0.0 0.0 0.0"/>
       <parent link="${sequence}_x2y"/>
-      <child link="${sequence}_taxel_base_link"/>
+      <child link="${sequence}_taxel_${base}"/>
       <axis xyz="0 0 1"/>
       <limit effort="100.0" lower="${-0.001-zmod}" upper="0.000" velocity="0.5"/>
     </joint>
@@ -112,12 +112,12 @@
 
   <!-- Sensors -->
   <xacro:macro name="sensoraftf" params="sequence parent x:=0.0 y:=0.0 z:=0.0 rx:=0.0 ry:=0.0 rz:=0.0 col:='blue' taxels:=0 skipinertia:=0">
-    <joint name="${sequence}_aftf_fixed" type="fixed">
+    <joint name="${sequence}aftf_fixed" type="fixed">
       <origin xyz="${x} ${y} ${z}" rpy="${radians(rx)} ${radians(ry)} ${radians(rz)}"/>
       <parent link="${parent}" />
-      <child link="${sequence}_aftf_base_link" />
+      <child link="${sequence}aftf_${base}" />
     </joint>
-    <link name="${sequence}_aftf_base_link">
+    <link name="${sequence}aftf_${base}">
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
@@ -141,7 +141,7 @@
       
     </link>
 
-    <link name="${sequence}_aftf_sensorbase_base_link">
+    <link name="${sequence}aftf_sensorbase_${base}">
       <visual>
         <geometry>
           <sphere radius="0.001"/>
@@ -155,7 +155,7 @@
         </geometry>
       </collision>
     </link>
-    <link name="${sequence}_aftf_sensorbase_pos_link">
+    <link name="${sequence}aftf_sensorbase_pos_link">
       <visual>
         <geometry>
           <sphere radius="0.00001"/>
@@ -169,32 +169,32 @@
         </geometry>
       </collision>
     </link>
-    <joint name="${sequence}_aftf_sensor_pos_joint" type="prismatic">
+    <joint name="${sequence}aftf_sensor_pos_joint" type="prismatic">
       <origin xyz="0.0 0.0140 0.0010" rpy="${radians(-25)} 0.0 0.0"/>
-      <parent link="${sequence}_aftf_base_link"/>
-      <child link="${sequence}_aftf_sensorbase_pos_link"/>
+      <parent link="${sequence}aftf_${base}"/>
+      <child link="${sequence}aftf_sensorbase_pos_link"/>
       <axis xyz="0 0 1"/>
       <limit effort="100.0" lower="0.000" upper="0.000" velocity="0.5"/>
     </joint>
-    <joint name="${sequence}_aftf_sensor_joint" type="prismatic">
+    <joint name="${sequence}aftf_sensor_joint" type="prismatic">
       <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 ${radians(-90)}"/>
-      <parent link="${sequence}_aftf_sensorbase_pos_link"/>
-      <child link="${sequence}_aftf_sensorbase_base_link"/>
+      <parent link="${sequence}aftf_sensorbase_pos_link"/>
+      <child link="${sequence}aftf_sensorbase_${base}"/>
       <axis xyz="0 0 1"/>
       <limit effort="100.0" lower="0.000" upper="0.000" velocity="0.5"/>
     </joint>
     <xacro:if value="${taxels==1}">
-      <xacro:sensor4x4 sequence="${sequence}_aftf" x="-0.0111665" y="-0.0116665" parent="${sequence}_aftf_sensorbase_base_link" body="0" />
+      <xacro:sensor4x4 sequence="${sequence}aftf" x="-0.0111665" y="-0.0116665" parent="${sequence}aftf_sensorbase_${base}" body="0" />
     </xacro:if>
   </xacro:macro>
 
   <xacro:macro name="sensoraftc" params="sequence parent x:=0.0 y:=0.0 z:=0.0 rx:=0.0 ry:=0.0 rz:=0.0 col:='blue' taxels:=1 skipinertia:=0">
-    <joint name="${sequence}_aftc_fixed" type="fixed">
+    <joint name="${sequence}aftc_fixed" type="fixed">
       <origin xyz="${x-0.013} ${y} ${z}" rpy="${radians(rx)} ${radians(ry)} ${radians(rz)}"/>
       <parent link="${parent}" />
-      <child link="${sequence}_aftc_base_link" />
+      <child link="${sequence}aftc_${base}" />
     </joint>
-    <link name="${sequence}_aftc_base_link">
+    <link name="${sequence}aftc_${base}">
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
@@ -217,45 +217,45 @@
       </xacro:if>
     </link>
     <xacro:if value="${taxels == 1}">
-      <xacro:taxel sequence="${sequence}_aftc_1"  x="0.0101" y="0.0306" z="0.01254" ry="90" rz="30" parent="${sequence}_aftc_base_link" />
-      <xacro:taxel sequence="${sequence}_aftc_2"  x="0.0126" y="0.0236" z="0.01254" ry="90" rz="10" parent="${sequence}_aftc_base_link" />
-      <xacro:taxel sequence="${sequence}_aftc_3"  x="0.0138" y="0.0173" z="0.01254" ry="90" rz="10" parent="${sequence}_aftc_base_link" />
-      <xacro:taxel sequence="${sequence}_aftc_4"  x="0.0143" y="0.0103" z="0.01254" ry="90" parent="${sequence}_aftc_base_link" />
-      <xacro:taxel sequence="${sequence}_aftc_5"  x="0.0143" y="0.0038" z="0.01254" ry="90" parent="${sequence}_aftc_base_link" />
-      <xacro:taxel sequence="${sequence}_aftc_6"  x="0.0098" y="0.0230" z="0.02000" ry="50" rz="10" parent="${sequence}_aftc_base_link" />
-      <xacro:taxel sequence="${sequence}_aftc_7"  x="0.0110" y="0.0167" z="0.02000" ry="50" rz="10" parent="${sequence}_aftc_base_link" />
-      <xacro:taxel sequence="${sequence}_aftc_8"  x="0.0115" y="0.0103" z="0.02000" ry="50" parent="${sequence}_aftc_base_link" />
-      <xacro:taxel sequence="${sequence}_aftc_9"  x="0.0115" y="0.0038" z="0.02000" ry="50" parent="${sequence}_aftc_base_link" />
-      <xacro:taxel sequence="${sequence}_aftc_10" x="0.0037" y="0.0338" z="0.01730" ry="29" rx="-48" parent="${sequence}_aftc_base_link" />
-      <xacro:taxel sequence="${sequence}_aftc_11" x="0.0039" y="0.0296" z="0.02155" ry="26" rx="-31" parent="${sequence}_aftc_base_link" />
-      <xacro:taxel sequence="${sequence}_aftc_12" x="0.0039" y="0.0230" z="0.02444" ry="22" rx="-10" parent="${sequence}_aftc_base_link" />
-      <xacro:taxel sequence="${sequence}_aftc_13" x="0.0039" y="0.0169" z="0.02544" ry="21" rx="-10" parent="${sequence}_aftc_base_link" />
-      <xacro:taxel sequence="${sequence}_aftc_14" x="0.0039" y="0.0103" z="0.02574" ry="18" parent="${sequence}_aftc_base_link" />
-      <xacro:taxel sequence="${sequence}_aftc_15" x="0.0039" y="0.0038" z="0.02574" ry="18" parent="${sequence}_aftc_base_link" />
-      <xacro:taxel sequence="${sequence}_aftc_16" x="-0.0037" y="0.0338" z="0.01730" ry="-29" rx="-48" parent="${sequence}_aftc_base_link" />
-      <xacro:taxel sequence="${sequence}_aftc_17" x="-0.0039" y="0.0296" z="0.02155" ry="-26" rx="-31" parent="${sequence}_aftc_base_link" />
-      <xacro:taxel sequence="${sequence}_aftc_18" x="-0.0039" y="0.0230" z="0.02444" ry="-22" rx="-10" parent="${sequence}_aftc_base_link" />
-      <xacro:taxel sequence="${sequence}_aftc_19" x="-0.0039" y="0.0169" z="0.02544" ry="-21" rx="-10" parent="${sequence}_aftc_base_link" />
-      <xacro:taxel sequence="${sequence}_aftc_20" x="-0.0039" y="0.0103" z="0.02574" ry="-18" parent="${sequence}_aftc_base_link" />
-      <xacro:taxel sequence="${sequence}_aftc_21" x="-0.0039" y="0.0038" z="0.02574" ry="-18" parent="${sequence}_aftc_base_link" />
-      <xacro:taxel sequence="${sequence}_aftc_22" x="-0.0098" y="0.0230" z="0.02000" ry="-50" rz="-10" parent="${sequence}_aftc_base_link" />
-      <xacro:taxel sequence="${sequence}_aftc_23" x="-0.0110" y="0.0167" z="0.02000" ry="-50" rz="-10" parent="${sequence}_aftc_base_link" />
-      <xacro:taxel sequence="${sequence}_aftc_24" x="-0.0115" y="0.0103" z="0.02000" ry="-50" parent="${sequence}_aftc_base_link" />
-      <xacro:taxel sequence="${sequence}_aftc_25" x="-0.0115" y="0.0038" z="0.02000" ry="-50" parent="${sequence}_aftc_base_link" />
-      <xacro:taxel sequence="${sequence}_aftc_26" x="-0.0101" y="0.0306" z="0.01254" ry="-90" rz="-30" parent="${sequence}_aftc_base_link" />
-      <xacro:taxel sequence="${sequence}_aftc_27" x="-0.0126" y="0.0236" z="0.01254" ry="-90" rz="-10" parent="${sequence}_aftc_base_link" />
-      <xacro:taxel sequence="${sequence}_aftc_28" x="-0.0138" y="0.0173" z="0.01254" ry="-90" rz="-10" parent="${sequence}_aftc_base_link" />
-      <xacro:taxel sequence="${sequence}_aftc_29" x="-0.0143" y="0.0103" z="0.01254" ry="-90" parent="${sequence}_aftc_base_link" />
-      <xacro:taxel sequence="${sequence}_aftc_30" x="-0.0143" y="0.0038" z="0.01254" ry="-90" parent="${sequence}_aftc_base_link" />
+      <xacro:taxel sequence="${sequence}aftc_1"  x="0.0101" y="0.0306" z="0.01254" ry="90" rz="30" parent="${sequence}aftc_${base}" />
+      <xacro:taxel sequence="${sequence}aftc_2"  x="0.0126" y="0.0236" z="0.01254" ry="90" rz="10" parent="${sequence}aftc_${base}" />
+      <xacro:taxel sequence="${sequence}aftc_3"  x="0.0138" y="0.0173" z="0.01254" ry="90" rz="10" parent="${sequence}aftc_${base}" />
+      <xacro:taxel sequence="${sequence}aftc_4"  x="0.0143" y="0.0103" z="0.01254" ry="90" parent="${sequence}aftc_${base}" />
+      <xacro:taxel sequence="${sequence}aftc_5"  x="0.0143" y="0.0038" z="0.01254" ry="90" parent="${sequence}aftc_${base}" />
+      <xacro:taxel sequence="${sequence}aftc_6"  x="0.0098" y="0.0230" z="0.02000" ry="50" rz="10" parent="${sequence}aftc_${base}" />
+      <xacro:taxel sequence="${sequence}aftc_7"  x="0.0110" y="0.0167" z="0.02000" ry="50" rz="10" parent="${sequence}aftc_${base}" />
+      <xacro:taxel sequence="${sequence}aftc_8"  x="0.0115" y="0.0103" z="0.02000" ry="50" parent="${sequence}aftc_${base}" />
+      <xacro:taxel sequence="${sequence}aftc_9"  x="0.0115" y="0.0038" z="0.02000" ry="50" parent="${sequence}aftc_${base}" />
+      <xacro:taxel sequence="${sequence}aftc_10" x="0.0037" y="0.0338" z="0.01730" ry="29" rx="-48" parent="${sequence}aftc_${base}" />
+      <xacro:taxel sequence="${sequence}aftc_11" x="0.0039" y="0.0296" z="0.02155" ry="26" rx="-31" parent="${sequence}aftc_${base}" />
+      <xacro:taxel sequence="${sequence}aftc_12" x="0.0039" y="0.0230" z="0.02444" ry="22" rx="-10" parent="${sequence}aftc_${base}" />
+      <xacro:taxel sequence="${sequence}aftc_13" x="0.0039" y="0.0169" z="0.02544" ry="21" rx="-10" parent="${sequence}aftc_${base}" />
+      <xacro:taxel sequence="${sequence}aftc_14" x="0.0039" y="0.0103" z="0.02574" ry="18" parent="${sequence}aftc_${base}" />
+      <xacro:taxel sequence="${sequence}aftc_15" x="0.0039" y="0.0038" z="0.02574" ry="18" parent="${sequence}aftc_${base}" />
+      <xacro:taxel sequence="${sequence}aftc_16" x="-0.0037" y="0.0338" z="0.01730" ry="-29" rx="-48" parent="${sequence}aftc_${base}" />
+      <xacro:taxel sequence="${sequence}aftc_17" x="-0.0039" y="0.0296" z="0.02155" ry="-26" rx="-31" parent="${sequence}aftc_${base}" />
+      <xacro:taxel sequence="${sequence}aftc_18" x="-0.0039" y="0.0230" z="0.02444" ry="-22" rx="-10" parent="${sequence}aftc_${base}" />
+      <xacro:taxel sequence="${sequence}aftc_19" x="-0.0039" y="0.0169" z="0.02544" ry="-21" rx="-10" parent="${sequence}aftc_${base}" />
+      <xacro:taxel sequence="${sequence}aftc_20" x="-0.0039" y="0.0103" z="0.02574" ry="-18" parent="${sequence}aftc_${base}" />
+      <xacro:taxel sequence="${sequence}aftc_21" x="-0.0039" y="0.0038" z="0.02574" ry="-18" parent="${sequence}aftc_${base}" />
+      <xacro:taxel sequence="${sequence}aftc_22" x="-0.0098" y="0.0230" z="0.02000" ry="-50" rz="-10" parent="${sequence}aftc_${base}" />
+      <xacro:taxel sequence="${sequence}aftc_23" x="-0.0110" y="0.0167" z="0.02000" ry="-50" rz="-10" parent="${sequence}aftc_${base}" />
+      <xacro:taxel sequence="${sequence}aftc_24" x="-0.0115" y="0.0103" z="0.02000" ry="-50" parent="${sequence}aftc_${base}" />
+      <xacro:taxel sequence="${sequence}aftc_25" x="-0.0115" y="0.0038" z="0.02000" ry="-50" parent="${sequence}aftc_${base}" />
+      <xacro:taxel sequence="${sequence}aftc_26" x="-0.0101" y="0.0306" z="0.01254" ry="-90" rz="-30" parent="${sequence}aftc_${base}" />
+      <xacro:taxel sequence="${sequence}aftc_27" x="-0.0126" y="0.0236" z="0.01254" ry="-90" rz="-10" parent="${sequence}aftc_${base}" />
+      <xacro:taxel sequence="${sequence}aftc_28" x="-0.0138" y="0.0173" z="0.01254" ry="-90" rz="-10" parent="${sequence}aftc_${base}" />
+      <xacro:taxel sequence="${sequence}aftc_29" x="-0.0143" y="0.0103" z="0.01254" ry="-90" parent="${sequence}aftc_${base}" />
+      <xacro:taxel sequence="${sequence}aftc_30" x="-0.0143" y="0.0038" z="0.01254" ry="-90" parent="${sequence}aftc_${base}" />
     </xacro:if>
   </xacro:macro>
    <xacro:macro name="aftd" params="sequence parent x:=0.0 y:=0.0 z:=0.0 rx:=0.0 ry:=0.0 rz:=0.0 col:='blue' skipinertia:=0">
-    <joint name="${sequence}_aftd_fixed" type="fixed">
+    <joint name="${sequence}aftd_fixed" type="fixed">
       <origin xyz="${x-0.013} ${y} ${z}" rpy="${radians(rx)} ${radians(ry)} ${radians(rz)}"/>
       <parent link="${parent}" />
-      <child link="${sequence}_aftd_base_link" />
+      <child link="${sequence}aftd_${base}" />
     </joint>
-    <link name="${sequence}_aftd_base_link">
+    <link name="${sequence}aftd_${base}">
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
@@ -282,9 +282,9 @@
     <joint name="${sequence}_4x4_fixed" type="fixed">
       <origin xyz="${x} ${y} ${z}" rpy="${radians(rx)} ${radians(ry)} ${radians(rz)}"/>
       <parent link="${parent}" />
-      <child link="${sequence}_4x4_base_link" />
+      <child link="${sequence}_4x4_${base}" />
     </joint>
-    <link name="${sequence}_4x4_base_link">
+    <link name="${sequence}_4x4_${base}">
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
@@ -309,31 +309,31 @@
       </xacro:if>
     </link>
     <xacro:if value="${taxels == 1}">
-      <xacro:taxel sequence="${sequence}_4x4_1"  x="${1*0.0046666+0.0007}" y="${4*0.00466666+0.00015}" z="0.004" parent="${sequence}_4x4_base_link" />
-      <xacro:taxel sequence="${sequence}_4x4_2"  x="${2*0.0046666+0.0007}" y="${4*0.00466666+0.00015}" z="0.004" parent="${sequence}_4x4_base_link" />
-      <xacro:taxel sequence="${sequence}_4x4_3"  x="${3*0.0046666+0.0007}" y="${4*0.00466666+0.00015}" z="0.004" parent="${sequence}_4x4_base_link" />
-      <xacro:taxel sequence="${sequence}_4x4_4"  x="${4*0.0046666+0.0007}" y="${4*0.00466666+0.00015}" z="0.004" parent="${sequence}_4x4_base_link" />
-      <xacro:taxel sequence="${sequence}_4x4_5"  x="${1*0.0046666+0.0007}" y="${3*0.00466666+0.00015}" z="0.004" parent="${sequence}_4x4_base_link" />
-      <xacro:taxel sequence="${sequence}_4x4_6"  x="${2*0.0046666+0.0007}" y="${3*0.00466666+0.00015}" z="0.004" parent="${sequence}_4x4_base_link" />
-      <xacro:taxel sequence="${sequence}_4x4_7"  x="${3*0.0046666+0.0007}" y="${3*0.00466666+0.00015}" z="0.004" parent="${sequence}_4x4_base_link" />
-      <xacro:taxel sequence="${sequence}_4x4_8"  x="${4*0.0046666+0.0007}" y="${3*0.00466666+0.00015}" z="0.004" parent="${sequence}_4x4_base_link" />
-      <xacro:taxel sequence="${sequence}_4x4_9"  x="${1*0.0046666+0.0007}" y="${2*0.00466666+0.00015}" z="0.004" parent="${sequence}_4x4_base_link" />
-      <xacro:taxel sequence="${sequence}_4x4_10" x="${2*0.0046666+0.0007}" y="${2*0.00466666+0.00015}" z="0.004" parent="${sequence}_4x4_base_link" />
-      <xacro:taxel sequence="${sequence}_4x4_11" x="${3*0.0046666+0.0007}" y="${2*0.00466666+0.00015}" z="0.004" parent="${sequence}_4x4_base_link" />
-      <xacro:taxel sequence="${sequence}_4x4_12" x="${4*0.0046666+0.0007}" y="${2*0.00466666+0.00015}" z="0.004" parent="${sequence}_4x4_base_link" />
-      <xacro:taxel sequence="${sequence}_4x4_13" x="${1*0.0046666+0.0007}" y="${1*0.00466666+0.00015}" z="0.004" parent="${sequence}_4x4_base_link" />
-      <xacro:taxel sequence="${sequence}_4x4_14" x="${2*0.0046666+0.0007}" y="${1*0.00466666+0.00015}" z="0.004" parent="${sequence}_4x4_base_link" />
-      <xacro:taxel sequence="${sequence}_4x4_15" x="${3*0.0046666+0.0007}" y="${1*0.00466666+0.00015}" z="0.004" parent="${sequence}_4x4_base_link" />
-      <xacro:taxel sequence="${sequence}_4x4_16" x="${4*0.0046666+0.0007}" y="${1*0.00466666+0.00015}" z="0.004" parent="${sequence}_4x4_base_link" />
+      <xacro:taxel sequence="${sequence}_4x4_1"  x="${1*0.0046666+0.0007}" y="${4*0.00466666+0.00015}" z="0.004" parent="${sequence}_4x4_${base}" />
+      <xacro:taxel sequence="${sequence}_4x4_2"  x="${2*0.0046666+0.0007}" y="${4*0.00466666+0.00015}" z="0.004" parent="${sequence}_4x4_${base}" />
+      <xacro:taxel sequence="${sequence}_4x4_3"  x="${3*0.0046666+0.0007}" y="${4*0.00466666+0.00015}" z="0.004" parent="${sequence}_4x4_${base}" />
+      <xacro:taxel sequence="${sequence}_4x4_4"  x="${4*0.0046666+0.0007}" y="${4*0.00466666+0.00015}" z="0.004" parent="${sequence}_4x4_${base}" />
+      <xacro:taxel sequence="${sequence}_4x4_5"  x="${1*0.0046666+0.0007}" y="${3*0.00466666+0.00015}" z="0.004" parent="${sequence}_4x4_${base}" />
+      <xacro:taxel sequence="${sequence}_4x4_6"  x="${2*0.0046666+0.0007}" y="${3*0.00466666+0.00015}" z="0.004" parent="${sequence}_4x4_${base}" />
+      <xacro:taxel sequence="${sequence}_4x4_7"  x="${3*0.0046666+0.0007}" y="${3*0.00466666+0.00015}" z="0.004" parent="${sequence}_4x4_${base}" />
+      <xacro:taxel sequence="${sequence}_4x4_8"  x="${4*0.0046666+0.0007}" y="${3*0.00466666+0.00015}" z="0.004" parent="${sequence}_4x4_${base}" />
+      <xacro:taxel sequence="${sequence}_4x4_9"  x="${1*0.0046666+0.0007}" y="${2*0.00466666+0.00015}" z="0.004" parent="${sequence}_4x4_${base}" />
+      <xacro:taxel sequence="${sequence}_4x4_10" x="${2*0.0046666+0.0007}" y="${2*0.00466666+0.00015}" z="0.004" parent="${sequence}_4x4_${base}" />
+      <xacro:taxel sequence="${sequence}_4x4_11" x="${3*0.0046666+0.0007}" y="${2*0.00466666+0.00015}" z="0.004" parent="${sequence}_4x4_${base}" />
+      <xacro:taxel sequence="${sequence}_4x4_12" x="${4*0.0046666+0.0007}" y="${2*0.00466666+0.00015}" z="0.004" parent="${sequence}_4x4_${base}" />
+      <xacro:taxel sequence="${sequence}_4x4_13" x="${1*0.0046666+0.0007}" y="${1*0.00466666+0.00015}" z="0.004" parent="${sequence}_4x4_${base}" />
+      <xacro:taxel sequence="${sequence}_4x4_14" x="${2*0.0046666+0.0007}" y="${1*0.00466666+0.00015}" z="0.004" parent="${sequence}_4x4_${base}" />
+      <xacro:taxel sequence="${sequence}_4x4_15" x="${3*0.0046666+0.0007}" y="${1*0.00466666+0.00015}" z="0.004" parent="${sequence}_4x4_${base}" />
+      <xacro:taxel sequence="${sequence}_4x4_16" x="${4*0.0046666+0.0007}" y="${1*0.00466666+0.00015}" z="0.004" parent="${sequence}_4x4_${base}" />
     </xacro:if>
   </xacro:macro>
   <xacro:macro name="sensor1x6" params="sequence parent x:=0.0 y:=0.0 z:=0.0 rx:=0.0 ry:=0.0 rz:=0.0 col:='blue' body:=1 taxels:=1 skipinertia:=0">
     <joint name="${sequence}_1x6_fixed" type="fixed">
       <origin xyz="${x} ${y} ${z}" rpy="${radians(rx)} ${radians(ry)} ${radians(rz)}"/>
       <parent link="${parent}" />
-      <child link="${sequence}_1x6_base_link" />
+      <child link="${sequence}_1x6_${base}" />
     </joint>
-    <link name="${sequence}_1x6_base_link">
+    <link name="${sequence}_1x6_${base}">
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
@@ -358,21 +358,21 @@
       </xacro:if>
     </link>
     <xacro:if value="${taxels == 1}">
-      <xacro:taxel sequence="${sequence}_1x6_1" x="${1*0.0046666-0.0023}" y="${6*0.00466666-0.0023}" z="0.005" parent="${sequence}_1x6_base_link" />
-      <xacro:taxel sequence="${sequence}_1x6_2" x="${1*0.0046666-0.0023}" y="${5*0.00466666-0.0023}" z="0.005" parent="${sequence}_1x6_base_link" />
-      <xacro:taxel sequence="${sequence}_1x6_3" x="${1*0.0046666-0.0023}" y="${4*0.00466666-0.0023}" z="0.005" parent="${sequence}_1x6_base_link" />
-      <xacro:taxel sequence="${sequence}_1x6_4" x="${1*0.0046666-0.0023}" y="${3*0.00466666-0.0023}" z="0.005" parent="${sequence}_1x6_base_link" />
-      <xacro:taxel sequence="${sequence}_1x6_5" x="${1*0.0046666-0.0023}" y="${2*0.00466666-0.0023}" z="0.005" parent="${sequence}_1x6_base_link" />
-      <xacro:taxel sequence="${sequence}_1x6_6" x="${1*0.0046666-0.0023}" y="${1*0.00466666-0.0023}" z="0.005" parent="${sequence}_1x6_base_link" />
+      <xacro:taxel sequence="${sequence}_1x6_1" x="${1*0.0046666-0.0023}" y="${6*0.00466666-0.0023}" z="0.005" parent="${sequence}_1x6_${base}" />
+      <xacro:taxel sequence="${sequence}_1x6_2" x="${1*0.0046666-0.0023}" y="${5*0.00466666-0.0023}" z="0.005" parent="${sequence}_1x6_${base}" />
+      <xacro:taxel sequence="${sequence}_1x6_3" x="${1*0.0046666-0.0023}" y="${4*0.00466666-0.0023}" z="0.005" parent="${sequence}_1x6_${base}" />
+      <xacro:taxel sequence="${sequence}_1x6_4" x="${1*0.0046666-0.0023}" y="${3*0.00466666-0.0023}" z="0.005" parent="${sequence}_1x6_${base}" />
+      <xacro:taxel sequence="${sequence}_1x6_5" x="${1*0.0046666-0.0023}" y="${2*0.00466666-0.0023}" z="0.005" parent="${sequence}_1x6_${base}" />
+      <xacro:taxel sequence="${sequence}_1x6_6" x="${1*0.0046666-0.0023}" y="${1*0.00466666-0.0023}" z="0.005" parent="${sequence}_1x6_${base}" />
     </xacro:if>
   </xacro:macro>
   <xacro:macro name="sensor4x6" params="sequence parent x:=0.0 y:=0.0 z:=0.0 rx:=0.0 ry:=0.0 rz:=0.0 col:='blue' body:=1 taxels:=1 skipinertia:=0">
     <joint name="${sequence}_4x6_fixed" type="fixed">
       <origin xyz="${x} ${y} ${z}" rpy="${radians(rx)} ${radians(ry)} ${radians(rz)}"/>
       <parent link="${parent}" />
-      <child link="${sequence}_4x6_base_link" />
+      <child link="${sequence}_4x6_${base}" />
     </joint>
-    <link name="${sequence}_4x6_base_link">
+    <link name="${sequence}_4x6_${base}">
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
@@ -397,42 +397,48 @@
       </xacro:if>
     </link>
     <xacro:if value="${taxels == 1}">
-      <xacro:taxel sequence="${sequence}_4x6_1"  x="${1*0.00724+0.0030}" y="${4*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_base_link" />
-      <xacro:taxel sequence="${sequence}_4x6_2"  x="${2*0.00724+0.0030}" y="${4*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_base_link" />
-      <xacro:taxel sequence="${sequence}_4x6_3"  x="${3*0.00724+0.0030}" y="${4*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_base_link" />
-      <xacro:taxel sequence="${sequence}_4x6_4"  x="${4*0.00724+0.0030}" y="${4*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_base_link" />
-      <xacro:taxel sequence="${sequence}_4x6_5"  x="${5*0.00724+0.0030}" y="${4*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_base_link" />
-      <xacro:taxel sequence="${sequence}_4x6_6"  x="${6*0.00724+0.0030}" y="${4*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_base_link" />
-      <xacro:taxel sequence="${sequence}_4x6_7"  x="${1*0.00724+0.0030}" y="${3*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_base_link" />
-      <xacro:taxel sequence="${sequence}_4x6_8"  x="${2*0.00724+0.0030}" y="${3*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_base_link" />
-      <xacro:taxel sequence="${sequence}_4x6_9"  x="${3*0.00724+0.0030}" y="${3*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_base_link" />
-      <xacro:taxel sequence="${sequence}_4x6_10" x="${4*0.00724+0.0030}" y="${3*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_base_link" />
-      <xacro:taxel sequence="${sequence}_4x6_11" x="${5*0.00724+0.0030}" y="${3*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_base_link" />
-      <xacro:taxel sequence="${sequence}_4x6_12" x="${6*0.00724+0.0030}" y="${3*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_base_link" />
-      <xacro:taxel sequence="${sequence}_4x6_13" x="${1*0.00724+0.0030}" y="${2*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_base_link" />
-      <xacro:taxel sequence="${sequence}_4x6_14" x="${2*0.00724+0.0030}" y="${2*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_base_link" />
-      <xacro:taxel sequence="${sequence}_4x6_15" x="${3*0.00724+0.0030}" y="${2*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_base_link" />
-      <xacro:taxel sequence="${sequence}_4x6_16" x="${4*0.00724+0.0030}" y="${2*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_base_link" />
-      <xacro:taxel sequence="${sequence}_4x6_17" x="${5*0.00724+0.0030}" y="${2*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_base_link" />
-      <xacro:taxel sequence="${sequence}_4x6_18" x="${6*0.00724+0.0030}" y="${2*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_base_link" />
-      <xacro:taxel sequence="${sequence}_4x6_19" x="${1*0.00724+0.0030}" y="${1*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_base_link" />
-      <xacro:taxel sequence="${sequence}_4x6_20" x="${2*0.00724+0.0030}" y="${1*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_base_link" />
-      <xacro:taxel sequence="${sequence}_4x6_21" x="${3*0.00724+0.0030}" y="${1*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_base_link" />
-      <xacro:taxel sequence="${sequence}_4x6_22" x="${4*0.00724+0.0030}" y="${1*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_base_link" />
-      <xacro:taxel sequence="${sequence}_4x6_23" x="${5*0.00724+0.0030}" y="${1*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_base_link" />
-      <xacro:taxel sequence="${sequence}_4x6_24" x="${6*0.00724+0.0030}" y="${1*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_base_link" />
+      <xacro:taxel sequence="${sequence}_4x6_1"  x="${1*0.00724+0.0030}" y="${4*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_${base}" />
+      <xacro:taxel sequence="${sequence}_4x6_2"  x="${2*0.00724+0.0030}" y="${4*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_${base}" />
+      <xacro:taxel sequence="${sequence}_4x6_3"  x="${3*0.00724+0.0030}" y="${4*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_${base}" />
+      <xacro:taxel sequence="${sequence}_4x6_4"  x="${4*0.00724+0.0030}" y="${4*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_${base}" />
+      <xacro:taxel sequence="${sequence}_4x6_5"  x="${5*0.00724+0.0030}" y="${4*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_${base}" />
+      <xacro:taxel sequence="${sequence}_4x6_6"  x="${6*0.00724+0.0030}" y="${4*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_${base}" />
+      <xacro:taxel sequence="${sequence}_4x6_7"  x="${1*0.00724+0.0030}" y="${3*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_${base}" />
+      <xacro:taxel sequence="${sequence}_4x6_8"  x="${2*0.00724+0.0030}" y="${3*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_${base}" />
+      <xacro:taxel sequence="${sequence}_4x6_9"  x="${3*0.00724+0.0030}" y="${3*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_${base}" />
+      <xacro:taxel sequence="${sequence}_4x6_10" x="${4*0.00724+0.0030}" y="${3*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_${base}" />
+      <xacro:taxel sequence="${sequence}_4x6_11" x="${5*0.00724+0.0030}" y="${3*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_${base}" />
+      <xacro:taxel sequence="${sequence}_4x6_12" x="${6*0.00724+0.0030}" y="${3*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_${base}" />
+      <xacro:taxel sequence="${sequence}_4x6_13" x="${1*0.00724+0.0030}" y="${2*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_${base}" />
+      <xacro:taxel sequence="${sequence}_4x6_14" x="${2*0.00724+0.0030}" y="${2*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_${base}" />
+      <xacro:taxel sequence="${sequence}_4x6_15" x="${3*0.00724+0.0030}" y="${2*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_${base}" />
+      <xacro:taxel sequence="${sequence}_4x6_16" x="${4*0.00724+0.0030}" y="${2*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_${base}" />
+      <xacro:taxel sequence="${sequence}_4x6_17" x="${5*0.00724+0.0030}" y="${2*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_${base}" />
+      <xacro:taxel sequence="${sequence}_4x6_18" x="${6*0.00724+0.0030}" y="${2*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_${base}" />
+      <xacro:taxel sequence="${sequence}_4x6_19" x="${1*0.00724+0.0030}" y="${1*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_${base}" />
+      <xacro:taxel sequence="${sequence}_4x6_20" x="${2*0.00724+0.0030}" y="${1*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_${base}" />
+      <xacro:taxel sequence="${sequence}_4x6_21" x="${3*0.00724+0.0030}" y="${1*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_${base}" />
+      <xacro:taxel sequence="${sequence}_4x6_22" x="${4*0.00724+0.0030}" y="${1*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_${base}" />
+      <xacro:taxel sequence="${sequence}_4x6_23" x="${5*0.00724+0.0030}" y="${1*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_${base}" />
+      <xacro:taxel sequence="${sequence}_4x6_24" x="${6*0.00724+0.0030}" y="${1*0.00717-0.002175}" z="0.005" parent="${sequence}_4x6_${base}" />
     </xacro:if>
   </xacro:macro>
 
   <!-- Allegro Hands -->
-  <xacro:macro name="allegro_hand_right" params="sequence parent x:=0.0 y:=0.0 z:=0.0 rx:=0.0 ry:=0.0 rz:=0.0 covers:=1 phalanges:=1 tips:='flat' palm:=1 taxels:=0 defaultnames:=0">
+  <xacro:macro name="allegro_hand_right" params="sequence parent x:=0.0 y:=0.0 z:=0.0 rx:=0.0 ry:=0.0 rz:=0.0 baseispalm:=0 covers:=1 phalanges:=1 tips:='flat' palm:=1 taxels:=0 defaultnames:=0">
     <xacro:if value="${sequence == ''}">
       <xacro:property name="seq" value=""/>
     </xacro:if>
     <xacro:unless value="${sequence == ''}">
       <xacro:property name="seq" value="${sequence}_"/>
     </xacro:unless>
-    <link name="${seq}base_link">
+    <xacro:if value="${baseispalm == 1}">
+      <xacro:property name="base" value="palm_link"/>
+    </xacro:if>
+    <xacro:unless value="${baseispalm == 1}">
+      <xacro:property name="base" value="base_link"/>
+    </xacro:unless>
+    <link name="${seq}${base}">
       <visual>
         <geometry>
           <xacro:if value="${palm == 1}">
@@ -471,17 +477,17 @@
     <joint name="${seq}ahr_fixed" type="fixed">
         <origin xyz="${x} ${y} ${z}" rpy="${radians(rx)} ${radians(ry)} ${radians(rz)}"/>
         <parent link="${parent}" />
-        <child link="${seq}base_link" />
+        <child link="${seq}${base}" />
       </joint>
     <xacro:if value="${palm == 1}">
-      <xacro:sensor4x6 sequence="${seq}ahr_palm_1" col="red" parent="${seq}base_link" x="0.013" y="-0.051" z="-0.0365"  rz="90" rx="90" ry="0.0" taxels="${taxels}" skipinertia="1" />
-      <xacro:sensor4x6 sequence="${seq}ahr_palm_2" col="green" parent="${seq}base_link" x="0.013" y="0.0523" z="-0.005"  rz="90" rx="90" ry="180.0" taxels="${taxels}" skipinertia="1" />
-      <xacro:sensor4x6 sequence="${seq}ahr_palm_3" col="blue" parent="${seq}base_link" x="0.013" y="-0.051" z="-0.068" rz="90" rx="90" ry="0.0" taxels="${taxels}" skipinertia="1" />
+      <xacro:sensor4x6 sequence="${seq}ahr_palm_1" col="red" parent="${seq}${base}" x="0.013" y="-0.051" z="-0.0365"  rz="90" rx="90" ry="0.0" taxels="${taxels}" skipinertia="1" />
+      <xacro:sensor4x6 sequence="${seq}ahr_palm_2" col="green" parent="${seq}${base}" x="0.013" y="0.0523" z="-0.005"  rz="90" rx="90" ry="180.0" taxels="${taxels}" skipinertia="1" />
+      <xacro:sensor4x6 sequence="${seq}ahr_palm_3" col="blue" parent="${seq}${base}" x="0.013" y="-0.051" z="-0.068" rz="90" rx="90" ry="0.0" taxels="${taxels}" skipinertia="1" />
     </xacro:if>
     <xacro:if value="${defaultnames == 1}">
     <xacro:finger 
       sequence=			    "${seq}"
-      parent=				    "${seq}base_link"
+      parent=				    "${seq}${base}"
       finger_num=			  "0"
       offset_origin_x=	"${0}"	
       offset_origin_y=	"${0.0435}"
@@ -494,7 +500,7 @@
     />
     <xacro:finger
       sequence=			    "${seq}"
-      parent=				    "${seq}base_link"
+      parent=				    "${seq}${base}"
       finger_num=			  "1" 
       offset_origin_x=	"${0}"	
       offset_origin_y=	"0" 
@@ -507,7 +513,7 @@
     />
     <xacro:finger 
       sequence=			    "${seq}"
-      parent=				    "${seq}base_link"
+      parent=				    "${seq}${base}"
       finger_num=			  "2" 
       offset_origin_x=	"${0}"	
       offset_origin_y=	"-${0.0435}" 
@@ -520,7 +526,7 @@
     />
     <xacro:thumb_right
       sequence=			    "${seq}"
-      parent=				    "${seq}base_link"
+      parent=				    "${seq}${base}"
       finger_num=			  "3" 
       offset_origin_x=	"-0.0182"	
       offset_origin_y=	"0.019333" 
@@ -537,7 +543,7 @@
     <xacro:unless value="${defaultnames == 1}">
       <xacro:finger 
         sequence=			    "${seq}hitosashi_finger_"
-        parent=				    "${seq}base_link"
+        parent=				    "${seq}${base}"
         finger_num=			  "0"
         offset_origin_x=	"${0}"	
         offset_origin_y=	"${0.0435}"
@@ -550,7 +556,7 @@
       />
       <xacro:finger
         sequence=			    "${seq}naka_finger_"
-        parent=				    "${seq}base_link"
+        parent=				    "${seq}${base}"
         finger_num=			  "1" 
         offset_origin_x=	"${0}"	
         offset_origin_y=	"0" 
@@ -563,7 +569,7 @@
       />
       <xacro:finger 
         sequence=			    "${seq}kusuri_finger_"
-        parent=				    "${seq}base_link"
+        parent=				    "${seq}${base}"
         finger_num=			  "2" 
         offset_origin_x=	"${0}"	
         offset_origin_y=	"-${0.0435}" 
@@ -576,7 +582,7 @@
       />
       <xacro:thumb_right
         sequence=			    "${seq}oya_finger_"
-        parent=				    "${seq}base_link"
+        parent=				    "${seq}${base}"
         finger_num=			  "3" 
         offset_origin_x=	"-0.0182"	
         offset_origin_y=	"0.019333" 
@@ -593,7 +599,7 @@
     </xacro:macro>
     <!--FINGER MACRO-->
     <xacro:macro name="finger" params="sequence parent finger_num offset_origin_x offset_origin_y offset_origin_z finger_angle_r covers:=1 tip:='flat' phalanges:=1 taxels:=0">
-      <link name="${sequence}finger_link_${finger_num*4+0}">	
+      <link name="${sequence}link_${finger_num*4+0}">	
         <visual>
           <geometry>
             <mesh filename="package://xela_models/mesh/allegro/link_0.0_ext.STL" />
@@ -612,14 +618,14 @@
           <inertia ixx="1.38e-07" ixy="1.27e-10" ixz="4.83e-09" iyy="6.83e-08" iyz="0.0" izz="1.16e-07" />
         </inertial>
       </link>
-      <joint name="${sequence}finger_joint_${finger_num*4+0}" type="revolute">
+      <joint name="${sequence}joint_${finger_num*4+0}" type="revolute">
         <axis xyz="0 0 1"/>
         <limit effort="15" velocity="7" lower="${-0.57+0.1}" upper="${0.57-0.1}" />
         <parent link="${parent}"/>
-        <child link="${sequence}finger_link_${finger_num*4+0}"/>
+        <child link="${sequence}link_${finger_num*4+0}"/>
         <origin rpy="${finger_angle_r} 0 0" xyz="${offset_origin_x} ${offset_origin_y} ${offset_origin_z}"/>
       </joint>
-      <link name="${sequence}finger_link_${finger_num*4+1}">	
+      <link name="${sequence}link_${finger_num*4+1}">	
         <visual>
           <geometry>
             <xacro:if value="${phalanges == 1}">
@@ -662,7 +668,7 @@
         </xacro:unless>
       </link>
       <xacro:if value="${covers == 1}"><!--covers are always with sensors-->
-        <link name="${sequence}finger_link_${finger_num*4+1}_cover">	
+        <link name="${sequence}link_${finger_num*4+1}_cover">	
           <visual>
             <geometry>
               <mesh filename="package://xela_models/mesh/allegro/link_1_cover.stl" />
@@ -677,24 +683,24 @@
           </collision>
           <!--As link is fixed, inertias will be inside the main link-->
         </link>
-        <joint name="${sequence}finger_link_${finger_num*4+1}_cover_joint" type="fixed">
+        <joint name="${sequence}link_${finger_num*4+1}_cover_joint" type="fixed">
           <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
-          <parent link="${sequence}finger_link_${finger_num*4+1}" />
-          <child link="${sequence}finger_link_${finger_num*4+1}_cover" />
+          <parent link="${sequence}link_${finger_num*4+1}" />
+          <child link="${sequence}link_${finger_num*4+1}_cover" />
         </joint>
       </xacro:if>
       <xacro:if value="${phalanges == 1 and taxels == 1}">
-        <xacro:sensor4x4 sequence="${sequence}finger_link_${finger_num*4+1}A" col="red" parent="${sequence}finger_link_${finger_num*4+1}" ry="-90" rz="180" z="0.033" y="0.012" x="0.0108" body="0" taxels="${taxels}" skipinertia="1" />
-        <xacro:sensor4x4 sequence="${sequence}finger_link_${finger_num*4+1}B" col="red" parent="${sequence}finger_link_${finger_num*4+1}" ry="90" z="0.021" y="-0.012" x="0.0108" body="0" taxels="${taxels}" skipinertia="1" />
+        <xacro:sensor4x4 sequence="${sequence}link_${finger_num*4+1}A" col="red" parent="${sequence}link_${finger_num*4+1}" ry="-90" rz="180" z="0.033" y="0.012" x="0.0108" body="0" taxels="${taxels}" skipinertia="1" />
+        <xacro:sensor4x4 sequence="${sequence}link_${finger_num*4+1}B" col="red" parent="${sequence}link_${finger_num*4+1}" ry="90" z="0.021" y="-0.012" x="0.0108" body="0" taxels="${taxels}" skipinertia="1" />
       </xacro:if>
-      <joint name="${sequence}finger_joint_${finger_num*4+1}" type="revolute">
+      <joint name="${sequence}joint_${finger_num*4+1}" type="revolute">
         <limit effort="15" velocity="7" lower="${-0.296+0.1}" upper="${1.71-0.1}" />
         <axis xyz="0 1 0"/>
-        <parent link="${sequence}finger_link_${finger_num*4+0}"/>
-        <child link="${sequence}finger_link_${finger_num*4+1}"/>
+        <parent link="${sequence}link_${finger_num*4+0}"/>
+        <child link="${sequence}link_${finger_num*4+1}"/>
         <origin xyz="0 0 ${0.0164+0.004}"/><!-- New height on fingers -->
       </joint>
-      <link name="${sequence}finger_link_${finger_num*4+2}">	
+      <link name="${sequence}link_${finger_num*4+2}">	
         <visual>
           <geometry>
             <xacro:if value="${phalanges == 1}">
@@ -737,7 +743,7 @@
         </xacro:unless>
       </link>
       <xacro:if value="${covers == 1}">
-        <link name="${sequence}finger_link_${finger_num*4+2}_cover">	
+        <link name="${sequence}link_${finger_num*4+2}_cover">	
           <visual>
             <geometry>
               <mesh filename="package://xela_models/mesh/allegro/link_2_cover.stl" />
@@ -751,23 +757,23 @@
             <origin rpy="0 0 0" xyz="0 0 ${0.0514/2}"/>
           </collision>
         </link>
-        <joint name="${sequence}finger_link_${finger_num*4+2}_cover_joint" type="fixed">
+        <joint name="${sequence}link_${finger_num*4+2}_cover_joint" type="fixed">
           <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
-          <parent link="${sequence}finger_link_${finger_num*4+2}" />
-          <child link="${sequence}finger_link_${finger_num*4+2}_cover" />
+          <parent link="${sequence}link_${finger_num*4+2}" />
+          <child link="${sequence}link_${finger_num*4+2}_cover" />
         </joint>
       </xacro:if>
       <xacro:if value="${phalanges == 1 and taxels == 1}">
-        <xacro:sensor4x4 sequence="${sequence}finger_link_${finger_num*4+2}" col="red" parent="${sequence}finger_link_${finger_num*4+2}" ry="90" z="0.0445" y="-0.012" x="0.01" body="0" skipinertia="1" />
+        <xacro:sensor4x4 sequence="${sequence}link_${finger_num*4+2}" col="red" parent="${sequence}link_${finger_num*4+2}" ry="90" z="0.0445" y="-0.012" x="0.01" body="0" skipinertia="1" />
       </xacro:if>
-      <joint name="${sequence}finger_joint_${finger_num*4+2}" type="revolute">
+      <joint name="${sequence}joint_${finger_num*4+2}" type="revolute">
         <axis xyz="0 1 0"/>
         <limit effort="15" velocity="7" lower="${-0.274+0.1}" upper="${1.809-0.1}" />
-        <parent link="${sequence}finger_link_${finger_num*4+1}"/>
-        <child link="${sequence}finger_link_${finger_num*4+2}"/>
+        <parent link="${sequence}link_${finger_num*4+1}"/>
+        <child link="${sequence}link_${finger_num*4+2}"/>
         <origin xyz="0 0 ${0.0540}"/>
       </joint>
-      <link name="${sequence}finger_link_${finger_num*4+3}">	
+      <link name="${sequence}link_${finger_num*4+3}">	
         <visual>
           <geometry>
             <mesh filename="package://xela_models/mesh/allegro/link_3.0.STL" />
@@ -802,27 +808,27 @@
           </inertial>
         </xacro:unless>
       </link>
-      <joint name="${sequence}finger_joint_${finger_num*4+3}" type="revolute">
+      <joint name="${sequence}joint_${finger_num*4+3}" type="revolute">
         <axis xyz="0 1 0"/>
         <limit effort="15" velocity="7" lower="${-0.327+0.1}" upper="${1.718-0.1}" />
-        <parent link="${sequence}finger_link_${finger_num*4+2}"/>
-        <child link="${sequence}finger_link_${finger_num*4+3}"/>
+        <parent link="${sequence}link_${finger_num*4+2}"/>
+        <child link="${sequence}link_${finger_num*4+3}"/>
         <origin xyz="0 0.0 0.0384"/>
       </joint>
     <xacro:if value="${tip == 'flat'}">
-      <xacro:sensoraftf sequence="${sequence}finger_${finger_num}" col="red" parent="${sequence}finger_link_${finger_num*4+3}" rx="90" rz="90" z="0.016" taxels="${taxels}" skipinertia="1"/>
+      <xacro:sensoraftf sequence="${sequence}${finger_num}" col="red" parent="${sequence}link_${finger_num*4+3}" rx="90" rz="90" z="0.016" taxels="${taxels}" skipinertia="1"/>
     </xacro:if>
     <xacro:if value="${tip == 'curved'}">
-      <xacro:sensoraftc sequence="${sequence}finger_${finger_num}" col="red" parent="${sequence}finger_link_${finger_num*4+3}" rx="90" rz="90" z="0.016" taxels="${taxels}" skipinertia="1"/>
+      <xacro:sensoraftc sequence="${sequence}${finger_num}" col="red" parent="${sequence}link_${finger_num*4+3}" rx="90" rz="90" z="0.016" taxels="${taxels}" skipinertia="1"/>
     </xacro:if>
     <xacro:if value="${tip == 'default'}">
-      <xacro:aftd sequence="${sequence}finger_${finger_num}" col="white" parent="${sequence}finger_link_${finger_num*4+3}" rx="0" rz="0" z="0.027" x="0.013" skipinertia="1"/>
+      <xacro:aftd sequence="${sequence}${finger_num}" col="white" parent="${sequence}link_${finger_num*4+3}" rx="0" rz="0" z="0.027" x="0.013" skipinertia="1"/>
     </xacro:if>
     </xacro:macro>
 
     <!--THUMB MACRO-->
     <xacro:macro name="thumb_right" params="sequence parent finger_num offset_origin_x offset_origin_y offset_origin_z finger_angle_r finger_angle_p finger_angle_y covers:=1 phalanges:=1 tip:='flat' taxels:=0">
-      <link name="${sequence}_link_${finger_num*4+0}">
+      <link name="${sequence}link_${finger_num*4+0}">
         <visual>
           <geometry>
             <mesh filename="package://xela_models/mesh/allegro/link_12.0_right.STL" />
@@ -841,14 +847,14 @@
           <inertia ixx="3.36e-06" ixy="0.0" ixz="1.76e-08" iyy="3.84e-06" iyz="2.46e-07" izz="2.59e-06" />
         </inertial>
       </link>
-      <joint name="${sequence}_joint_${finger_num*4+0}" type="revolute">
+      <joint name="${sequence}joint_${finger_num*4+0}" type="revolute">
         <axis xyz="-1 0 0"/>
         <limit effort="15" velocity="7" lower="${0.363-0.1}" upper="${1.496-0.1}" />
         <parent link="${parent}"/>
-        <child link="${sequence}_link_${finger_num*4+0}"/>
+        <child link="${sequence}link_${finger_num*4+0}"/>
         <origin rpy="${finger_angle_r} ${finger_angle_p} ${finger_angle_y}" xyz="${offset_origin_x} ${offset_origin_y} ${offset_origin_z}"/>
       </joint>
-      <link name="${sequence}_link_${finger_num*4+1}">	
+      <link name="${sequence}link_${finger_num*4+1}">	
         <visual>
           <geometry>
             <mesh filename="package://xela_models/mesh/allegro/link_13.0.STL" />
@@ -868,7 +874,7 @@
         </inertial>
       </link>
       <xacro:if value="${covers == 1}">
-        <link name="${sequence}_link_${finger_num*4+2}_cover">	
+        <link name="${sequence}link_${finger_num*4+2}_cover">	
           <visual>
             <geometry>
               <mesh filename="package://xela_models/mesh/allegro/thumb_1_cover.stl" />
@@ -882,20 +888,20 @@
             <origin rpy="0 0 0" xyz="0 0 0"/>
           </collision>
         </link>
-        <joint name="${sequence}_link_${finger_num*4+2}_cover_joint" type="fixed">
+        <joint name="${sequence}link_${finger_num*4+2}_cover_joint" type="fixed">
           <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
-          <parent link="${sequence}_link_${finger_num*4+2}" />
-          <child link="${sequence}_link_${finger_num*4+2}_cover" />
+          <parent link="${sequence}link_${finger_num*4+2}" />
+          <child link="${sequence}link_${finger_num*4+2}_cover" />
         </joint>
       </xacro:if>
-      <joint name="${sequence}_joint_${finger_num*4+1}" type="revolute">
+      <joint name="${sequence}joint_${finger_num*4+1}" type="revolute">
         <axis xyz="0 0 1"/>
         <limit effort="15" velocity="7" lower="${-0.205+0.1}" upper="${1.263-0.1}" />
-        <parent link="${sequence}_link_${finger_num*4+0}"/>
-        <child link="${sequence}_link_${finger_num*4+1}"/>   
+        <parent link="${sequence}link_${finger_num*4+0}"/>
+        <child link="${sequence}link_${finger_num*4+1}"/>   
         <origin xyz="-0.027 0.005 0.0399"/>
       </joint>
-      <link name="${sequence}_link_${finger_num*4+2}">	
+      <link name="${sequence}link_${finger_num*4+2}">	
         <visual>
           <geometry>
             <xacro:if value="${phalanges == 1}">
@@ -938,7 +944,7 @@
         </xacro:unless>
       </link>
       <xacro:if value="${covers == 1}">
-        <link name="${sequence}_link_${finger_num*4+3}_cover">	
+        <link name="${sequence}link_${finger_num*4+3}_cover">	
           <visual>
             <geometry>
               <mesh filename="package://xela_models/mesh/allegro/thumb_2_cover.stl" />
@@ -952,23 +958,23 @@
             <origin rpy="0 0 0" xyz="0 0 0"/>
           </collision>
         </link>
-        <joint name="${sequence}_link_${finger_num*4+3}_cover_joint" type="fixed">
+        <joint name="${sequence}link_${finger_num*4+3}_cover_joint" type="fixed">
           <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
-          <parent link="${sequence}_link_${finger_num*4+3}" />
-          <child link="${sequence}_link_${finger_num*4+3}_cover" />
+          <parent link="${sequence}link_${finger_num*4+3}" />
+          <child link="${sequence}link_${finger_num*4+3}_cover" />
         </joint>
       </xacro:if>
       <xacro:if value="${phalanges == 1 and taxels == 1}">
-        <xacro:sensor4x4 sequence="${sequence}_link_${finger_num*4+2}" parent="${sequence}_link_${finger_num*4+2}" ry="90" z="0.023" y="-0.012" x="0.011" body="0" skipinertia="1" />
+        <xacro:sensor4x4 sequence="${sequence}link_${finger_num*4+2}" parent="${sequence}link_${finger_num*4+2}" ry="90" z="0.023" y="-0.012" x="0.011" body="0" skipinertia="1" />
       </xacro:if>
-      <joint name="${sequence}_joint_${finger_num*4+2}" type="revolute">
+      <joint name="${sequence}joint_${finger_num*4+2}" type="revolute">
         <axis xyz="0 1 0"/>
         <limit effort="15" velocity="7" lower="${-0.289+0.1}" upper="${1.744-0.1}" />
-        <parent link="${sequence}_link_${finger_num*4+1}"/>
-        <child link="${sequence}_link_${finger_num*4+2}"/>
+        <parent link="${sequence}link_${finger_num*4+1}"/>
+        <child link="${sequence}link_${finger_num*4+2}"/>
         <origin xyz="0 0 ${0.0177}"/>
       </joint> 
-      <link name="${sequence}_link_${finger_num*4+3}">
+      <link name="${sequence}link_${finger_num*4+3}">
         <visual>
           <geometry>
             <xacro:if value="${phalanges == 1}">
@@ -1059,23 +1065,23 @@
         </xacro:unless>
       </link>
       <xacro:if value="${phalanges == 1 and taxels == 1}">
-        <xacro:sensor4x4 sequence="${sequence}_link_${finger_num*4+3}" parent="${sequence}_link_${finger_num*4+3}" ry="90" z="0.021" y="-0.012" x="0.011" body="0" skipinertia="1" />
+        <xacro:sensor4x4 sequence="${sequence}link_${finger_num*4+3}" parent="${sequence}link_${finger_num*4+3}" ry="90" z="0.021" y="-0.012" x="0.011" body="0" skipinertia="1" />
       </xacro:if>
-    <joint name="${sequence}_joint_${finger_num*4+3}" type="revolute">
+    <joint name="${sequence}joint_${finger_num*4+3}" type="revolute">
       <axis xyz="0 1 0"/>
       <limit effort="15" velocity="7" lower="${-0.262+0.1}" upper="${1.819-0.1}" />
-      <parent link="${sequence}_link_${finger_num*4+2}"/>
-      <child link="${sequence}_link_${finger_num*4+3}"/>
+      <parent link="${sequence}link_${finger_num*4+2}"/>
+      <child link="${sequence}link_${finger_num*4+3}"/>
       <origin xyz="0 0 ${0.0514}"/>
     </joint>
     <xacro:if value="${tip == 'flat'}">
-      <xacro:sensoraftf sequence="${sequence}_${finger_num}" col="green" parent="${sequence}_link_${finger_num*4+3}" rx="90" rz="90" z="0.0315" taxels="${taxels}" skipinertia="1" />
+      <xacro:sensoraftf sequence="${sequence}${finger_num}" col="green" parent="${sequence}link_${finger_num*4+3}" rx="90" rz="90" z="0.0315" taxels="${taxels}" skipinertia="1" />
     </xacro:if>
     <xacro:if value="${tip == 'curved'}">
-      <xacro:sensoraftc sequence="${sequence}_${finger_num}" col="green" parent="${sequence}_link_${finger_num*4+3}" rx="90" rz="90" z="0.0315" taxels="${taxels}" skipinertia="1" />
+      <xacro:sensoraftc sequence="${sequence}${finger_num}" col="green" parent="${sequence}link_${finger_num*4+3}" rx="90" rz="90" z="0.0315" taxels="${taxels}" skipinertia="1" />
     </xacro:if>
     <xacro:if value="${tip == 'default'}">
-      <xacro:aftd sequence="${sequence}_${finger_num}" col="white" parent="${sequence}_link_${finger_num*4+3}" rx="0" rz="0" z="0.042" x="0.013" skipinertia="1" />
+      <xacro:aftd sequence="${sequence}${finger_num}" col="white" parent="${sequence}link_${finger_num*4+3}" rx="0" rz="0" z="0.042" x="0.013" skipinertia="1" />
     </xacro:if>
   </xacro:macro>
 </robot>
