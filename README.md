@@ -1,6 +1,8 @@
 # ROS URDF for XELA Sensors
 
-> NOTE: There is currently no module to broadcast sensor readings to the model. If there is a need, please make note of the joint names and make own joint_publisher node
+> NOTE: There is currently no module to broadcast sensor readings to the model. If there is a need, please make note of the joint names and make own joint_publisher node and enable taxel visualization<br>
+> NOTE: As each hand is different, some elements in URDF files need to be changed manually<br>
+> NOTE: Gravity compensation must be calibrated after adding sensors. It will be the responsibility of the user
 
 ## Installation
 Unpack the xela_models directory into your catkin workspace src directory and set it up to be used like any other package for ROS
@@ -11,6 +13,7 @@ To use sensors with your URDF files, import XELA xacro file by adding <xacro:inc
 ## Visualization (XACRO)
 To run the visualization of the model, use following command;
 >roslaunch xela_models display.launch model:=&lt;model&gt;
+![Image of Allegro Hand](./allegro_full_211014.png)
 
 ### Available models:
 | sensor_model | Description |
@@ -80,6 +83,13 @@ To run the visualization of the model, use following command;
 
 
 ## Changelog and notes
+### _2021/10/14_
+* Change links to official ones for v4 without sensors and use sensor bodies as fixed link
+* Modify some initial values to match the hand for testing
+#### Known issues
+- [ ] Encoders can report slightly different data between hands
+- [ ] Accuracy of the Allegro hand -> TF is separate from URDF and would need to be manipulated by separately (not supported by XELA)
+
 ### _2021/10/12_
 * Add _baseispalm_ parameter to enforce default name for allegro ROS node
 * Update link names to be fully compatible with allegro's

@@ -3,7 +3,7 @@
 
   <!-- Rviz colors -->
   <material name="black">
-    <color rgba="0.1 0.1 0.1 1.0"/>
+    <color rgba="0.2 0.2 0.2 0.8"/><!-- Slight transparency to make more visible -->
   </material>
 
   <material name="blue">
@@ -23,7 +23,7 @@
   </material>
 
   <material name="brown">
-    <color rgba="${222/255} ${207/255} ${195/255} 1.0"/>
+    <color rgba="${165/255} ${42/255} ${42/255} 1.0"/>
   </material>
 
   <material name="red">
@@ -480,65 +480,65 @@
         <child link="${seq}${base}" />
       </joint>
     <xacro:if value="${palm == 1}">
-      <xacro:sensor4x6 sequence="${seq}ahr_palm_1" col="red" parent="${seq}${base}" x="0.013" y="-0.051" z="-0.0365"  rz="90" rx="90" ry="0.0" taxels="${taxels}" skipinertia="1" />
-      <xacro:sensor4x6 sequence="${seq}ahr_palm_2" col="green" parent="${seq}${base}" x="0.013" y="0.0523" z="-0.005"  rz="90" rx="90" ry="180.0" taxels="${taxels}" skipinertia="1" />
-      <xacro:sensor4x6 sequence="${seq}ahr_palm_3" col="blue" parent="${seq}${base}" x="0.013" y="-0.051" z="-0.068" rz="90" rx="90" ry="0.0" taxels="${taxels}" skipinertia="1" />
+      <xacro:sensor4x6 sequence="${seq}ahr_palm_1" col="brown" parent="${seq}${base}" x="0.013" y="-0.051" z="-0.0365"  rz="90" rx="90" ry="0.0" taxels="${taxels}" skipinertia="1" />
+      <xacro:sensor4x6 sequence="${seq}ahr_palm_2" col="brown" parent="${seq}${base}" x="0.013" y="0.0523" z="-0.005"  rz="90" rx="90" ry="180.0" taxels="${taxels}" skipinertia="1" />
+      <xacro:sensor4x6 sequence="${seq}ahr_palm_3" col="brown" parent="${seq}${base}" x="0.013" y="-0.051" z="-0.068" rz="90" rx="90" ry="0.0" taxels="${taxels}" skipinertia="1" />
     </xacro:if>
     <xacro:if value="${defaultnames == 1}">
-    <xacro:finger 
-      sequence=			    "${seq}"
-      parent=				    "${seq}${base}"
-      finger_num=			  "0"
-      offset_origin_x=	"${0}"	
-      offset_origin_y=	"${0.0435}"
-      offset_origin_z=	"${-0.001542}"
-      finger_angle_r=		"-${radians(5.0)}"
-      covers=				    "${covers}"
-      phalanges=				"${phalanges}"
-      tip=				      "${tips}"
-      taxels=           "${taxels}"
-    />
-    <xacro:finger
-      sequence=			    "${seq}"
-      parent=				    "${seq}${base}"
-      finger_num=			  "1" 
-      offset_origin_x=	"${0}"	
-      offset_origin_y=	"0" 
-      offset_origin_z=	"${0.0007}" 
-      finger_angle_r=		"0.0"
-      covers=				    "${covers}"
-      phalanges=				"${phalanges}"
-      tip=				      "${tips}"
-      taxels=           "${taxels}"
-    />
-    <xacro:finger 
-      sequence=			    "${seq}"
-      parent=				    "${seq}${base}"
-      finger_num=			  "2" 
-      offset_origin_x=	"${0}"	
-      offset_origin_y=	"-${0.0435}" 
-      offset_origin_z=	"${-0.001542}" 
-      finger_angle_r=		"${radians(5.0)}"
-      covers=				    "${covers}"
-      phalanges=				"${phalanges}"
-      tip=				      "${tips}"
-      taxels=           "${taxels}"
-    />
-    <xacro:thumb_right
-      sequence=			    "${seq}"
-      parent=				    "${seq}${base}"
-      finger_num=			  "3" 
-      offset_origin_x=	"-0.0182"	
-      offset_origin_y=	"0.019333" 
-      offset_origin_z=	"-0.045987"
-      covers=				    "${covers}"
-      finger_angle_r=		"0"
-      finger_angle_p=		"-${radians(95)}"	
-      finger_angle_y=		"-${radians(90)}"
-      phalanges=				"${phalanges}"
-      tip=				      "${tips}"
-      taxels=           "${taxels}"
-    />
+      <xacro:finger 
+        sequence=			    "${seq}"
+        parent=				    "${seq}${base}"
+        finger_num=			  "0"
+        offset_origin_x=	"${0}"	
+        offset_origin_y=	"${0.0435}"
+        offset_origin_z=	"${-0.001542}"
+        finger_angle_r=		"-${radians(5.0)}"
+        covers=				    "${covers}"
+        phalanges=				"${phalanges}"
+        tip=				      "${tips}"
+        taxels=           "${taxels}"
+      />
+      <xacro:finger
+        sequence=			    "${seq}"
+        parent=				    "${seq}${base}"
+        finger_num=			  "1" 
+        offset_origin_x=	"${0}"	
+        offset_origin_y=	"0" 
+        offset_origin_z=	"${0.0007}" 
+        finger_angle_r=		"0.0"
+        covers=				    "${covers}"
+        phalanges=				"${phalanges}"
+        tip=				      "${tips}"
+        taxels=           "${taxels}"
+      />
+      <xacro:finger 
+        sequence=			    "${seq}"
+        parent=				    "${seq}${base}"
+        finger_num=			  "2" 
+        offset_origin_x=	"${0}"	
+        offset_origin_y=	"-${0.0435}" 
+        offset_origin_z=	"${-0.001542}" 
+        finger_angle_r=		"${radians(5.0)}"
+        covers=				    "${covers}"
+        phalanges=				"${phalanges}"
+        tip=				      "${tips}"
+        taxels=           "${taxels}"
+      />
+      <xacro:thumb_right
+        sequence=			    "${seq}"
+        parent=				    "${seq}${base}"
+        finger_num=			  "3" 
+        offset_origin_x=	"-0.0182"	
+        offset_origin_y=	"0.019333" 
+        offset_origin_z=	"${-0.045987-0.0005}"
+        covers=				    "${covers}"
+        finger_angle_r=		"0"
+        finger_angle_p=		"-${radians(95)}"	
+        finger_angle_y=		"-${radians(90)}"
+        phalanges=				"${phalanges}"
+        tip=				      "${tips}"
+        taxels=           "${taxels}"
+      />
     </xacro:if>
     <xacro:unless value="${defaultnames == 1}">
       <xacro:finger 
@@ -596,238 +596,228 @@
         taxels=           "${taxels}"
       />
     </xacro:unless>
-    </xacro:macro>
-    <!--FINGER MACRO-->
-    <xacro:macro name="finger" params="sequence parent finger_num offset_origin_x offset_origin_y offset_origin_z finger_angle_r covers:=1 tip:='flat' phalanges:=1 taxels:=0">
-      <link name="${sequence}link_${finger_num*4+0}">	
-        <visual>
-          <geometry>
-            <mesh filename="package://xela_models/mesh/allegro/link_0.0_ext.STL" />
-          </geometry>
-          <material name="grey"/>
-        </visual>
-        <collision>
-          <geometry>
-            <box size="${0.0196} ${0.0275} ${0.0164}"/>
-          </geometry>
-          <origin rpy="0 0 0" xyz="0 0 ${0.0164/2+0.003}"/>
-        </collision>
-        <inertial>
-          <mass value="0.0127" />
-          <origin xyz="0 0 0" rpy="0 0 0"/>
-          <inertia ixx="1.38e-07" ixy="1.27e-10" ixz="4.83e-09" iyy="6.83e-08" iyz="0.0" izz="1.16e-07" />
-        </inertial>
-      </link>
-      <joint name="${sequence}joint_${finger_num*4+0}" type="revolute">
-        <axis xyz="0 0 1"/>
-        <limit effort="15" velocity="7" lower="${-0.57+0.1}" upper="${0.57-0.1}" />
-        <parent link="${parent}"/>
-        <child link="${sequence}link_${finger_num*4+0}"/>
-        <origin rpy="${finger_angle_r} 0 0" xyz="${offset_origin_x} ${offset_origin_y} ${offset_origin_z}"/>
-      </joint>
-      <link name="${sequence}link_${finger_num*4+1}">	
-        <visual>
-          <geometry>
-            <xacro:if value="${phalanges == 1}">
-              <mesh filename="package://xela_models/mesh/allegro/link_1.1.stl" />
-            </xacro:if>
-            <xacro:if value="${phalanges != 1}">
-              <mesh filename="package://xela_models/mesh/allegro/link_1_ns.stl"/>   
-            </xacro:if>
-          </geometry>
-          <material name="black" />
-        </visual>
-        <collision>
-          <geometry>
-            <box size="${0.0196} ${0.0275} ${0.0164}"/>
-          </geometry>
-          <origin rpy="0 0 0" xyz="0 0 ${0.0164/2}"/>
-        </collision>
-        <xacro:if value="${covers == 1}">
-          <inertial>
-            <mass value="0.0809" />
-            <origin xyz="0 0 0" rpy="0 0 0"/>
-            <inertia ixx="1.75e-05" ixy="0.0" ixz="5.66e-08" iyy="1.80e-05" iyz="0.0" izz="4.60e-06" />
-          </inertial>
-        </xacro:if>
-        <xacro:unless value="${covers == 1}">
-          <xacro:if value="${phalanges == 1}">
-            <inertial>
-              <mass value="0.0719" />
-              <origin xyz="0 0 0" rpy="0 0 0"/>
-              <inertia ixx="1.56e-05" ixy="0.0" ixz="5.03e-08" iyy="1.60e-05" iyz="0.0" izz="4.09e-06" />
-            </inertial>
-          </xacro:if>
-          <xacro:unless value="${phalanges == 1}">
-            <inertial>
-              <mass value="0.0650" />
-              <origin xyz="0 0 0" rpy="0 0 0"/>
-              <inertia ixx="1.14e-05" ixy="0.0" ixz="0.0" iyy="1.12e-05" iyz="0.0" izz="2.56e-06" />
-            </inertial>
-          </xacro:unless>
-        </xacro:unless>
-      </link>
-      <xacro:if value="${covers == 1}"><!--covers are always with sensors-->
-        <link name="${sequence}link_${finger_num*4+1}_cover">	
-          <visual>
-            <geometry>
-              <mesh filename="package://xela_models/mesh/allegro/link_1_cover.stl" />
-            </geometry>
-            <material name="red"/>
-          </visual>
-          <collision>
-            <geometry>
-              <mesh filename="package://xela_models/mesh/allegro/link_1_cover.stl" />
-            </geometry>
-            <origin rpy="0 0 0" xyz="0 0 ${0.0177/2}"/>
-          </collision>
-          <!--As link is fixed, inertias will be inside the main link-->
-        </link>
-        <joint name="${sequence}link_${finger_num*4+1}_cover_joint" type="fixed">
-          <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
-          <parent link="${sequence}link_${finger_num*4+1}" />
-          <child link="${sequence}link_${finger_num*4+1}_cover" />
-        </joint>
-      </xacro:if>
-      <xacro:if value="${phalanges == 1 and taxels == 1}">
-        <xacro:sensor4x4 sequence="${sequence}link_${finger_num*4+1}A" col="red" parent="${sequence}link_${finger_num*4+1}" ry="-90" rz="180" z="0.033" y="0.012" x="0.0108" body="0" taxels="${taxels}" skipinertia="1" />
-        <xacro:sensor4x4 sequence="${sequence}link_${finger_num*4+1}B" col="red" parent="${sequence}link_${finger_num*4+1}" ry="90" z="0.021" y="-0.012" x="0.0108" body="0" taxels="${taxels}" skipinertia="1" />
-      </xacro:if>
-      <joint name="${sequence}joint_${finger_num*4+1}" type="revolute">
-        <limit effort="15" velocity="7" lower="${-0.296+0.1}" upper="${1.71-0.1}" />
-        <axis xyz="0 1 0"/>
-        <parent link="${sequence}link_${finger_num*4+0}"/>
-        <child link="${sequence}link_${finger_num*4+1}"/>
-        <origin xyz="0 0 ${0.0164+0.004}"/><!-- New height on fingers -->
-      </joint>
-      <link name="${sequence}link_${finger_num*4+2}">	
-        <visual>
-          <geometry>
-            <xacro:if value="${phalanges == 1}">
-              <mesh filename="package://xela_models/mesh/allegro/link_2.1.stl" />
-            </xacro:if>
-            <xacro:if value="${phalanges != 1}">
-              <mesh filename="package://xela_models/mesh/allegro/link_2_ns.stl"/>   
-            </xacro:if>
-          </geometry>
-          <material name="black" />
-        </visual>
-        <collision>
-          <geometry>
-            <box size="${0.0196} ${0.0275} ${0.0540}"/>
-          </geometry>
-          <origin rpy="0 0 0" xyz="0 0 ${0.0540/2}"/>     
-        </collision>
-        <xacro:if value="${covers == 1}"><!--covers are always with sensors-->
-          <inertial>
-            <mass value="0.0447" />
-            <origin xyz="0 0 0" rpy="0 0 0"/>
-            <inertia ixx="3.80e-07" ixy="0.0" ixz="7.15e-09" iyy="2.26e-07" iyz="1.34e-09" izz="1.86e-07" />
-          </inertial>
-        </xacro:if>
-        <xacro:unless value="${covers == 1}">
-          <xacro:if value="${phalanges == 1}">
-            <inertial>
-              <mass value="0.0422" />
-              <origin xyz="0 0 0" rpy="0 0 0"/>
-              <inertia ixx="3.15e-06" ixy="0.0" ixz="0.0" iyy="3.05e-06" iyz="0.0" izz="1.33e-06" />
-            </inertial>
-          </xacro:if>
-          <xacro:unless value="${phalanges == 1}">
-            <inertial>
-              <mass value="0.0355" />
-              <origin xyz="0 0 0" rpy="0 0 0"/>
-              <inertia ixx="2.46e-06" ixy="0.0" ixz="0.0" iyy="2.26e-06" iyz="0.0" izz="8.95e-07" />
-            </inertial>
-          </xacro:unless>
-        </xacro:unless>
-      </link>
+  </xacro:macro>
+  <!--FINGER MACRO-->
+  <xacro:macro name="finger" params="sequence parent finger_num offset_origin_x offset_origin_y offset_origin_z finger_angle_r covers:=1 tip:='flat' phalanges:=1 taxels:=0">
+    <link name="${sequence}link_${finger_num*4+0}">	
+      <visual>
+        <geometry>
+          <mesh filename="package://xela_models/mesh/allegro/link_0.0_ext.STL" />
+        </geometry>
+        <material name="grey"/>
+      </visual>
+      <collision>
+        <geometry>
+          <box size="${0.0196} ${0.0275} ${0.0164}"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 ${0.0164/2+0.003}"/>
+      </collision>
+      <inertial>
+        <mass value="0.0127" />
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <inertia ixx="1.38e-07" ixy="1.27e-10" ixz="4.83e-09" iyy="6.83e-08" iyz="0.0" izz="1.16e-07" />
+      </inertial>
+    </link>
+    <joint name="${sequence}joint_${finger_num*4+0}" type="revolute">
+      <axis xyz="0 0 1"/>
+      <limit effort="15" velocity="7" lower="${-0.57+0.1}" upper="${0.57-0.1}" />
+      <parent link="${parent}"/>
+      <child link="${sequence}link_${finger_num*4+0}"/>
+      <origin rpy="${finger_angle_r} 0 0" xyz="${offset_origin_x} ${offset_origin_y} ${offset_origin_z}"/>
+    </joint>
+    <link name="${sequence}link_${finger_num*4+1}">	
+      <visual>
+        <geometry>
+          <mesh filename="package://xela_models/mesh/allegro/link_1.0.stl" />
+        </geometry>
+        <material name="black" />
+      </visual>
+      <collision>
+        <geometry>
+          <box size="${0.0196} ${0.0275} ${0.0164}"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 ${0.0164/2}"/>
+      </collision>
       <xacro:if value="${covers == 1}">
-        <link name="${sequence}link_${finger_num*4+2}_cover">	
-          <visual>
-            <geometry>
-              <mesh filename="package://xela_models/mesh/allegro/link_2_cover.stl" />
-            </geometry>
-            <material name="red"/>
-          </visual>
-          <collision>
-            <geometry>
-              <mesh filename="package://xela_models/mesh/allegro/link_2_cover.stl" />
-            </geometry>
-            <origin rpy="0 0 0" xyz="0 0 ${0.0514/2}"/>
-          </collision>
-        </link>
-        <joint name="${sequence}link_${finger_num*4+2}_cover_joint" type="fixed">
-          <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
-          <parent link="${sequence}link_${finger_num*4+2}" />
-          <child link="${sequence}link_${finger_num*4+2}_cover" />
-        </joint>
+        <inertial>
+          <mass value="0.0809" />
+          <origin xyz="0 0 0" rpy="0 0 0"/>
+          <inertia ixx="1.75e-05" ixy="0.0" ixz="5.66e-08" iyy="1.80e-05" iyz="0.0" izz="4.60e-06" />
+        </inertial>
       </xacro:if>
-      <xacro:if value="${phalanges == 1 and taxels == 1}">
-        <xacro:sensor4x4 sequence="${sequence}link_${finger_num*4+2}" col="red" parent="${sequence}link_${finger_num*4+2}" ry="90" z="0.0445" y="-0.012" x="0.01" body="0" skipinertia="1" />
-      </xacro:if>
-      <joint name="${sequence}joint_${finger_num*4+2}" type="revolute">
-        <axis xyz="0 1 0"/>
-        <limit effort="15" velocity="7" lower="${-0.274+0.1}" upper="${1.809-0.1}" />
-        <parent link="${sequence}link_${finger_num*4+1}"/>
-        <child link="${sequence}link_${finger_num*4+2}"/>
-        <origin xyz="0 0 ${0.0540}"/>
-      </joint>
-      <link name="${sequence}link_${finger_num*4+3}">	
+      <xacro:unless value="${covers == 1}">
+        <xacro:if value="${phalanges == 1}">
+          <inertial>
+            <mass value="0.0719" />
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <inertia ixx="1.56e-05" ixy="0.0" ixz="5.03e-08" iyy="1.60e-05" iyz="0.0" izz="4.09e-06" />
+          </inertial>
+        </xacro:if>
+        <xacro:unless value="${phalanges == 1}">
+          <inertial>
+            <mass value="0.0650" />
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <inertia ixx="1.14e-05" ixy="0.0" ixz="0.0" iyy="1.12e-05" iyz="0.0" izz="2.56e-06" />
+          </inertial>
+        </xacro:unless>
+      </xacro:unless>
+    </link>
+    <xacro:if value="${covers == 1}"><!--covers are always with sensors-->
+      <link name="${sequence}link_${finger_num*4+1}_cover">	
         <visual>
           <geometry>
-            <mesh filename="package://xela_models/mesh/allegro/link_3.0.STL" />
+            <mesh filename="package://xela_models/mesh/allegro/link_1_cover.stl" />
           </geometry>
-          <material name="black" />
+          <material name="red"/>
         </visual>
         <collision>
           <geometry>
-            <box size="${0.0196} ${0.0275} ${0.0384-0.0120}"/>
+            <mesh filename="package://xela_models/mesh/allegro/link_1_cover.stl" />
           </geometry>
-          <origin rpy="0 0 0" xyz="0 0 ${(0.0384-0.0120)/2}"/>
+          <origin rpy="0 0 0" xyz="0 0 ${0.0177/2}"/>
         </collision>
-        <xacro:if value="${tip == 'flat'}">
+        <!--As link is fixed, inertias will be inside the main link-->
+      </link>
+      <joint name="${sequence}link_${finger_num*4+1}_cover_joint" type="fixed">
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <parent link="${sequence}link_${finger_num*4+1}" />
+        <child link="${sequence}link_${finger_num*4+1}_cover" />
+      </joint>
+    </xacro:if>
+    <xacro:if value="${phalanges == 1}">
+      <xacro:sensor4x4 sequence="${sequence}link_${finger_num*4+1}A" col="blue" parent="${sequence}link_${finger_num*4+1}" ry="-90" rz="180" z="0.033" y="0.012" x="0.0108" taxels="${taxels}" skipinertia="1" />
+      <xacro:sensor4x4 sequence="${sequence}link_${finger_num*4+1}B" col="blue" parent="${sequence}link_${finger_num*4+1}" ry="90" z="0.021" y="-0.012" x="0.0108" taxels="${taxels}" skipinertia="1" />
+    </xacro:if>
+    <joint name="${sequence}joint_${finger_num*4+1}" type="revolute">
+      <limit effort="15" velocity="7" lower="${-0.296+0.1}" upper="${1.71-0.1}" />
+      <axis xyz="0 1 0"/>
+      <parent link="${sequence}link_${finger_num*4+0}"/>
+      <child link="${sequence}link_${finger_num*4+1}"/>
+      <origin xyz="0 0 ${0.0164+0.0025}"/><!-- New height on fingers -->
+    </joint>
+    <link name="${sequence}link_${finger_num*4+2}">	
+      <visual>
+        <geometry>
+          <mesh filename="package://xela_models/mesh/allegro/link_2.0.stl" />
+        </geometry>
+        <material name="black" />
+      </visual>
+      <collision>
+        <geometry>
+          <box size="${0.0196} ${0.0275} ${0.0540}"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 ${0.0540/2}"/>     
+      </collision>
+      <xacro:if value="${covers == 1}"><!--covers are always with sensors-->
+        <inertial>
+          <mass value="0.0447" />
+          <origin xyz="0 0 0" rpy="0 0 0"/>
+          <inertia ixx="3.80e-07" ixy="0.0" ixz="7.15e-09" iyy="2.26e-07" iyz="1.34e-09" izz="1.86e-07" />
+        </inertial>
+      </xacro:if>
+      <xacro:unless value="${covers == 1}">
+        <xacro:if value="${phalanges == 1}">
           <inertial>
-            <mass value="0.0281" />
+            <mass value="0.0422" />
             <origin xyz="0 0 0" rpy="0 0 0"/>
-            <inertia ixx="1.59e-06" ixy="0.0" ixz="0.0" iyy="1.49e-06" iyz="0.0" izz="1.10e-06" />
+            <inertia ixx="3.15e-06" ixy="0.0" ixz="0.0" iyy="3.05e-06" iyz="0.0" izz="1.33e-06" />
           </inertial>
         </xacro:if>
-        <xacro:if value="${tip == 'curved'}">
+        <xacro:unless value="${phalanges == 1}">
           <inertial>
-            <mass value="0.0404" />
+            <mass value="0.0355" />
             <origin xyz="0 0 0" rpy="0 0 0"/>
-            <inertia ixx="3.64e-06" ixy="0.0" ixz="0.0" iyy="3.33e-06" iyz="0.0" izz="1.92e-06" />
-          </inertial>
-        </xacro:if>
-        <xacro:unless value="${tip == 'flat' or tip == 'curved'}">
-          <inertial>
-            <mass value="0.0280" />
-            <origin xyz="0 0 0" rpy="0 0 0"/>
-            <inertia ixx="3.05e-07" ixy="0.0" ixz="0.0" iyy="1.51e-07" iyz="0.0" izz="2.56e-07" />
+            <inertia ixx="2.46e-06" ixy="0.0" ixz="0.0" iyy="2.26e-06" iyz="0.0" izz="8.95e-07" />
           </inertial>
         </xacro:unless>
+      </xacro:unless>
+    </link>
+    <xacro:if value="${covers == 1}">
+      <link name="${sequence}link_${finger_num*4+2}_cover">	
+        <visual>
+          <geometry>
+            <mesh filename="package://xela_models/mesh/allegro/link_2_cover.stl" />
+          </geometry>
+          <material name="red"/>
+        </visual>
+        <collision>
+          <geometry>
+            <mesh filename="package://xela_models/mesh/allegro/link_2_cover.stl" />
+          </geometry>
+          <origin rpy="0 0 0" xyz="0 0 ${0.0514/2}"/>
+        </collision>
       </link>
-      <joint name="${sequence}joint_${finger_num*4+3}" type="revolute">
-        <axis xyz="0 1 0"/>
-        <limit effort="15" velocity="7" lower="${-0.327+0.1}" upper="${1.718-0.1}" />
-        <parent link="${sequence}link_${finger_num*4+2}"/>
-        <child link="${sequence}link_${finger_num*4+3}"/>
-        <origin xyz="0 0.0 0.0384"/>
+      <joint name="${sequence}link_${finger_num*4+2}_cover_joint" type="fixed">
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <parent link="${sequence}link_${finger_num*4+2}" />
+        <child link="${sequence}link_${finger_num*4+2}_cover" />
       </joint>
+    </xacro:if>
+    <xacro:if value="${phalanges == 1}">
+      <xacro:sensor4x4 sequence="${sequence}link_${finger_num*4+2}" col="blue" parent="${sequence}link_${finger_num*4+2}" ry="90" z="0.0445" y="-0.012" x="0.01" taxels="${taxels}" skipinertia="1" />
+    </xacro:if>
+    <joint name="${sequence}joint_${finger_num*4+2}" type="revolute">
+      <axis xyz="0 1 0"/>
+      <limit effort="15" velocity="7" lower="${-0.274+0.1}" upper="${1.809-0.1}" />
+      <parent link="${sequence}link_${finger_num*4+1}"/>
+      <child link="${sequence}link_${finger_num*4+2}"/>
+      <origin xyz="0 0 ${0.0540}"/>
+    </joint>
+    <link name="${sequence}link_${finger_num*4+3}">	
+      <visual>
+        <geometry>
+          <mesh filename="package://xela_models/mesh/allegro/link_3.0.STL" />
+        </geometry>
+        <material name="black" />
+      </visual>
+      <collision>
+        <geometry>
+          <box size="${0.0196} ${0.0275} ${0.0384-0.0120}"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 ${(0.0384-0.0120)/2}"/>
+      </collision>
+      <xacro:if value="${tip == 'flat'}">
+        <inertial>
+          <mass value="0.0281" />
+          <origin xyz="0 0 0" rpy="0 0 0"/>
+          <inertia ixx="1.59e-06" ixy="0.0" ixz="0.0" iyy="1.49e-06" iyz="0.0" izz="1.10e-06" />
+        </inertial>
+      </xacro:if>
+      <xacro:if value="${tip == 'curved'}">
+        <inertial>
+          <mass value="0.0404" />
+          <origin xyz="0 0 0" rpy="0 0 0"/>
+          <inertia ixx="3.64e-06" ixy="0.0" ixz="0.0" iyy="3.33e-06" iyz="0.0" izz="1.92e-06" />
+        </inertial>
+      </xacro:if>
+      <xacro:unless value="${tip == 'flat' or tip == 'curved'}">
+        <inertial>
+          <mass value="0.0280" />
+          <origin xyz="0 0 0" rpy="0 0 0"/>
+          <inertia ixx="3.05e-07" ixy="0.0" ixz="0.0" iyy="1.51e-07" iyz="0.0" izz="2.56e-07" />
+        </inertial>
+      </xacro:unless>
+    </link>
+    <joint name="${sequence}joint_${finger_num*4+3}" type="revolute">
+      <axis xyz="0 1 0"/>
+      <limit effort="15" velocity="7" lower="${-0.327+0.1}" upper="${1.718-0.1}" />
+      <parent link="${sequence}link_${finger_num*4+2}"/>
+      <child link="${sequence}link_${finger_num*4+3}"/>
+      <origin xyz="0 0.0 0.0384"/>
+    </joint>
     <xacro:if value="${tip == 'flat'}">
-      <xacro:sensoraftf sequence="${sequence}${finger_num}" col="red" parent="${sequence}link_${finger_num*4+3}" rx="90" rz="90" z="0.016" taxels="${taxels}" skipinertia="1"/>
+      <xacro:sensoraftf sequence="${sequence}${finger_num}" col="green" parent="${sequence}link_${finger_num*4+3}" rx="90" rz="90" z="0.016" taxels="${taxels}" skipinertia="1"/>
     </xacro:if>
     <xacro:if value="${tip == 'curved'}">
-      <xacro:sensoraftc sequence="${sequence}${finger_num}" col="red" parent="${sequence}link_${finger_num*4+3}" rx="90" rz="90" z="0.016" taxels="${taxels}" skipinertia="1"/>
+      <xacro:sensoraftc sequence="${sequence}${finger_num}" col="orange" parent="${sequence}link_${finger_num*4+3}" rx="90" rz="90" z="0.016" taxels="${taxels}" skipinertia="1"/>
     </xacro:if>
     <xacro:if value="${tip == 'default'}">
       <xacro:aftd sequence="${sequence}${finger_num}" col="white" parent="${sequence}link_${finger_num*4+3}" rx="0" rz="0" z="0.027" x="0.013" skipinertia="1"/>
     </xacro:if>
-    </xacro:macro>
+  </xacro:macro>
 
-    <!--THUMB MACRO-->
-    <xacro:macro name="thumb_right" params="sequence parent finger_num offset_origin_x offset_origin_y offset_origin_z finger_angle_r finger_angle_p finger_angle_y covers:=1 phalanges:=1 tip:='flat' taxels:=0">
+  <!--THUMB MACRO-->
+  <xacro:macro name="thumb_right" params="sequence parent finger_num offset_origin_x offset_origin_y offset_origin_z finger_angle_r finger_angle_p finger_angle_y covers:=1 phalanges:=1 tip:='flat' taxels:=0">
       <link name="${sequence}link_${finger_num*4+0}">
         <visual>
           <geometry>
@@ -857,7 +847,7 @@
       <link name="${sequence}link_${finger_num*4+1}">	
         <visual>
           <geometry>
-            <mesh filename="package://xela_models/mesh/allegro/link_13.0.STL" />
+            <mesh filename="package://xela_models/mesh/allegro/link_0.0_ext.STL" /><!-- link_13.0.STL -->
           </geometry>
           <material name="grey" />
         </visual>
@@ -904,12 +894,7 @@
       <link name="${sequence}link_${finger_num*4+2}">	
         <visual>
           <geometry>
-            <xacro:if value="${phalanges == 1}">
-              <mesh filename="package://xela_models/mesh/allegro/thumb_1.1.stl"/>   
-            </xacro:if>
-            <xacro:if value="${phalanges != 1}">
-              <mesh filename="package://xela_models/mesh/allegro/thumb_1.1_ns.stl"/>   
-            </xacro:if>
+            <mesh filename="package://xela_models/mesh/allegro/thumb_1.0.stl"/>
           </geometry>
           <material name="black" />
         </visual>
@@ -964,25 +949,20 @@
           <child link="${sequence}link_${finger_num*4+3}_cover" />
         </joint>
       </xacro:if>
-      <xacro:if value="${phalanges == 1 and taxels == 1}">
-        <xacro:sensor4x4 sequence="${sequence}link_${finger_num*4+2}" parent="${sequence}link_${finger_num*4+2}" ry="90" z="0.023" y="-0.012" x="0.011" body="0" skipinertia="1" />
+      <xacro:if value="${phalanges == 1}">
+        <xacro:sensor4x4 sequence="${sequence}link_${finger_num*4+2}" col="blue" parent="${sequence}link_${finger_num*4+2}" ry="90" z="0.023" y="-0.012" x="0.011" taxels="${taxels}" skipinertia="1" />
       </xacro:if>
       <joint name="${sequence}joint_${finger_num*4+2}" type="revolute">
         <axis xyz="0 1 0"/>
         <limit effort="15" velocity="7" lower="${-0.289+0.1}" upper="${1.744-0.1}" />
         <parent link="${sequence}link_${finger_num*4+1}"/>
         <child link="${sequence}link_${finger_num*4+2}"/>
-        <origin xyz="0 0 ${0.0177}"/>
+        <origin xyz="0 0 ${0.0177+0.002}" rpy="0 ${radians(-1)} 0"/>
       </joint> 
       <link name="${sequence}link_${finger_num*4+3}">
         <visual>
           <geometry>
-            <xacro:if value="${phalanges == 1}">
-              <mesh filename="package://xela_models/mesh/allegro/thumb_2.1.stl"/>  
-            </xacro:if>
-            <xacro:if value="${phalanges != 1}">
-              <mesh filename="package://xela_models/mesh/allegro/thumb_1.2_ns.stl"/>   
-            </xacro:if> 
+            <mesh filename="package://xela_models/mesh/allegro/thumb_2.0.stl"/> 
           </geometry>
         <material name="black" />
         </visual>
@@ -1064,21 +1044,21 @@
           </xacro:unless>
         </xacro:unless>
       </link>
-      <xacro:if value="${phalanges == 1 and taxels == 1}">
-        <xacro:sensor4x4 sequence="${sequence}link_${finger_num*4+3}" parent="${sequence}link_${finger_num*4+3}" ry="90" z="0.021" y="-0.012" x="0.011" body="0" skipinertia="1" />
+      <xacro:if value="${phalanges == 1}">
+        <xacro:sensor4x4 sequence="${sequence}link_${finger_num*4+3}" col="blue" parent="${sequence}link_${finger_num*4+3}" ry="90" z="0.021" y="-0.012" x="0.011" taxels="${taxels}" skipinertia="1" />
       </xacro:if>
     <joint name="${sequence}joint_${finger_num*4+3}" type="revolute">
       <axis xyz="0 1 0"/>
       <limit effort="15" velocity="7" lower="${-0.262+0.1}" upper="${1.819-0.1}" />
       <parent link="${sequence}link_${finger_num*4+2}"/>
       <child link="${sequence}link_${finger_num*4+3}"/>
-      <origin xyz="0 0 ${0.0514}"/>
+      <origin xyz="0 0 ${0.0514}"/><!--allegro link size difference-0.004-->
     </joint>
     <xacro:if value="${tip == 'flat'}">
       <xacro:sensoraftf sequence="${sequence}${finger_num}" col="green" parent="${sequence}link_${finger_num*4+3}" rx="90" rz="90" z="0.0315" taxels="${taxels}" skipinertia="1" />
     </xacro:if>
     <xacro:if value="${tip == 'curved'}">
-      <xacro:sensoraftc sequence="${sequence}${finger_num}" col="green" parent="${sequence}link_${finger_num*4+3}" rx="90" rz="90" z="0.0315" taxels="${taxels}" skipinertia="1" />
+      <xacro:sensoraftc sequence="${sequence}${finger_num}" col="orange" parent="${sequence}link_${finger_num*4+3}" rx="90" rz="90" z="0.0315" taxels="${taxels}" skipinertia="1" />
     </xacro:if>
     <xacro:if value="${tip == 'default'}">
       <xacro:aftd sequence="${sequence}${finger_num}" col="white" parent="${sequence}link_${finger_num*4+3}" rx="0" rz="0" z="0.042" x="0.013" skipinertia="1" />
