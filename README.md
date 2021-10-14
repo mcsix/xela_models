@@ -86,9 +86,10 @@ To run the visualization of the model, use following command;
 ### _2021/10/14_
 * Change links to official ones for v4 without sensors and use sensor bodies as fixed link
 * Modify some initial values to match the hand for testing
+* Add ahrcpcpn.urdf with new details (Allegro Hand Right with Curved Fingertips, Phalange sensors, Phalange covers and Palm sensors)
 #### Known issues
-- [ ] Encoders can report slightly different data between hands
-- [ ] Accuracy of the Allegro hand -> TF is separate from URDF and would need to be manipulated by separately (not supported by XELA)
+- Encoders can report slightly different data between hands
+- Accuracy of the Allegro hand -> TF is separate from URDF and would need to be manipulated by separately (not supported by XELA)
 
 ### _2021/10/12_
 * Add _baseispalm_ parameter to enforce default name for allegro ROS node
