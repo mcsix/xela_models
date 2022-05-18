@@ -1,6 +1,8 @@
 # ROS URDF for XELA Sensors
 
-> NOTE: There is currently no module to broadcast sensor readings to the model. If there is a need, please make note of the joint names and make own joint_publisher node
+> NOTE: There is currently no module to broadcast sensor readings to the model. If there is a need, please make note of the joint names and make own joint_publisher node and enable taxel visualization<br>
+> NOTE: As each hand is different, some elements in URDF files need to be changed manually<br>
+> NOTE: Gravity compensation must be calibrated after adding sensors. It will be the responsibility of the user
 
 ## Installation
 Unpack the xela_models directory into your catkin workspace src directory and set it up to be used like any other package for ROS
@@ -11,6 +13,7 @@ To use sensors with your URDF files, import XELA xacro file by adding <xacro:inc
 ## Visualization (XACRO)
 To run the visualization of the model, use following command;
 >roslaunch xela_models display.launch model:=&lt;model&gt;
+![Image of Allegro Hand](./allegro_full_211014.png)
 
 ### Available models:
 | sensor_model | Description |
@@ -75,9 +78,23 @@ To run the visualization of the model, use following command;
 | palm | To enable or disable sensors on the palm | palm=”0”<br>Default: palm=”1” |
 | phalanges | To enable or disable phalange sensors | phalanges=”0”<br>__Default__: phalanges=”1” |
 | tips | To set the type of fingertips<br>_curved_, _flat_, _default_<br>__Note__: default means Allegro Hand’s own tips<br>You can also set to none to have no tips | tips=”curved”<br>__Default__: tips=”flat”<br>__Note__: set to _default_ if you wish the original tips without sensors |
+| defaultnames | To enforce using default link and joint names | defaultnames=1<br>__Default__: defaultnames=0 |
+| baseispalm | enforce naming of the hand's __base_link__ to be called __palm_link__ _(allegro default)_ | baseispalm=1<br>__Default__: baseispalm=0 |
 
 
 ## Changelog and notes
+### _2021/10/14_
+* Change links to official ones for v4 without sensors and use sensor bodies as fixed link
+* Modify some initial values to match the hand for testing
+* Add ahrcpcpn.urdf with new details (Allegro Hand Right with Curved Fingertips, Phalange sensors, Phalange covers and Palm sensors)
+#### Known issues
+- Encoders can report slightly different data between hands
+- Accuracy of the Allegro hand -> TF is separate from URDF and would need to be manipulated by separately (not supported by XELA)
+
+### _2021/10/12_
+* Add _baseispalm_ parameter to enforce default name for allegro ROS node
+* Update link names to be fully compatible with allegro's
+
 ### _2021/10/04_
 * Add more options for custom use cases
     * Inertias can be disabled for individual sensors if calculated into parent link
