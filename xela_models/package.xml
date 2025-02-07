@@ -1,17 +1,19 @@
 <?xml version="1.0"?>
-<package format="2">
+<package format="3">
   <name>xela_models</name>
   <version>1.2.0</version>
   <description>The XELA Sensor Models</description>
 
   <maintainer email="matthias@xelarobotics.com">Matt</maintainer>
   <license>GPLv3</license>
-  <url type="website">http://xelarobotics.com</url>
-  <author email="matthias@xelarobotics.com">Matt</author>
 
-  <buildtool_depend>catkin</buildtool_depend>
+  <url type="website">http://xelarobotics.com</url>
+  <author email="oscar.palacin@eurecat.org">pala5</author>
+
+  <!-- Replaced catkin with ament_cmake -->
+  <buildtool_depend>ament_cmake</buildtool_depend>
 
   <export>
-
+    <build_type>ament_cmake</build_type>
   </export>
 </package>

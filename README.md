@@ -1,4 +1,4 @@
-# ROS URDF for XELA Sensors
+# ROS2 URDF for XELA Sensors
 
 > NOTE: There is currently no module to broadcast sensor readings to the model. If there is a need, please make note of the joint names and make own joint_publisher node and enable taxel visualization<br>
 > NOTE: As each hand is different, some elements in URDF files need to be changed manually<br>
@@ -12,7 +12,7 @@ To use sensors with your URDF files, import XELA xacro file by adding <xacro:inc
 
 ## Visualization (XACRO)
 To run the visualization of the model, use following command;
->roslaunch xela_models display.launch model:=&lt;model&gt;
+>ros2 launch xela_models xacro_launch.py xela_model:=${xela_sensor}
 ![Image of Allegro Hand](./allegro_full_211014.png)
 
 ### Available models:
@@ -30,7 +30,7 @@ __Do not edit the xela.xacro file.__
 
 ## Visualization (URDF)
 To run the visualization of the model, use following command;
->roslaunch xela_models urdf.launch model:=&lt;model&gt;
+>ros2 launch xela_models urdf_launch.py xela_model:=${xela_sensor}
 
 ### Available models:
 | sensor_model | Description |
