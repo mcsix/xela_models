@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<robot name="4x6n" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <!-- 4x6 base model -->
+  <xacro:arg name="base_prefix" default="base_" />
+
+  <!-- <xacro:macro name="uspa46_2409" params="sequence parent x:=0.0 y:=0.0 z:=0.0 rx:=0.0 ry:=0.0 rz:=0.0 col:='blue' body:=1 taxels:=1 skipinertia:=0 xoff=0.003 yoff=0.002175 zoff=0.005 txstep=0.00724 tystep=0.00717 standalone:=0"> -->
+  <!-- <xacro:uspa46_2409 sequence="${seq}16" col="red" parent="${bseq}palm_link" x="0.014" y="0.0249" z="-0.0204"  rz="90" rx="90" ry="180" taxels="${taxels}" skipinertia="1" sensor_collision="${sensor_collision}" /> -->
+  <xacro:macro name="uspa46_2409" params="sequence parent x:=0.0 y:=0.0 z:=0.0 rx:=0.0 ry:=0.0 rz:=0.0 col:='blue' body:=1 taxels:=1 skipinertia:=0 xoff:=-0.0237 yoff:=0.0178 zoff:=0.005 txstep:=0.00724 tystep:=0.00717 standalone:=0 sensor_collision:=1">
+
+    <xacro:if value="${standalone == 1}">
+      <xacro:include filename="$(find xela_models)/urdf/materials.xacro" />
+      <xacro:include filename="$(find xela_models)/urdf/taxel_n.xacro" />
+    </xacro:if>
+
+    <xacro:property name="bseq" value="$(arg base_prefix)${sequence}"/>
+
+    <joint name="${bseq}_4x6_fixed" type="fixed">
+      <origin xyz="${x} ${y} ${z}" rpy="${radians(rx)} ${radians(ry)} ${radians(rz)}"/>
+      <parent link="${parent}" />
+      <child link="${bseq}_4x6_link" />
+    </joint>
+    <link name="${bseq}_4x6_link">
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <!-- <mesh filename="package://xela_models/mesh/4x6.stl"/> -->
+          <mesh filename="package://xela_models/mesh/uSPa46_2409.stl" scale="0.001 0.001 0.001" />
+        </geometry>
+      </collision>
+      <xacro:if value="${body == 1}">
+        <visual>
+          <origin xyz="0 0 0" rpy="0 0 0" />
+          <geometry>
+            <!-- <mesh filename="package://xela_models/mesh/4x6.stl"/> -->
+            <mesh filename="package://xela_models/mesh/uSPa46_2409.stl" scale="0.001 0.001 0.001" />
+          </geometry>
+          <material name="${col}"/>
+        </visual>
+        <xacro:unless value="${skipinertia == 1}">
+          <inertial>
+            <mass value="0.0108" />
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <inertia ixx="1.11e-07" ixy="0.0" ixz="0.0" iyy="2.97e-07" iyz="0.0" izz="4.03e-07" />
+          </inertial>
+        </xacro:unless>
+      </xacro:if>
+    </link>
+    
+    <gazebo reference="${bseq}_4x6_link">
+      <material>Gazebo/Red</material>
+    </gazebo>
+
+    <xacro:if value="${taxels == 1}">
+      <xacro:taxel_n sequence="${sequence}_4x6_01" x="${1*txstep+xoff}" y="${4*tystep-yoff}" z="${zoff}" parent="${bseq}_4x6_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_4x6_02" x="${2*txstep+xoff}" y="${4*tystep-yoff}" z="${zoff}" parent="${bseq}_4x6_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_4x6_03" x="${3*txstep+xoff}" y="${4*tystep-yoff}" z="${zoff}" parent="${bseq}_4x6_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_4x6_04" x="${4*txstep+xoff}" y="${4*tystep-yoff}" z="${zoff}" parent="${bseq}_4x6_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_4x6_05" x="${5*txstep+xoff}" y="${4*tystep-yoff}" z="${zoff}" parent="${bseq}_4x6_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_4x6_06" x="${6*txstep+xoff}" y="${4*tystep-yoff}" z="${zoff}" parent="${bseq}_4x6_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_4x6_07" x="${1*txstep+xoff}" y="${3*tystep-yoff}" z="${zoff}" parent="${bseq}_4x6_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_4x6_08" x="${2*txstep+xoff}" y="${3*tystep-yoff}" z="${zoff}" parent="${bseq}_4x6_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_4x6_09" x="${3*txstep+xoff}" y="${3*tystep-yoff}" z="${zoff}" parent="${bseq}_4x6_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_4x6_10" x="${4*txstep+xoff}" y="${3*tystep-yoff}" z="${zoff}" parent="${bseq}_4x6_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_4x6_11" x="${5*txstep+xoff}" y="${3*tystep-yoff}" z="${zoff}" parent="${bseq}_4x6_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_4x6_12" x="${6*txstep+xoff}" y="${3*tystep-yoff}" z="${zoff}" parent="${bseq}_4x6_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_4x6_13" x="${1*txstep+xoff}" y="${2*tystep-yoff}" z="${zoff}" parent="${bseq}_4x6_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_4x6_14" x="${2*txstep+xoff}" y="${2*tystep-yoff}" z="${zoff}" parent="${bseq}_4x6_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_4x6_15" x="${3*txstep+xoff}" y="${2*tystep-yoff}" z="${zoff}" parent="${bseq}_4x6_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_4x6_16" x="${4*txstep+xoff}" y="${2*tystep-yoff}" z="${zoff}" parent="${bseq}_4x6_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_4x6_17" x="${5*txstep+xoff}" y="${2*tystep-yoff}" z="${zoff}" parent="${bseq}_4x6_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_4x6_18" x="${6*txstep+xoff}" y="${2*tystep-yoff}" z="${zoff}" parent="${bseq}_4x6_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_4x6_19" x="${1*txstep+xoff}" y="${1*tystep-yoff}" z="${zoff}" parent="${bseq}_4x6_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_4x6_20" x="${2*txstep+xoff}" y="${1*tystep-yoff}" z="${zoff}" parent="${bseq}_4x6_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_4x6_21" x="${3*txstep+xoff}" y="${1*tystep-yoff}" z="${zoff}" parent="${bseq}_4x6_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_4x6_22" x="${4*txstep+xoff}" y="${1*tystep-yoff}" z="${zoff}" parent="${bseq}_4x6_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_4x6_23" x="${5*txstep+xoff}" y="${1*tystep-yoff}" z="${zoff}" parent="${bseq}_4x6_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_4x6_24" x="${6*txstep+xoff}" y="${1*tystep-yoff}" z="${zoff}" parent="${bseq}_4x6_link" sensor_collision="${sensor_collision}" />
+    </xacro:if>
+  </xacro:macro>
+
+</robot>

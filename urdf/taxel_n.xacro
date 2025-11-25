@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="xela_taxel">
+
+  <!-- Import Rviz colors -->
+  <!-- <xacro:include filename="$(find xela_models)/urdf/materials.xacro" /> -->
+  <!-- <xacro:taxel_n sequence="${sequence}_4x6_01" x="${1*txstep+xoff}" y="${4*tystep-yoff}" z="${zoff}" parent="${bseq}_4x6_link" sensor_collision="${sensor_collision}" /> -->
+  <xacro:macro name="taxel_n" params="sequence parent x:=0.0 y:=0.0 z:=0.0 rx:=0.0 ry:=0.0 rz:=0.0 col:='blue' zmod:=0.0 sensor_collision:=1 sensor_inertial:=0">
+
+    <joint name="${sequence}_joint" type="prismatic">
+      <origin xyz="${x} ${y} ${z}" rpy="${radians(rx)} ${radians(ry)} ${radians(rz)}"/>
+      <parent link="${parent}"/>
+      <child link="${sequence}_link"/>
+      <axis xyz="0 0 1"/>
+      <limit effort="100.0" lower="${-0.001-zmod}" upper="0.000" velocity="0.5"/>
+    </joint>
+
+    <link name="${sequence}_link">
+      <visual>
+        <geometry>
+          <sphere radius="0.001"/>
+        </geometry>
+        <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+        <material name="${col}"/>
+      </visual>
+      <xacro:if value="${sensor_collision}">
+        <collision>
+          <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+          <geometry>
+            <sphere radius="0.001"/>
+          </geometry>
+        </collision>
+      </xacro:if>  
+      <xacro:if value="${sensor_inertial}">
+        <inertial>
+          <mass value="0.0001" /> 
+          <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+          <inertia ixx="0.0000006666667" ixy="0.0" ixz="0.0" iyy="0.0000006666667" iyz="0.0" izz="0.0000006666667"/>
+        </inertial>
+      </xacro:if>
+
+    </link>
+
+    <gazebo reference="${sequence}_link">
+        <material>Gazebo/Blue</material>
+    </gazebo>
+    
+  </xacro:macro>
+
+  <xacro:macro name="taxelntest" params="sequence parent x:=0.0 y:=0.0 z:=0.0 rx:=0.0 ry:=0.0 rz:=0.0">
+    <xacro:taxel_n sequence="${sequence}A"  x="${x}" y="${y}" z="${z}" rx="${rx}" ry="${ry}" rz="${rz}" parent="${parent}" />
+    <xacro:taxel_n sequence="${sequence}B"  x="${x}" y="${y}" z="${z}" rx="${rx}" ry="${ry}" rz="${rz}" parent="${parent}" col="red" zmod="-0.001" />
+  </xacro:macro>
+
+</robot>

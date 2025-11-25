@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="allegro_hand_left">
+
+	<!-- Import XELA Data -->
+	<xacro:include filename="$(find xela_models)/urdf/allegro_hand_left_new.xacro" />
+
+	<link name="world" />
+  
+	<xacro:allegro_hand_left_new sequence="0" tips="curved" parent="world" 
+								 defaultnames="1" palm="1" taxels="1" sensor_collision="0" />
+
+</robot>
+
