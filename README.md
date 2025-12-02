@@ -13,78 +13,89 @@ colcon build
 
 ## Use
 To use sensors with your URDF files, import XELA xacro file by adding <xacro:include filename="$(find xela_models)/urdf/xela.xacro" /> to your xacro URDF file.
-### 1 urdfs
-#### for Left hand:
+
+## Visualization (XACRO)
+To run the visualization of the model, use following command;
+>ros2 launch xela_models xacro_launch.py xela_sensor:=&lt;sensor_model&gt;
+ 
+### Available Sensor models:
+| sensor_model                   | Description                                      |
+|--------------------------------|--------------------------------------------------|
+| all_parts_of_individual_module | uSPa 61   / 6 x 1 taxels  |
+|                                | uSPa 44   / 4x4 taxels    |
+|                                | uSPa 46   / 4x6 taxels    | 
+|                                | uSPr 2F   / 4x6 taxels in the fingertip |
+|                                | uSCu ALHA / 30 taxels in the Curved fingertip |
+| allegro_hand_left_curved       | Allegro hand v4, full assembly, curved tips (left)  |
+| allegro_hand_right_curved      | Allegro hand v4, full assembly, curved tips (right) |
+
+### 1. Launch all_parts_of_individual_module view 
 ```
-urdf/allegro_hand_left_curved.xacro
+source install/setup.bash
+ros2 launch xela_models xacro_launch.py xela_sensor:=all_parts_of_individual_module
 ```
-#### for Right hand:
-```
-urdf/allegro_hand_left_curved.xacro
-```
-### 2.1 Launch view of the left hand
-#### Term 1:
+![Image of Left Allegro Hand](./all_parts.png)
+
+### 2. Launch left allegrohand view 
 ```
 source install/setup.bash
 ros2 launch xela_models xacro_launch.py xela_sensor:=allegro_hand_left_curved
 ```
-### 2.2 Launch view of the right hand
-#### Term 1:
+![Image of Left Allegro Hand](./left_allegro.png)
+
+### 3. Launch right allegrohand view
 ```
 source install/setup.bash
 ros2 launch xela_models xacro_launch.py xela_sensor:=allegro_hand_right_curved
 ```
+![Image of Left Allegro Hand](./right_allegro.png)
 
-## Visualization (XACRO)
-To run the visualization of the model, use following command;
->ros2 launch xela_models xacro_launch.py xela_sensor:=&lt;model&gt;
-> 
-![Image of Allegro Hand](./allegro_full_211014.png)
 
-### Available models:
-| sensor_model              | Description                                      |
-|---------------------------|--------------------------------------------------|
-| allegro_hand_left_curved  | Allegro hand, full assembly, curved tips (left)  |
-| allegro_hand_right_curved | Allegro hand, full assembly, curved tips (right) |
+
 
 > You may also take a look in the specific files in xela_models/urdf<br>
 __Do not edit the xela.xacro file.__
 
 ## Available default sensors (XACRO):
-| Model  | Linking tag                                         |
-|--------|-----------------------------------------------------|
-| XR1944 | <xacro:sensor4x4 sequence="1" parent="base_link" /> |
-| XR1946 | <xacro:sensor4x6 sequence="1" parent="base_link" /> |
+| Model    | Linking tag                                         |
+|----------|-----------------------------------------------------|
+| uSPa61   | <xacro:sensor1x6n 	sequence="1" col="red" parent="base_link" taxels="1" x="0.1" y="0.1" /> |
+| uSPa44   | <xacro:sensor4x4n 	sequence="2" col="red" parent="base_link" taxels="1" x="0.0" y="0.1" /> |
+| uSPa46   | <xacro:sensor4x6n	sequence="3" col="red" parent="base_link" taxels="1" x="-0.15" y="0.1" /> |
+| uSPr2F   | <xacro:uspref2  	sequence="4" col="red" parent="base_link" taxels="1" x="-0.15" y="0.015" /> |
+| uSCu ALHA| <xacro:sensoraftcn sequence="5" col="red" parent="base_link" taxels="1" x="0.0" y="0.0" />  |
 
-## Required arguments you will need to specify (XACRO):
+### Required arguments you will need to specify (XACRO):
 | Argument | Description                                  | Example            |
 |----------|----------------------------------------------|--------------------|
-| sequence | Unique name for the sensor                   | sequence=”1”       |
-| parent   | Parent link the sensor should be attached to | parent=”base_link” |
+| sequence | Unique name for the sensor                   | sequence="1"       |
+| parent   | Parent link the sensor should be attached to | parent="base_link" |
+--------------------------------------------------------------------------------
 
-
-## Optional arguments you can edit (XACRO):
+### Optional arguments you can edit (XACRO):
 | Argument | Description                                                                                              | Example                                                                                                        |
 |----------|----------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
-| x        | To set base position on x axis                                                                           | x=”0.01”                                                                                                       | 
-| rx       | To set rotation over x axis (in degrees)                                                                 | rx=”90”                                                                                                        | 
-| y        | To set base position on y axis                                                                           | y=”0.01”                                                                                                       | 
-| ry       | To set rotation over y axis (in degrees)                                                                 | ry=”90”                                                                                                        | 
-| z        | To set base position on z axis                                                                           | z=”0.01”                                                                                                       | 
-| rz       | To set rotation over z axis (in degrees)                                                                 | rz=”90”                                                                                                        | 
-| col      | To set one of the default colors:<br>_black_, _blue_, _green_, _grey_, _orange_, _brown_, _red_, _white_ | col=”blue”                                                                                                     | 
-| body     | To include or exclude the shell of the sensor<br>(set to 0 if your mesh already has sensor shape)        | body=”0”<br>__Note__: by default body=”1”                                                                      | 
-| taxels   | To show or hide taxels                                                                                   | taxels=”0”<br>__Note__: single sensors by default will have taxels on, whilst Allegro hands will have them off | 
+| x        | To set base position on x axis                                                                           | x="0.01"”"                                                                                                       | 
+| rx       | To set rotation over x axis (in degrees)                                                                 | rx="90"                                                                                                        | 
+| y        | To set base position on y axis                                                                           | y="0.01"                                                                                                       | 
+| ry       | To set rotation over y axis (in degrees)                                                                 | ry="90"                                                                                                        | 
+| z        | To set base position on z axis                                                                           | z="0.01"                                                                                                       | 
+| rz       | To set rotation over z axis (in degrees)                                                                 | rz="90"                                                                                                        | 
+| col      | To set one of the default colors:<br>_black_, _blue_, _green_, _grey_, _orange_, _brown_, _red_, _white_ | col="blue"                                                                                                     | 
+| body     | To include or exclude the shell of the sensor<br>(set to 0 if your mesh already has sensor shape)        | body="0"<br>__Note__: by default body="1"                                                                      | 
+| taxels   | To show or hide taxels                                                                                   | taxels="0"<br>__Note__: Taxel is turned on by default for single sensors, but can be turned off for Allegro hands. ex) to prevent excessive computation during motion planning for a sensor-equipped robot, tactile information can be disabled and used to generate URDFs | 
+| sensor_collision   | To set collision info on taxel                                                                 | sensor_collision="0"<br>__Note__: Collision information for sensors is disabled by default. It can be enabled if necessary | 
 
 
-## Available special sensors (XACRO):
-| Model                              | Linking tag                                                  | arguments                                                                              |
-|------------------------------------|--------------------------------------------------------------|----------------------------------------------------------------------------------------|
-| Allegro hand (right) full assembly | <xacro:allegro_hand_right sequence="1" parent="base_link" /> | Same as regular sensors, except no _col_<br>Plus _covers_, _palm_, _tips_, _phalanges_ |
-| 3xXR1921                           | <xacro:sensor1x6 sequence="1" parent="base_link" />          | Same as regular sensors                                                                |
+## Available Integrated model (XACRO):
+
+| Model    | Linking tag                                         | arguments                                                                              |
+|----------|-----------------------------------------------------|----------------------------------------------------------------------------------------|
+| Allegro Hand v4 Curved, left    | <xacro:allegro_hand_left_new sequence="0" tips="curved" parent="world" defaultnames="1" palm="1" taxels="1" sensor_collision="0" /> | Same as regular sensors, except no _col_<br>Plus _covers_, _palm_, _tips_, _phalanges_ |
+| Allegro Hand v4, Curved, right | <xacro:allegro_hand_right_new sequence="0" tips="curved" parent="world" defaultnames="1" palm="1" taxels="1" sensor_collision="0" /> | |
 
 
-## Special arguments (XACRO):
+### Optional Arguments (XACRO):
 | Argument     | Description                                                                                                                                                 | Example                                                                                                               |
 |--------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
 | covers       | To enable or disable controller covers                                                                                                                      | covers=”0”<br>__Default__: covers=”1”                                                                                 |
@@ -97,7 +108,13 @@ __Do not edit the xela.xacro file.__
 
 ## Changelog and notes
 ### _2025/11/26_
-* Version for ROS 2
+* Version for ROS 2 (Tested on Humble)
+* Sensor link simplification:
+  - Reduced from 3 links per sensor to 1 link
+  - Reduced from 3 joints per sensor to 1 joint
+* Updated palm sensor module and sensor base models and meshes
+* Added left allegrohand model
+* Added uSPr2F Fingertip model
 
 ### _2021/10/14_
 * Change links to official ones for v4 without sensors and use sensor bodies as fixed link

@@ -7,7 +7,7 @@
 	<link name="world" />
   
 	<xacro:allegro_hand_right_new sequence="0" tips="curved" parent="world" 
-								  defaultnames="1" palm="1" taxels="1" />
+								  defaultnames="1" palm="1" taxels="1" sensor_collision="0" />
     
 </robot>
 

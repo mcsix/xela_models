@@ -11,13 +11,20 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "xela_sensor",
-            description="Model of XELA sensor.",
-            choices=["allegro_hand_right_curved", "allegro_hand_left_curved"],
+            description="Model of xela sensor.",
+            choices=["all_parts_of_individual_module", "allegro_hand_right_curved", "allegro_hand_left_curved", 
+            ]
         )
     )
     # Initialize Arguments
     xela_sensor            = LaunchConfiguration("xela_sensor")
     rviz_config_file        = LaunchConfiguration("rviz_config_file")
+    
+    rviz_config_name = PythonExpression([
+        "'all_sensor_view.rviz' if '",
+        xela_sensor,
+        "' == 'all_parts_of_individual_module' else 'urdf_rviz2.rviz'"
+    ])
 
     description_file = PathJoinSubstitution([
         FindPackageShare("xela_models"),
@@ -35,11 +42,12 @@ def generate_launch_description():
         DeclareLaunchArgument(
             "rviz_config_file",
             default_value=PathJoinSubstitution(
-                [FindPackageShare("xela_models"), "rviz", "urdf_rviz2.rviz"]
+                [FindPackageShare("xela_models"), "rviz", rviz_config_name]
             ),
             description="RViz config file (absolute path) to use when launching rviz.",
         )
     )
+
     robot_description_content = Command(
         [
             PathJoinSubstitution([FindExecutable(name="xacro")]),

@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <robot name="allegro_fingertip_flat" xmlns:xacro="http://www.ros.org/wiki/xacro">
   <xacro:arg name="base_prefix" default="base_" />
-   <xacro:macro name="aftdn" params="x_seq parent x:=0.0 y:=0.0 z:=0.0 rx:=0.0 ry:=0.0 rz:=0.0 col:='blue' skipinertia:=0 standalone:=0 sensor_collision:=1">
+   <xacro:macro name="aftdn" params="sequence parent x:=0.0 y:=0.0 z:=0.0 rx:=0.0 ry:=0.0 rz:=0.0 col:='blue' skipinertia:=0 standalone:=0 sensor_collision:=1">
 
     <xacro:if value="${standalone == 1}">
       <xacro:include filename="$(find xela_models)/urdf/materials.xacro" />
     </xacro:if>
-    <xacro:property name="sequence" value="$(arg base_prefix)${x_seq}"/>
+    <!-- <xacro:property name="sequence" value="$(arg base_prefix)${x_seq}"/> -->
     <joint name="${sequence}_aftd_fixed" type="fixed">
       <origin xyz="${x-0.013} ${y} ${z}" rpy="${radians(rx)} ${radians(ry)} ${radians(rz)}"/>
       <parent link="${parent}" />

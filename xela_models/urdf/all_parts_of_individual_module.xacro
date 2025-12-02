@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="allegro_hand_right">
+
+<!-- Import XELA Data -->
+<!-- <xacro:include filename="$(find xela_models)/urdf/xela.xacro" /> -->
+<xacro:include filename="$(find xela_models)/urdf/materials.xacro" />
+<xacro:include filename="$(find xela_models)/urdf/taxel_n.xacro" />
+
+<xacro:include filename="$(find xela_models)/urdf/4x4n.xacro" />
+<xacro:include filename="$(find xela_models)/urdf/1x6n.xacro" />
+<xacro:include filename="$(find xela_models)/urdf/4x6n.xacro" />
+<xacro:include filename="$(find xela_models)/urdf/uSPr2F.xacro" />
+<xacro:include filename="$(find xela_models)/urdf/aftcn.xacro" />
+<xacro:include filename="$(find xela_models)/urdf/aftfn.xacro" />
+<xacro:include filename="$(find xela_models)/urdf/aftdn.xacro" />
+
+	<link name="world" />
+  
+	<joint name="fixed" type="fixed">
+		<parent link="world" />
+		<child link="base_link" />
+	</joint>
+
+	<link name="base_link">
+		<visual>
+		<geometry>
+			<sphere radius="0.001"/>
+		</geometry>
+		<origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+		</visual>
+		<collision>
+		<geometry>
+			<sphere radius="0.001"/>
+		</geometry>
+		</collision>
+	</link>
+
+	<xacro:sensoraftcn 	sequence="1" col="red" parent="base_link" taxels="1" x="0.0" y="0.0" />    
+  	<xacro:sensoraftfn 	sequence="2" col="red" parent="base_link" taxels="1" x="0.1" y="0.0" />
+  	<xacro:aftdn 		sequence="3" col="red" parent="base_link"  x="0.2" y="0.0" />
+  	<xacro:uspref2  	sequence="4" col="red" parent="base_link" taxels="1" x="-0.15" y="0.015" />
+  	<xacro:sensor1x6n 	sequence="5" col="red" parent="base_link" taxels="1" x="0.1" y="0.1" />
+  	<xacro:sensor4x4n 	sequence="6" col="red" parent="base_link" taxels="1" x="0.0" y="0.1" />
+  	<xacro:sensor4x6n	sequence="7" col="red" parent="base_link" taxels="1" x="-0.15" y="0.1" />
+
+</robot>
+

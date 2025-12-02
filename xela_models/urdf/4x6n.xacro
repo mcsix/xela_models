@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<robot name="4x6n" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <!-- <xacro:include filename="$(find xela_models)/urdf/materials.xacro" />
+  <xacro:include filename="$(find xela_models)/urdf/taxel_n.xacro" /> -->
+
+  <!-- 4x6 new model -->
+  <xacro:macro name="sensor4x6n" params="sequence parent x:=0.0 y:=0.0 z:=0.0 rx:=0.0 ry:=0.0 rz:=0.0 col:='blue' body:=1 taxels:=1 skipinertia:=0 xoff=0.003 yoff=0.002175 zoff=0.005 txstep=0.00724 tystep=0.00717 standalone:=0" >
+
+    <xacro:if value="${standalone == 1}">
+      <xacro:include filename="$(find xela_models)/urdf/materials.xacro" />
+      <xacro:include filename="$(find xela_models)/urdf/taxel_n.xacro" />
+    </xacro:if>
+
+    <joint name="${sequence}_4x6_fixed" type="fixed">
+      <origin xyz="${x} ${y} ${z}" rpy="${radians(rx)} ${radians(ry)} ${radians(rz)}"/>
+      <parent link="${parent}" />
+      <child link="${sequence}_4x6_link" />
+    </joint>
+    <link name="${sequence}_4x6_link">
+      <collision>
+        <origin xyz="0.026 0.0155 0" rpy="3.14 0 3.14" />
+        <geometry>
+          <mesh filename="package://xela_models/mesh/4x6_new.stl" scale="0.001 0.001 0.001" />
+        </geometry>
+      </collision>
+      <xacro:if value="${body == 1}">
+        <visual>
+          <origin xyz="0.026 0.0155 0" rpy="3.14 0 3.14" />
+          <geometry>
+            <mesh filename="package://xela_models/mesh/4x6_new.stl" scale="0.001 0.001 0.001"/>
+          </geometry>
+          <material name="${col}"/>
+        </visual>
+        <xacro:unless value="${skipinertia == 1}">
+          <inertial>
+            <mass value="0.0108" />
+            <origin xyz="0.026 0.0155 0" rpy="3.14 0 3.14"/>
+            <inertia ixx="1.11e-07" ixy="0.0" ixz="0.0" iyy="2.97e-07" iyz="0.0" izz="4.03e-07" />
+          </inertial>
+        </xacro:unless>
+      </xacro:if>
+    </link>
+    
+    <gazebo reference="${sequence}_4x6_link">
+      <material>Gazebo/Red</material>
+    </gazebo>
+
+    <xacro:if value="${taxels == 1}">
+      <xacro:taxel_n sequence="${sequence}_4x6_01" x="${1*txstep+xoff}" y="${4*tystep-yoff}" z="${zoff}" parent="${sequence}_4x6_link" />
+      <xacro:taxel_n sequence="${sequence}_4x6_02" x="${2*txstep+xoff}" y="${4*tystep-yoff}" z="${zoff}" parent="${sequence}_4x6_link" />
+      <xacro:taxel_n sequence="${sequence}_4x6_03" x="${3*txstep+xoff}" y="${4*tystep-yoff}" z="${zoff}" parent="${sequence}_4x6_link" />
+      <xacro:taxel_n sequence="${sequence}_4x6_04" x="${4*txstep+xoff}" y="${4*tystep-yoff}" z="${zoff}" parent="${sequence}_4x6_link" />
+      <xacro:taxel_n sequence="${sequence}_4x6_05" x="${5*txstep+xoff}" y="${4*tystep-yoff}" z="${zoff}" parent="${sequence}_4x6_link" />
+      <xacro:taxel_n sequence="${sequence}_4x6_06" x="${6*txstep+xoff}" y="${4*tystep-yoff}" z="${zoff}" parent="${sequence}_4x6_link" />
+      <xacro:taxel_n sequence="${sequence}_4x6_07" x="${1*txstep+xoff}" y="${3*tystep-yoff}" z="${zoff}" parent="${sequence}_4x6_link" />
+      <xacro:taxel_n sequence="${sequence}_4x6_08" x="${2*txstep+xoff}" y="${3*tystep-yoff}" z="${zoff}" parent="${sequence}_4x6_link" />
+      <xacro:taxel_n sequence="${sequence}_4x6_09" x="${3*txstep+xoff}" y="${3*tystep-yoff}" z="${zoff}" parent="${sequence}_4x6_link" />
+      <xacro:taxel_n sequence="${sequence}_4x6_10" x="${4*txstep+xoff}" y="${3*tystep-yoff}" z="${zoff}" parent="${sequence}_4x6_link" />
+      <xacro:taxel_n sequence="${sequence}_4x6_11" x="${5*txstep+xoff}" y="${3*tystep-yoff}" z="${zoff}" parent="${sequence}_4x6_link" />
+      <xacro:taxel_n sequence="${sequence}_4x6_12" x="${6*txstep+xoff}" y="${3*tystep-yoff}" z="${zoff}" parent="${sequence}_4x6_link" />
+      <xacro:taxel_n sequence="${sequence}_4x6_13" x="${1*txstep+xoff}" y="${2*tystep-yoff}" z="${zoff}" parent="${sequence}_4x6_link" />
+      <xacro:taxel_n sequence="${sequence}_4x6_14" x="${2*txstep+xoff}" y="${2*tystep-yoff}" z="${zoff}" parent="${sequence}_4x6_link" />
+      <xacro:taxel_n sequence="${sequence}_4x6_15" x="${3*txstep+xoff}" y="${2*tystep-yoff}" z="${zoff}" parent="${sequence}_4x6_link" />
+      <xacro:taxel_n sequence="${sequence}_4x6_16" x="${4*txstep+xoff}" y="${2*tystep-yoff}" z="${zoff}" parent="${sequence}_4x6_link" />
+      <xacro:taxel_n sequence="${sequence}_4x6_17" x="${5*txstep+xoff}" y="${2*tystep-yoff}" z="${zoff}" parent="${sequence}_4x6_link" />
+      <xacro:taxel_n sequence="${sequence}_4x6_18" x="${6*txstep+xoff}" y="${2*tystep-yoff}" z="${zoff}" parent="${sequence}_4x6_link" />
+      <xacro:taxel_n sequence="${sequence}_4x6_19" x="${1*txstep+xoff}" y="${1*tystep-yoff}" z="${zoff}" parent="${sequence}_4x6_link" />
+      <xacro:taxel_n sequence="${sequence}_4x6_20" x="${2*txstep+xoff}" y="${1*tystep-yoff}" z="${zoff}" parent="${sequence}_4x6_link" />
+      <xacro:taxel_n sequence="${sequence}_4x6_21" x="${3*txstep+xoff}" y="${1*tystep-yoff}" z="${zoff}" parent="${sequence}_4x6_link" />
+      <xacro:taxel_n sequence="${sequence}_4x6_22" x="${4*txstep+xoff}" y="${1*tystep-yoff}" z="${zoff}" parent="${sequence}_4x6_link" />
+      <xacro:taxel_n sequence="${sequence}_4x6_23" x="${5*txstep+xoff}" y="${1*tystep-yoff}" z="${zoff}" parent="${sequence}_4x6_link" />
+      <xacro:taxel_n sequence="${sequence}_4x6_24" x="${6*txstep+xoff}" y="${1*tystep-yoff}" z="${zoff}" parent="${sequence}_4x6_link" />
+    </xacro:if>
+  </xacro:macro>
+
+</robot>

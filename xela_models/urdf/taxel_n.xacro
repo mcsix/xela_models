@@ -1,10 +1,7 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="xela_taxel">
 
-  <!-- Import Rviz colors -->
-  <!-- <xacro:include filename="$(find xela_models)/urdf/materials.xacro" /> -->
-  <!-- <xacro:taxel_n sequence="${sequence}_4x6_01" x="${1*txstep+xoff}" y="${4*tystep-yoff}" z="${zoff}" parent="${bseq}_4x6_link" sensor_collision="${sensor_collision}" /> -->
-  <xacro:macro name="taxel_n" params="sequence parent x:=0.0 y:=0.0 z:=0.0 rx:=0.0 ry:=0.0 rz:=0.0 col:='blue' zmod:=0.0 sensor_collision:=1 sensor_inertial:=0">
+  <xacro:macro name="taxel_n" params="sequence parent x:=0.0 y:=0.0 z:=0.0 rx:=0.0 ry:=0.0 rz:=0.0 col:='blue' zmod:=0.0 sensor_collision:=0 sensor_inertial:=0">
 
     <joint name="${sequence}_joint" type="prismatic">
       <origin xyz="${x} ${y} ${z}" rpy="${radians(rx)} ${radians(ry)} ${radians(rz)}"/>
