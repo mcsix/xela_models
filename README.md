@@ -21,7 +21,9 @@ To run the visualization of the model, use following command;
 ### Available Sensor models:
 | sensor_model                   | Description                                      |
 |--------------------------------|--------------------------------------------------|
-| all_parts_of_individual_module | uSPa 61   / 6 x 1 taxels  |
+| all_parts_of_individual_module | uSPa 11   / 1x1 taxels   |
+|                                | uSPa 61   / 6x1 taxels    |
+|                                | uSPa 22   / 2x2 taxels    |
 |                                | uSPa 44   / 4x4 taxels    |
 |                                | uSPa 46   / 4x6 taxels    | 
 |                                | uSPr 2F   / 4x6 taxels in the fingertip |
@@ -59,11 +61,13 @@ __Do not edit the xela.xacro file.__
 ## Available default sensors (XACRO):
 | Model    | Linking tag                                         |
 |----------|-----------------------------------------------------|
-| uSPa61   | <xacro:sensor1x6n 	sequence="1" col="red" parent="base_link" taxels="1" x="0.1" y="0.1" /> |
-| uSPa44   | <xacro:sensor4x4n 	sequence="2" col="red" parent="base_link" taxels="1" x="0.0" y="0.1" /> |
-| uSPa46   | <xacro:sensor4x6n	sequence="3" col="red" parent="base_link" taxels="1" x="-0.15" y="0.1" /> |
-| uSPr2F   | <xacro:uspref2  	sequence="4" col="red" parent="base_link" taxels="1" x="-0.15" y="0.015" /> |
-| uSCu ALHA| <xacro:sensoraftcn sequence="5" col="red" parent="base_link" taxels="1" x="0.0" y="0.0" />  |
+| uSPa11   | <xacro:sensor1x6n 	sequence="1" col="red" parent="base_link" taxels="1" x="0.2" y="0.1" /> |
+| uSPa61   | <xacro:sensor1x6n 	sequence="2" col="red" parent="base_link" taxels="1" x="0.15" y="0.1" /> |
+| uSPa22   | <xacro:sensor2x2n 	sequence="3" col="red" parent="base_link" taxels="1" x="0.0" y="0.1" /> |
+| uSPa44   | <xacro:sensor4x4n 	sequence="4" col="red" parent="base_link" taxels="1" x="0.1" y="0.1" /> |
+| uSPa46   | <xacro:sensor4x6n	sequence="5" col="red" parent="base_link" taxels="1" x="-0.15" y="0.1" /> |
+| uSPr2F   | <xacro:uspref2  	sequence="6" col="red" parent="base_link" taxels="1" x="-0.15" y="0.015" /> |
+| uSCu ALHA| <xacro:sensoraftcn sequence="7" col="red" parent="base_link" taxels="1" x="0.0" y="0.0" />  |
 
 ### Required arguments you will need to specify (XACRO):
 | Argument | Description                                  | Example            |
@@ -142,14 +146,6 @@ __Do not edit the xela.xacro file.__
     * Regular sensors will have by default taxels turned on
 * Add new parameter "taxels" for sensors and hands/grippers
 
-## To Do
-- [ ] Add XR1911
-- [ ] Add XR1921
-- [ ] Add XR1922
-- [ ] Add Robotiq 2F Gripper
-- [ ] Add Robotiq Hand-# Gripper
-- [ ] Add Schunk Gripper
-- [ ] Add SAKE Gripper
 
 ## Contributors
 |                                           Photo                                           |                 Contributor                  |        Relation        |
