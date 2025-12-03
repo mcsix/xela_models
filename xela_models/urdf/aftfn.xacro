@@ -9,8 +9,6 @@
       <xacro:include filename="$(find xela_models)/urdf/4x6n.xacro" />
     </xacro:if>
 
-    <!-- <xacro:property name="sequence" value="$(arg base_prefix)${x_seq}"/> -->
-
     <joint name="${sequence}_aftf_fixed" type="fixed">
       <origin xyz="${x} ${y} ${z}" rpy="${radians(rx)} ${radians(ry)} ${radians(rz)}"/>
       <parent link="${parent}" />

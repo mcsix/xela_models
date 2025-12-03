@@ -3,8 +3,6 @@
   <!-- 4x6 base model -->
   <xacro:arg name="base_prefix" default="base_" />
 
-  <!-- <xacro:macro name="uspa46_2409" params="sequence parent x:=0.0 y:=0.0 z:=0.0 rx:=0.0 ry:=0.0 rz:=0.0 col:='blue' body:=1 taxels:=1 skipinertia:=0 xoff=0.003 yoff=0.002175 zoff=0.005 txstep=0.00724 tystep=0.00717 standalone:=0"> -->
-  <!-- <xacro:uspa46_2409 sequence="${seq}16" col="red" parent="${bseq}palm_link" x="0.014" y="0.0249" z="-0.0204"  rz="90" rx="90" ry="180" taxels="${taxels}" skipinertia="1" sensor_collision="${sensor_collision}" /> -->
   <xacro:macro name="uspa46_2409" params="sequence parent x:=0.0 y:=0.0 z:=0.0 rx:=0.0 ry:=0.0 rz:=0.0 col:='blue' body:=1 taxels:=1 skipinertia:=0 xoff:=-0.0237 yoff:=0.0178 zoff:=0.005 txstep:=0.00724 tystep:=0.00717 standalone:=0 sensor_collision:=1">
 
     <xacro:if value="${standalone == 1}">
@@ -23,7 +21,6 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <!-- <mesh filename="package://xela_models/mesh/4x6.stl"/> -->
           <mesh filename="package://xela_models/mesh/uSPa46_2409.stl" scale="0.001 0.001 0.001" />
         </geometry>
       </collision>
@@ -31,7 +28,6 @@
         <visual>
           <origin xyz="0 0 0" rpy="0 0 0" />
           <geometry>
-            <!-- <mesh filename="package://xela_models/mesh/4x6.stl"/> -->
             <mesh filename="package://xela_models/mesh/uSPa46_2409.stl" scale="0.001 0.001 0.001" />
           </geometry>
           <material name="${col}"/>

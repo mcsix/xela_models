@@ -6,7 +6,6 @@
     <xacro:if value="${standalone == 1}">
       <xacro:include filename="$(find xela_models)/urdf/materials.xacro" />
     </xacro:if>
-    <!-- <xacro:property name="sequence" value="$(arg base_prefix)${x_seq}"/> -->
     <joint name="${sequence}_aftd_fixed" type="fixed">
       <origin xyz="${x-0.013} ${y} ${z}" rpy="${radians(rx)} ${radians(ry)} ${radians(rz)}"/>
       <parent link="${parent}" />

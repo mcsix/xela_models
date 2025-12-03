@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="allegro_hand_left">
 
-	<!-- Import XELA Data -->
 	<xacro:include filename="$(find xela_models)/urdf/allegro_hand_left_new.xacro" />
 
 	<link name="world" />

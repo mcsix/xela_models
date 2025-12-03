@@ -1,8 +1,6 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="allegro_hand_right">
 
-<!-- Import XELA Data -->
-<!-- <xacro:include filename="$(find xela_models)/urdf/xela.xacro" /> -->
 <xacro:include filename="$(find xela_models)/urdf/materials.xacro" />
 <xacro:include filename="$(find xela_models)/urdf/taxel_n.xacro" />
 

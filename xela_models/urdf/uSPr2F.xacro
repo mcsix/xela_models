@@ -1,7 +1,5 @@
 <?xml version="1.0"?>
 <robot name="uspref2" xmlns:xacro="http://www.ros.org/wiki/xacro">
-  <!-- <xacro:include filename="$(find xela_models)/urdf/materials.xacro" />
-  <xacro:include filename="$(find xela_models)/urdf/taxel_n.xacro" /> -->
   
   <xacro:arg name="sensor_prefix" default="x_taxel_" />
   <xacro:arg name="base_prefix" default="x_base_" />
@@ -31,7 +29,6 @@
         <visual>
           <origin xyz="0 0 0" rpy="0 1.57 1.57" />
           <geometry>
-            <!-- <mesh filename="package://xela_models/mesh/uSkin_Robotiq_IIT.stl" scale="0.001 0.001 0.001"/> -->
             <mesh filename="package://xela_models/mesh/uspref2.stl" scale="0.001 0.001 0.001"/>
           </geometry>
           <material name="${col}"/>
