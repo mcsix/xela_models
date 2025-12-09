@@ -21,7 +21,8 @@ To run the visualization of the model, use following command;
 ### Available Sensor models:
 | sensor_model                   | Description                                      |
 |--------------------------------|--------------------------------------------------|
-| all_parts_of_individual_module | uSPa 11   / 1x1 taxels   |
+| all_parts_of_individual_module | uSPa 11   / 1x1 taxels    |
+|                                | uSPa 21   / 2x1 taxels    |
 |                                | uSPa 22   / 2x2 taxels    |
 |                                | uSPa 44   / 4x4 taxels    |
 |                                | uSPa 46   / 4x6 taxels    | 
@@ -60,12 +61,13 @@ __Do not edit the xela.xacro file.__
 ## Available default sensors (XACRO):
 | Model    | Linking tag                                         |
 |----------|-----------------------------------------------------|
-| uSPa11   | <xacro:sensor1x1n 	sequence="1" col="red" parent="base_link" taxels="1" x="0.2" y="0.1" /> |
-| uSPa22   | <xacro:sensor2x2n 	sequence="3" col="red" parent="base_link" taxels="1" x="0.0" y="0.1" /> |
-| uSPa44   | <xacro:sensor4x4n 	sequence="4" col="red" parent="base_link" taxels="1" x="0.1" y="0.1" /> |
-| uSPa46   | <xacro:sensor4x6n	sequence="5" col="red" parent="base_link" taxels="1" x="-0.15" y="0.1" /> |
-| uSPr2F   | <xacro:uspref2  	sequence="6" col="red" parent="base_link" taxels="1" x="-0.15" y="0.015" /> |
-| uSCu ALHA| <xacro:sensoraftcn sequence="7" col="red" parent="base_link" taxels="1" x="0.0" y="0.0" />  |
+| uSPa11   | <xacro:sensor1x1n 	sequence="1" col="red" parent="base_link" taxels="1" x="0.17" y="0.1" />     |
+| uSPa21   | <xacro:sensor2x1n 	sequence="2" col="red" parent="base_link" taxels="1" x="0.12" y="0.1" />     |
+| uSPa22   | <xacro:sensor2x2n 	sequence="3" col="red" parent="base_link" taxels="1" x="0.07" y="0.1" />     |
+| uSPa44   | <xacro:sensor4x4n 	sequence="4" col="red" parent="base_link" taxels="1" x="0.0" y="0.1" />      |
+| uSPa46   | <xacro:sensor4x6n	sequence="5" col="red" parent="base_link" taxels="1" x="-0.15" y="0.1" />    |
+| uSPr2F   | <xacro:uspref2  	  sequence="6" col="red" parent="base_link" taxels="1" x="-0.15" y="0.0015" /> |
+| uSCu ALHA| <xacro:sensoraftcn sequence="7" col="red" parent="base_link" taxels="1" x="0.0" y="0.0" />      |
 
 ### Required arguments you will need to specify (XACRO):
 | Argument | Description                                  | Example            |
