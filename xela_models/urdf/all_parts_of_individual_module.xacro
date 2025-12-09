@@ -6,6 +6,7 @@
 
 <xacro:include filename="$(find xela_models)/urdf/1x1n.xacro" />
 <xacro:include filename="$(find xela_models)/urdf/1x6n.xacro" />
+<xacro:include filename="$(find xela_models)/urdf/2x1n.xacro" />
 <xacro:include filename="$(find xela_models)/urdf/2x2n.xacro" />
 <xacro:include filename="$(find xela_models)/urdf/4x4n.xacro" />
 <xacro:include filename="$(find xela_models)/urdf/4x6n.xacro" />
@@ -39,9 +40,9 @@
   	<xacro:sensoraftfn 	sequence="2" col="red" parent="base_link" taxels="1" x="0.1" y="0.0" />
   	<xacro:aftdn 		sequence="3" col="red" parent="base_link"  x="0.2" y="0.0" />
   	<xacro:uspref2  	sequence="4" col="red" parent="base_link" taxels="1" x="-0.15" y="0.015" />
-  	<xacro:sensor1x1n 	sequence="5" col="red" parent="base_link" taxels="1" x="0.2" y="0.1" />
-  	<xacro:sensor1x6n 	sequence="6" col="red" parent="base_link" taxels="1" x="0.15" y="0.1" />
-  	<xacro:sensor2x2n 	sequence="7" col="red" parent="base_link" taxels="1" x="0.1" y="0.1" />
+  	<xacro:sensor1x1n 	sequence="5" col="red" parent="base_link" taxels="1" x="0.17" y="0.1" />
+  	<xacro:sensor2x1n 	sequence="6" col="red" parent="base_link" taxels="1" x="0.12" y="0.1" />
+  	<xacro:sensor2x2n 	sequence="7" col="red" parent="base_link" taxels="1" x="0.07" y="0.1" />
   	<xacro:sensor4x4n 	sequence="8" col="red" parent="base_link" taxels="1" x="0.0" y="0.1" />
   	<xacro:sensor4x6n	sequence="9" col="red" parent="base_link" taxels="1" x="-0.15" y="0.1" />
 
