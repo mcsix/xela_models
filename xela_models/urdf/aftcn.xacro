@@ -10,12 +10,14 @@
       <xacro:include filename="$(find xela_models)/urdf/taxel_n.xacro" />
     </xacro:if>
 
-    <joint name="${sequence}_aftc_fixed" type="fixed">
+    <xacro:property name="bseq" value="$(arg base_prefix)${sequence}"/>
+
+    <joint name="${bseq}_aftc_fixed" type="fixed">
       <origin xyz="${x-0.013} ${y} ${z}" rpy="${radians(rx)} ${radians(ry)} ${radians(rz)}"/>
       <parent link="${parent}" />
-      <child link="${sequence}_aftc_link" />
+      <child link="${bseq}_aftc_link" />
     </joint>
-    <link name="${sequence}_aftc_link">
+    <link name="${bseq}_aftc_link">
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
@@ -38,36 +40,36 @@
       </xacro:if>
     </link>
     <xacro:if value="${taxels == 1}">
-      <xacro:taxel_n sequence="${sequence}_aftc_01" x="0.0101" y="0.0306" z="0.01254" ry="90" rz="30" parent="${sequence}_aftc_link" sensor_collision="${sensor_collision}" />
-      <xacro:taxel_n sequence="${sequence}_aftc_02" x="0.0126" y="0.0236" z="0.01254" ry="90" rz="10" parent="${sequence}_aftc_link" sensor_collision="${sensor_collision}" />
-      <xacro:taxel_n sequence="${sequence}_aftc_03" x="0.0138" y="0.0173" z="0.01254" ry="90" rz="10" parent="${sequence}_aftc_link" sensor_collision="${sensor_collision}" />
-      <xacro:taxel_n sequence="${sequence}_aftc_04" x="0.0143" y="0.0103" z="0.01254" ry="90" parent="${sequence}_aftc_link" sensor_collision="${sensor_collision}" />
-      <xacro:taxel_n sequence="${sequence}_aftc_05" x="0.0143" y="0.0038" z="0.01254" ry="90" parent="${sequence}_aftc_link" sensor_collision="${sensor_collision}" />
-      <xacro:taxel_n sequence="${sequence}_aftc_06" x="0.0098" y="0.0230" z="0.02000" ry="50" rz="10" parent="${sequence}_aftc_link" sensor_collision="${sensor_collision}" />
-      <xacro:taxel_n sequence="${sequence}_aftc_07" x="0.0110" y="0.0167" z="0.02000" ry="50" rz="10" parent="${sequence}_aftc_link" sensor_collision="${sensor_collision}" />
-      <xacro:taxel_n sequence="${sequence}_aftc_08" x="0.0115" y="0.0103" z="0.02000" ry="50" parent="${sequence}_aftc_link" sensor_collision="${sensor_collision}" />
-      <xacro:taxel_n sequence="${sequence}_aftc_09" x="0.0115" y="0.0038" z="0.02000" ry="50" parent="${sequence}_aftc_link" sensor_collision="${sensor_collision}" />
-      <xacro:taxel_n sequence="${sequence}_aftc_10" x="0.0037" y="0.0338" z="0.01730" ry="29" rx="-48" parent="${sequence}_aftc_link" sensor_collision="${sensor_collision}" />
-      <xacro:taxel_n sequence="${sequence}_aftc_11" x="0.0039" y="0.0296" z="0.02155" ry="26" rx="-31" parent="${sequence}_aftc_link" sensor_collision="${sensor_collision}" />
-      <xacro:taxel_n sequence="${sequence}_aftc_12" x="0.0039" y="0.0230" z="0.02444" ry="22" rx="-10" parent="${sequence}_aftc_link" sensor_collision="${sensor_collision}" />
-      <xacro:taxel_n sequence="${sequence}_aftc_13" x="0.0039" y="0.0169" z="0.02544" ry="21" rx="-10" parent="${sequence}_aftc_link" sensor_collision="${sensor_collision}" />
-      <xacro:taxel_n sequence="${sequence}_aftc_14" x="0.0039" y="0.0103" z="0.02574" ry="18" parent="${sequence}_aftc_link" sensor_collision="${sensor_collision}" />
-      <xacro:taxel_n sequence="${sequence}_aftc_15" x="0.0039" y="0.0038" z="0.02574" ry="18" parent="${sequence}_aftc_link" sensor_collision="${sensor_collision}" />
-      <xacro:taxel_n sequence="${sequence}_aftc_16" x="-0.0037" y="0.0338" z="0.01730" ry="-29" rx="-48" parent="${sequence}_aftc_link" sensor_collision="${sensor_collision}" />
-      <xacro:taxel_n sequence="${sequence}_aftc_17" x="-0.0039" y="0.0296" z="0.02155" ry="-26" rx="-31" parent="${sequence}_aftc_link" sensor_collision="${sensor_collision}" />
-      <xacro:taxel_n sequence="${sequence}_aftc_18" x="-0.0039" y="0.0230" z="0.02444" ry="-22" rx="-10" parent="${sequence}_aftc_link" sensor_collision="${sensor_collision}" />
-      <xacro:taxel_n sequence="${sequence}_aftc_19" x="-0.0039" y="0.0169" z="0.02544" ry="-21" rx="-10" parent="${sequence}_aftc_link" sensor_collision="${sensor_collision}" />
-      <xacro:taxel_n sequence="${sequence}_aftc_20" x="-0.0039" y="0.0103" z="0.02574" ry="-18" parent="${sequence}_aftc_link" sensor_collision="${sensor_collision}" />
-      <xacro:taxel_n sequence="${sequence}_aftc_21" x="-0.0039" y="0.0038" z="0.02574" ry="-18" parent="${sequence}_aftc_link" sensor_collision="${sensor_collision}" />
-      <xacro:taxel_n sequence="${sequence}_aftc_22" x="-0.0098" y="0.0230" z="0.02000" ry="-50" rz="-10" parent="${sequence}_aftc_link" sensor_collision="${sensor_collision}" />
-      <xacro:taxel_n sequence="${sequence}_aftc_23" x="-0.0110" y="0.0167" z="0.02000" ry="-50" rz="-10" parent="${sequence}_aftc_link" sensor_collision="${sensor_collision}" />
-      <xacro:taxel_n sequence="${sequence}_aftc_24" x="-0.0115" y="0.0103" z="0.02000" ry="-50" parent="${sequence}_aftc_link" sensor_collision="${sensor_collision}" />
-      <xacro:taxel_n sequence="${sequence}_aftc_25" x="-0.0115" y="0.0038" z="0.02000" ry="-50" parent="${sequence}_aftc_link" sensor_collision="${sensor_collision}" />
-      <xacro:taxel_n sequence="${sequence}_aftc_26" x="-0.0101" y="0.0306" z="0.01254" ry="-90" rz="-30" parent="${sequence}_aftc_link" sensor_collision="${sensor_collision}" />
-      <xacro:taxel_n sequence="${sequence}_aftc_27" x="-0.0126" y="0.0236" z="0.01254" ry="-90" rz="-10" parent="${sequence}_aftc_link" sensor_collision="${sensor_collision}" />
-      <xacro:taxel_n sequence="${sequence}_aftc_28" x="-0.0138" y="0.0173" z="0.01254" ry="-90" rz="-10" parent="${sequence}_aftc_link" sensor_collision="${sensor_collision}" />
-      <xacro:taxel_n sequence="${sequence}_aftc_29" x="-0.0143" y="0.0103" z="0.01254" ry="-90" parent="${sequence}_aftc_link" sensor_collision="${sensor_collision}" />
-      <xacro:taxel_n sequence="${sequence}_aftc_30" x="-0.0143" y="0.0038" z="0.01254" ry="-90" parent="${sequence}_aftc_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_aftc_01" x="0.0101" y="0.0306" z="0.01254" ry="90" rz="30" parent="${bseq}_aftc_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_aftc_02" x="0.0126" y="0.0236" z="0.01254" ry="90" rz="10" parent="${bseq}_aftc_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_aftc_03" x="0.0138" y="0.0173" z="0.01254" ry="90" rz="10" parent="${bseq}_aftc_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_aftc_04" x="0.0143" y="0.0103" z="0.01254" ry="90" parent="${bseq}_aftc_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_aftc_05" x="0.0143" y="0.0038" z="0.01254" ry="90" parent="${bseq}_aftc_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_aftc_06" x="0.0098" y="0.0230" z="0.02000" ry="50" rz="10" parent="${bseq}_aftc_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_aftc_07" x="0.0110" y="0.0167" z="0.02000" ry="50" rz="10" parent="${bseq}_aftc_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_aftc_08" x="0.0115" y="0.0103" z="0.02000" ry="50" parent="${bseq}_aftc_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_aftc_09" x="0.0115" y="0.0038" z="0.02000" ry="50" parent="${bseq}_aftc_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_aftc_10" x="0.0037" y="0.0338" z="0.01730" ry="29" rx="-48" parent="${bseq}_aftc_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_aftc_11" x="0.0039" y="0.0296" z="0.02155" ry="26" rx="-31" parent="${bseq}_aftc_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_aftc_12" x="0.0039" y="0.0230" z="0.02444" ry="22" rx="-10" parent="${bseq}_aftc_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_aftc_13" x="0.0039" y="0.0169" z="0.02544" ry="21" rx="-10" parent="${bseq}_aftc_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_aftc_14" x="0.0039" y="0.0103" z="0.02574" ry="18" parent="${bseq}_aftc_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_aftc_15" x="0.0039" y="0.0038" z="0.02574" ry="18" parent="${bseq}_aftc_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_aftc_16" x="-0.0037" y="0.0338" z="0.01730" ry="-29" rx="-48" parent="${bseq}_aftc_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_aftc_17" x="-0.0039" y="0.0296" z="0.02155" ry="-26" rx="-31" parent="${bseq}_aftc_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_aftc_18" x="-0.0039" y="0.0230" z="0.02444" ry="-22" rx="-10" parent="${bseq}_aftc_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_aftc_19" x="-0.0039" y="0.0169" z="0.02544" ry="-21" rx="-10" parent="${bseq}_aftc_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_aftc_20" x="-0.0039" y="0.0103" z="0.02574" ry="-18" parent="${bseq}_aftc_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_aftc_21" x="-0.0039" y="0.0038" z="0.02574" ry="-18" parent="${bseq}_aftc_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_aftc_22" x="-0.0098" y="0.0230" z="0.02000" ry="-50" rz="-10" parent="${bseq}_aftc_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_aftc_23" x="-0.0110" y="0.0167" z="0.02000" ry="-50" rz="-10" parent="${bseq}_aftc_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_aftc_24" x="-0.0115" y="0.0103" z="0.02000" ry="-50" parent="${bseq}_aftc_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_aftc_25" x="-0.0115" y="0.0038" z="0.02000" ry="-50" parent="${bseq}_aftc_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_aftc_26" x="-0.0101" y="0.0306" z="0.01254" ry="-90" rz="-30" parent="${bseq}_aftc_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_aftc_27" x="-0.0126" y="0.0236" z="0.01254" ry="-90" rz="-10" parent="${bseq}_aftc_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_aftc_28" x="-0.0138" y="0.0173" z="0.01254" ry="-90" rz="-10" parent="${bseq}_aftc_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_aftc_29" x="-0.0143" y="0.0103" z="0.01254" ry="-90" parent="${bseq}_aftc_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_aftc_30" x="-0.0143" y="0.0038" z="0.01254" ry="-90" parent="${bseq}_aftc_link" sensor_collision="${sensor_collision}" />
     </xacro:if>
   </xacro:macro>
 

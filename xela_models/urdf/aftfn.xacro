@@ -9,12 +9,14 @@
       <xacro:include filename="$(find xela_models)/urdf/4x6n.xacro" />
     </xacro:if>
 
-    <joint name="${sequence}_aftf_fixed" type="fixed">
+    <xacro:property name="bseq" value="$(arg base_prefix)${sequence}"/>
+
+    <joint name="${bseq}_aftf_fixed" type="fixed">
       <origin xyz="${x} ${y} ${z}" rpy="${radians(rx)} ${radians(ry)} ${radians(rz)}"/>
       <parent link="${parent}" />
-      <child link="${sequence}_aftf_link" />
+      <child link="${bseq}_aftf_link" />
     </joint>
-    <link name="${sequence}_aftf_link">
+    <link name="${bseq}_aftf_link">
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
@@ -38,7 +40,7 @@
       
     </link>
 
-    <link name="${sequence}_aftf_sensorbase_link">
+    <link name="${bseq}_aftf_sensorbase_link">
       <visual>
         <geometry>
           <sphere radius="0.001"/>
@@ -52,7 +54,7 @@
         </geometry>
       </collision>
     </link>
-    <link name="${sequence}_aftf_sensorbase_pos_link">
+    <link name="${bseq}_aftf_sensorbase_pos_link">
       <visual>
         <geometry>
           <sphere radius="0.00001"/>
@@ -66,22 +68,22 @@
         </geometry>
       </collision>
     </link>
-    <joint name="${sequence}_aftf_sensor_pos_joint" type="prismatic">
+    <joint name="${bseq}_aftf_sensor_pos_joint" type="prismatic">
       <origin xyz="0.0 0.0140 0.0010" rpy="${radians(-25)} 0.0 0.0"/>
-      <parent link="${sequence}_aftf_link"/>
-      <child link="${sequence}_aftf_sensorbase_pos_link"/>
+      <parent link="${bseq}_aftf_link"/>
+      <child link="${bseq}_aftf_sensorbase_pos_link"/>
       <axis xyz="0 0 1"/>
       <limit effort="100.0" lower="0.000" upper="0.000" velocity="0.5"/>
     </joint>
-    <joint name="${sequence}_aftf_sensor_joint" type="prismatic">
+    <joint name="${bseq}_aftf_sensor_joint" type="prismatic">
       <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 ${radians(-90)}"/>
-      <parent link="${sequence}_aftf_sensorbase_pos_link"/>
-      <child link="${sequence}_aftf_sensorbase_link"/>
+      <parent link="${bseq}_aftf_sensorbase_pos_link"/>
+      <child link="${bseq}_aftf_sensorbase_link"/>
       <axis xyz="0 0 1"/>
       <limit effort="100.0" lower="0.000" upper="0.000" velocity="0.5"/>
     </joint>
     <xacro:if value="${taxels==1}">
-      <xacro:sensor4x4n sequence="${sequence}_aftf" x="-0.0111665" y="-0.0116665" parent="${sequence}_aftf_sensorbase_link" body="0" sensor_collision="${sensor_collision}" />
+      <xacro:sensor4x4n sequence="${sequence}_aftf" x="-0.0111665" y="-0.0116665" parent="${bseq}_aftf_sensorbase_link" body="0" sensor_collision="${sensor_collision}" />
     </xacro:if>
   </xacro:macro>
 

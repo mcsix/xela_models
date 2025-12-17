@@ -11,12 +11,14 @@
       <xacro:include filename="$(find xela_models)/urdf/taxel_n.xacro" />
     </xacro:if>
 
-    <joint name="${sequence}_2x2_fixed" type="fixed">
+    <xacro:property name="bseq" value="$(arg base_prefix)${sequence}"/>
+
+    <joint name="${bseq}_2x2_fixed" type="fixed">
       <origin xyz="${x} ${y} ${z}" rpy="${radians(rx)} ${radians(ry)} ${radians(rz)}"/>
       <parent link="${parent}" />
-      <child link="${sequence}_2x2_link" />
+      <child link="${bseq}_2x2_link" />
     </joint>
-    <link name="${sequence}_2x2_link">
+    <link name="${bseq}_2x2_link">
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
@@ -41,15 +43,15 @@
       </xacro:if>
     </link>
 
-    <gazebo reference="${sequence}_2x2_link">
+    <gazebo reference="${bseq}_2x2_link">
       <material>Gazebo/Green</material>
     </gazebo>
 
     <xacro:if value="${taxels == 1}">
-      <xacro:taxel_n sequence="${sequence}_2x2_01"  x="${1*txstep+xoff}" y="${2*tystep+yoff}" z="${zoff}" parent="${sequence}_2x2_link" sensor_collision="${sensor_collision}" />
-      <xacro:taxel_n sequence="${sequence}_2x2_02"  x="${2*txstep+xoff}" y="${2*tystep+yoff}" z="${zoff}" parent="${sequence}_2x2_link" sensor_collision="${sensor_collision}" />
-      <xacro:taxel_n sequence="${sequence}_2x2_03"  x="${1*txstep+xoff}" y="${1*tystep+yoff}" z="${zoff}" parent="${sequence}_2x2_link" sensor_collision="${sensor_collision}" />
-      <xacro:taxel_n sequence="${sequence}_2x2_04"  x="${2*txstep+xoff}" y="${1*tystep+yoff}" z="${zoff}" parent="${sequence}_2x2_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_2x2_01"  x="${1*txstep+xoff}" y="${2*tystep+yoff}" z="${zoff}" parent="${bseq}_2x2_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_2x2_02"  x="${2*txstep+xoff}" y="${2*tystep+yoff}" z="${zoff}" parent="${bseq}_2x2_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_2x2_03"  x="${1*txstep+xoff}" y="${1*tystep+yoff}" z="${zoff}" parent="${bseq}_2x2_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_2x2_04"  x="${2*txstep+xoff}" y="${1*tystep+yoff}" z="${zoff}" parent="${bseq}_2x2_link" sensor_collision="${sensor_collision}" />
     </xacro:if>
   </xacro:macro>
 

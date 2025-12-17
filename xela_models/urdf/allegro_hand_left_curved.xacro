@@ -1,12 +1,28 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="allegro_hand_left">
 
+	<!-- Arguments -->
+	<xacro:arg name="taxels" default="1"/>
+	<xacro:arg name="sensor_collision" default="0"/>
+	<xacro:arg name="tips" default="curved"/>
+	<xacro:arg name="sequence" default="0"/>
+	<xacro:arg name="defaultnames" default="1"/>
+	<xacro:arg name="palm" default="1"/>
+	<xacro:arg name="parent" default="world"/>
+
 	<xacro:include filename="$(find xela_models)/urdf/allegro_hand_left_new.xacro" />
 
+	<xacro:if value="${xacro.arg('parent') == 'world'}">
 	<link name="world" />
-  
-	<xacro:allegro_hand_left_new sequence="0" tips="curved" parent="world" 
-								 defaultnames="1" palm="1" taxels="1" sensor_collision="0" />
+	</xacro:if>
 
+	<xacro:allegro_hand_left_new
+		sequence="$(arg sequence)"
+		tips="$(arg tips)"
+		parent="$(arg parent)"
+		defaultnames="$(arg defaultnames)"
+		palm="$(arg palm)"
+		taxels="$(arg taxels)"
+		sensor_collision="$(arg sensor_collision)" />
 </robot>
 
