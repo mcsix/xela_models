@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<robot name="uspref2" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  
+  <xacro:arg name="sensor_prefix" default="x_taxel_" />
+  <xacro:arg name="base_prefix" default="x_base_" />
+
+  <!-- uSPr eF2 model -->
+  <xacro:macro name="usprds" params="sequence parent x:=0.0 y:=0.0 z:=0.0 rx:=0.0 ry:=0.0 rz:=0.0 col:='blue' body:=1 taxels:=1 skipinertia:=0 xoff=-0.0085 yoff=0.012 zoff=0.00595 rzoff=-0.00495 txstep=0.0048 tystep=0.0048 standalone:=0">
+    <xacro:if value="${standalone == 1}">
+      <xacro:include filename="$(find xela_models)/urdf/materials.xacro" />
+      <xacro:include filename="$(find xela_models)/urdf/taxel_n.xacro" />
+    </xacro:if>
+
+   <xacro:property name="initial_positions_file" default="$(arg initial_positions_file)"/>
+    
+    <joint name="$(arg base_prefix)${sequence}_usprds_fixed" type="fixed">
+      <origin xyz="${x} ${y} ${z}" rpy="${radians(rx)} ${radians(ry)} ${radians(rz)}"/>
+      <parent link="${parent}" />
+      <child link="$(arg base_prefix)${sequence}_usprds_link" />
+    </joint>
+    <link name="$(arg base_prefix)${sequence}_usprds_link">
+      <collision>
+        <origin xyz="0 0 0" rpy="1.57 1.57 0" />
+        <geometry>
+          <mesh filename="package://xela_models/mesh/uSPaDS.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </collision>
+      <xacro:if value="${body == 1}">
+        <visual>
+          <origin xyz="0 0 0" rpy="1.57 0 0" />
+          <geometry>
+            <mesh filename="package://xela_models/mesh/uSPaDS.stl" scale="0.001 0.001 0.001"/>
+          </geometry>
+          <material name="${col}"/>
+        </visual>
+        <xacro:unless value="${skipinertia == 1}">
+          <inertial>
+            <origin xyz="0.000802 0.000964 0.000000" rpy="0 0 0"/>
+            <mass value="0.021331"/>
+            <inertia ixx="9.944032e-07" ixy="4.339981e-09" ixz="1.302310e-10"
+                    iyy="3.942455e-06" iyz="-3.681437e-10" izz="3.243939e-06"/>
+          </inertial>
+        </xacro:unless>
+      </xacro:if>
+    </link>
+    
+    <gazebo reference="$(arg base_prefix)${sequence}_usprds_link">
+      <material>Gazebo/Red</material>
+    </gazebo>
+
+    <xacro:if value="${taxels == 1}">
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_usprds_f_01" x="${5*txstep+xoff}" y="${4*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_usprds_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_usprds_f_02" x="${5*txstep+xoff}" y="${3*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_usprds_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_usprds_f_03" x="${5*txstep+xoff}" y="${2*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_usprds_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_usprds_f_04" x="${5*txstep+xoff}" y="${1*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_usprds_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_usprds_f_05" x="${4*txstep+xoff}" y="${4*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_usprds_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_usprds_f_06" x="${4*txstep+xoff}" y="${3*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_usprds_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_usprds_f_07" x="${4*txstep+xoff}" y="${2*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_usprds_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_usprds_f_08" x="${4*txstep+xoff}" y="${1*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_usprds_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_usprds_f_09" x="${3*txstep+xoff}" y="${4*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_usprds_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_usprds_f_10" x="${3*txstep+xoff}" y="${3*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_usprds_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_usprds_f_11" x="${3*txstep+xoff}" y="${2*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_usprds_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_usprds_f_12" x="${3*txstep+xoff}" y="${1*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_usprds_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_usprds_f_13" x="${2*txstep+xoff}" y="${4*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_usprds_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_usprds_f_14" x="${2*txstep+xoff}" y="${3*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_usprds_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_usprds_f_15" x="${2*txstep+xoff}" y="${2*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_usprds_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_usprds_f_16" x="${2*txstep+xoff}" y="${1*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_usprds_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_usprds_f_17" x="${1*txstep+xoff}" y="${4*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_usprds_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_usprds_f_18" x="${1*txstep+xoff}" y="${3*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_usprds_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_usprds_f_19" x="${1*txstep+xoff}" y="${2*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_usprds_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_usprds_f_20" x="${1*txstep+xoff}" y="${1*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_usprds_link" />
+
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_usprds_r_01" x="${3*txstep+xoff+txstep*2}" y="${4*tystep-yoff}" z="${rzoff}" parent="$(arg base_prefix)${sequence}_usprds_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_usprds_r_02" x="${3*txstep+xoff+txstep*2}" y="${3*tystep-yoff}" z="${rzoff}" parent="$(arg base_prefix)${sequence}_usprds_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_usprds_r_03" x="${3*txstep+xoff+txstep*2}" y="${2*tystep-yoff}" z="${rzoff}" parent="$(arg base_prefix)${sequence}_usprds_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_usprds_r_04" x="${3*txstep+xoff+txstep*2}" y="${1*tystep-yoff}" z="${rzoff}" parent="$(arg base_prefix)${sequence}_usprds_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_usprds_r_05" x="${2*txstep+xoff+txstep*2}" y="${4*tystep-yoff}" z="${rzoff}" parent="$(arg base_prefix)${sequence}_usprds_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_usprds_r_06" x="${2*txstep+xoff+txstep*2}" y="${3*tystep-yoff}" z="${rzoff}" parent="$(arg base_prefix)${sequence}_usprds_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_usprds_r_07" x="${2*txstep+xoff+txstep*2}" y="${2*tystep-yoff}" z="${rzoff}" parent="$(arg base_prefix)${sequence}_usprds_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_usprds_r_08" x="${2*txstep+xoff+txstep*2}" y="${1*tystep-yoff}" z="${rzoff}" parent="$(arg base_prefix)${sequence}_usprds_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_usprds_r_09" x="${1*txstep+xoff+txstep*2}" y="${3*tystep-yoff}" z="${rzoff}" parent="$(arg base_prefix)${sequence}_usprds_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_usprds_r_10" x="${1*txstep+xoff+txstep*2}" y="${2*tystep-yoff}" z="${rzoff}" parent="$(arg base_prefix)${sequence}_usprds_link" />
+    </xacro:if>
+  </xacro:macro>
+
+</robot>

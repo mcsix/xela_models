@@ -28,6 +28,7 @@ To run the visualization of the model, use following command;
 |                                | uSPa 46   / 4x6 taxels    | 
 |                                | uSPr 2F   / 4x6 taxels in the fingertip |
 |                                | uSCu ALHA / 30 taxels in the Curved fingertip |
+| usprds_std                     | uSPr DS   / 30 taxels in both side of the fingertip |
 | allegro_hand_left_curved       | Allegro hand v4, full assembly, curved tips (left)  |
 | allegro_hand_right_curved      | Allegro hand v4, full assembly, curved tips (right) |
 
@@ -36,7 +37,14 @@ To run the visualization of the model, use following command;
 source install/setup.bash
 ros2 launch xela_models xacro_launch.py xela_sensor:=all_parts_of_individual_module
 ```
-![Image of Left Allegro Hand](./all_parts.png)
+![Image of All Parts](./all_parts.png)
+
+#### uSPr DS
+```
+source install/setup.bash
+ros2 launch xela_models xacro_launch.py xela_sensor:=usprds_std
+```
+![Image of uSPrDS](./usprds_f.png)
 
 ### 2. Launch left allegrohand view 
 ```
@@ -50,7 +58,7 @@ ros2 launch xela_models xacro_launch.py xela_sensor:=allegro_hand_left_curved
 source install/setup.bash
 ros2 launch xela_models xacro_launch.py xela_sensor:=allegro_hand_right_curved
 ```
-![Image of Left Allegro Hand](./right_allegro.png)
+![Image of Right Allegro Hand](./right_allegro.png)
 
 
 
@@ -111,6 +119,9 @@ __Do not edit the xela.xacro file.__
 
 
 ## Changelog and notes
+### _2026/01/20_
+* Added uSPrDS Fingertip model
+
 ### _2025/11/26_
 * Version for ROS 2 (Tested on Humble)
 * Sensor link simplification:

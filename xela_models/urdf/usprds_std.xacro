@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="uSPrDS">
+
+	<xacro:include filename="$(find xela_models)/urdf/uSPrDS.xacro" />
+	<!-- Arguments -->
+	<xacro:arg name="taxels" default="1"/>
+	<xacro:arg name="parent" default="world"/>
+    <xacro:arg name="standalone" default="1"/>
+	
+	<xacro:if value="${xacro.arg('parent') == 'world'}">
+		<link name="world" />
+		<link name="ds_base_link"/>
+		<joint name="fixed" type="fixed">
+			<parent link="world" />
+			<child link="ds_base_link" />
+		</joint>
+        <xacro:property name="parent" value="ds_base_link"/>
+	</xacro:if>
+    <xacro:unless value="${xacro.arg('parent') == 'world'}">
+        <xacro:property name="parent" value="$(arg parent)"/>
+    </xacro:unless>
+
+  	<xacro:usprds
+		sequence="0" 
+		col="green" 
+		parent="${parent}" 
+		taxels="$(arg taxels)"
+		standalone="$(arg standalone)" />
+</robot>
+

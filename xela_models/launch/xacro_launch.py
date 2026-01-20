@@ -12,7 +12,7 @@ def generate_launch_description():
         DeclareLaunchArgument(
             "xela_sensor",
             description="Model of xela sensor.",
-            choices=["all_parts_of_individual_module", "allegro_hand_right_curved", "allegro_hand_left_curved", 
+            choices=["all_parts_of_individual_module", "allegro_hand_right_curved", "allegro_hand_left_curved", "usprds_std",
             ]
         )
     )
@@ -23,7 +23,9 @@ def generate_launch_description():
     rviz_config_name = PythonExpression([
         "'all_sensor_view.rviz' if '",
         xela_sensor,
-        "' == 'all_parts_of_individual_module' else 'urdf_rviz2.rviz'"
+        "' == 'all_parts_of_individual_module' or '",
+        xela_sensor,
+        "' == 'usprds_std' else 'urdf_rviz2.rviz'"
     ])
 
     description_file = PathJoinSubstitution([

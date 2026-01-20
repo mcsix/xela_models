@@ -11,6 +11,7 @@
 <xacro:include filename="$(find xela_models)/urdf/4x4n.xacro" />
 <xacro:include filename="$(find xela_models)/urdf/4x6n.xacro" />
 <xacro:include filename="$(find xela_models)/urdf/uSPr2F.xacro" />
+<xacro:include filename="$(find xela_models)/urdf/uSPrDS.xacro" />
 <xacro:include filename="$(find xela_models)/urdf/aftcn.xacro" />
 <xacro:include filename="$(find xela_models)/urdf/aftfn.xacro" />
 <xacro:include filename="$(find xela_models)/urdf/aftdn.xacro" />
@@ -45,6 +46,7 @@
   	<xacro:sensor2x2n 	sequence="7" col="red" parent="base_link" taxels="1" x="0.07" y="0.1" />
   	<xacro:sensor4x4n 	sequence="8" col="red" parent="base_link" taxels="1" x="0.0" y="0.1" />
   	<xacro:sensor4x6n	sequence="9" col="red" parent="base_link" taxels="1" x="-0.15" y="0.1" />
+  	<xacro:usprds  	    sequence="10" col="green" parent="base_link" taxels="1" x="-0.25" y="0.015" />
 
 </robot>
 
