@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<robot name="uSPa11" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="uSPa11" params="sequence parent x:=0.0 y:=0.0 z:=0.0 rx:=0.0 ry:=0.0 rz:=0.0 col:='blue' body:=1 taxels:=1 skipinertia:=0 xoff=0.0 yoff=0.0009 zoff=0.0 txstep=0.0046666 tystep=0.00466666 standalone:=0">
+
+    <xacro:if value="${standalone == 1}">
+      <xacro:include filename="$(find xela_models)/urdf/materials.xacro" />
+      <xacro:include filename="$(find xela_models)/urdf/taxel_n.xacro" />
+    </xacro:if>
+
+    <joint name="${sequence}_uSPa11_fixed" type="fixed">
+      <origin xyz="${x} ${y} ${z}" rpy="${radians(rx)} ${radians(ry)} ${radians(rz)}"/>
+      <parent link="${parent}" />
+      <child link="${sequence}_uSPa11_base_link" />
+    </joint>
+    <link name="${sequence}_uSPa11_base_link">
+      <collision>
+        <origin xyz="0 0 0" rpy="-1.57 0 1.57" />
+        <geometry>
+          <mesh filename="package://xela_models/mesh/uSPa11.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </collision>
+      <xacro:if value="${body == 1}">
+        <visual>
+          <origin xyz="0 0 0" rpy="-1.57 0 1.57" />
+          <geometry>
+            <mesh filename="package://xela_models/mesh/uSPa11.stl" scale="0.001 0.001 0.001"/>
+          </geometry>
+          <material name="${col}"/>
+        </visual>
+        <xacro:unless value="${skipinertia == 1}">
+          <inertial>
+            <mass value="0.0018" />
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <inertia ixx="9.47e-10" ixy="0.0" ixz="0.0" iyy="4.68e-11" iyz="0.0" izz="9.50e-10" />
+          </inertial>
+        </xacro:unless>
+      </xacro:if>
+    </link>
+    <xacro:if value="${taxels == 1}">
+      <xacro:taxel_n sequence="${sequence}_uSPa11_1" x="${0*txstep-xoff}" y="${0*tystep-yoff}" z="${zoff}" parent="${sequence}_uSPa11_base_link" />
+    </xacro:if>
+  </xacro:macro>
+
+</robot>

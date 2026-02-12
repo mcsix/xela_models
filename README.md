@@ -26,9 +26,10 @@ To run the visualization of the model, use following command;
 |                                | uSPa 22   / 2x2 taxels    |
 |                                | uSPa 44   / 4x4 taxels    |
 |                                | uSPa 46   / 4x6 taxels    | 
-|                                | uSPr 2F   / 4x6 taxels in the fingertip |
+|                                | uSPr 2F   / 4x6 taxels in 2F-140/2F-85 fingertip |
 |                                | uSCu ALHA / 30 taxels in the Curved fingertip |
-| usprds_std                     | uSPr DS   / 30 taxels in both side of the fingertip |
+|                                | uSPr DS   / 30 taxels in both side of the fingertip |
+|                                | uSPr HE35 / 3x5 taxels in the Hand-E fingertip |
 | allegro_hand_left_curved       | Allegro hand v4, full assembly, curved tips (left)  |
 | allegro_hand_right_curved      | Allegro hand v4, full assembly, curved tips (right) |
 
@@ -37,28 +38,28 @@ To run the visualization of the model, use following command;
 source install/setup.bash
 ros2 launch xela_models xacro_launch.py xela_sensor:=all_parts_of_individual_module
 ```
-![Image of All Parts](./all_parts.png)
+![Image of All Parts](./xela_models/doc/all_parts.png)
 
 #### uSPr DS
 ```
 source install/setup.bash
 ros2 launch xela_models xacro_launch.py xela_sensor:=usprds_std
 ```
-![Image of uSPrDS](./usprds_f.png)
+![Image of uSPrDS](./xela_models/doc/usprds_f.png)
 
 ### 2. Launch left allegrohand view 
 ```
 source install/setup.bash
 ros2 launch xela_models xacro_launch.py xela_sensor:=allegro_hand_left_curved
 ```
-![Image of Left Allegro Hand](./left_allegro.png)
+![Image of Left Allegro Hand](./xela_models/doc/left_allegro.png)
 
 ### 3. Launch right allegrohand view
 ```
 source install/setup.bash
 ros2 launch xela_models xacro_launch.py xela_sensor:=allegro_hand_right_curved
 ```
-![Image of Right Allegro Hand](./right_allegro.png)
+![Image of Right Allegro Hand](./xela_models/doc/right_allegro.png)
 
 
 
@@ -74,8 +75,10 @@ __Do not edit the xela.xacro file.__
 | uSPa22   | <xacro:sensor2x2n 	sequence="3" col="red" parent="base_link" taxels="1" x="0.07" y="0.1" />     |
 | uSPa44   | <xacro:sensor4x4n 	sequence="4" col="red" parent="base_link" taxels="1" x="0.0" y="0.1" />      |
 | uSPa46   | <xacro:sensor4x6n	sequence="5" col="red" parent="base_link" taxels="1" x="-0.15" y="0.1" />    |
-| uSPr2F   | <xacro:uspref2  	  sequence="6" col="red" parent="base_link" taxels="1" x="-0.15" y="0.0015" /> |
-| uSCu ALHA| <xacro:sensoraftcn sequence="7" col="red" parent="base_link" taxels="1" x="0.0" y="0.0" />      |
+| uSPr2F   | <xacro:uSPr2F      sequence="6" col="red" parent="base_link" taxels="1" x="-0.15" y="0.0015" /> |
+| uSPrDS   | <xacro:uSPrDS      sequence="7" col="red" parent="base_link" taxels="1" x="0" y="0.2" /> |
+| uSPrHE35 | <xacro:uSPrHE35    sequence="8" col="red" parent="base_link" taxels="1" x="0.1" y="0.2" z="0.0062" /> |
+| uSCu ALHA| <xacro:sensoraftcn sequence="9" col="red" parent="base_link" taxels="1" x="0.0" y="0.0" />      |
 
 ### Required arguments you will need to specify (XACRO):
 | Argument | Description                                  | Example            |
@@ -119,6 +122,11 @@ __Do not edit the xela.xacro file.__
 
 
 ## Changelog and notes
+### _2026/02/10_
+* Added uSPrHE35 Fingertip model
+* Changed default xacro file name to product name (e.g. 4x4n.xacro -> uSPa44.xacro)
+* Updated all_parts_of_individual_module list
+
 ### _2026/01/20_
 * Added uSPrDS Fingertip model
 

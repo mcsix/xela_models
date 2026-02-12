@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
-<robot name="uspref2" xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot name="uSPr2F" xmlns:xacro="http://www.ros.org/wiki/xacro">
   
   <xacro:arg name="sensor_prefix" default="x_taxel_" />
   <xacro:arg name="base_prefix" default="x_base_" />
 
   <!-- uSPr eF2 model -->
-  <xacro:macro name="uspref2" params="sequence parent x:=0.0 y:=0.0 z:=0.0 rx:=0.0 ry:=0.0 rz:=0.0 col:='blue' body:=1 taxels:=1 skipinertia:=0 xoff=0.004 yoff=0.018 zoff=0.0235 txstep=0.00724 tystep=0.00717 standalone:=0">
+  <xacro:macro name="uSPr2F" params="sequence parent x:=0.0 y:=0.0 z:=0.0 rx:=0.0 ry:=0.0 rz:=0.0 col:='blue' body:=1 taxels:=1 skipinertia:=0 xoff=0.004 yoff=0.018 zoff=0.0235 txstep=0.00724 tystep=0.00717 standalone:=0">
     <xacro:if value="${standalone == 1}">
       <xacro:include filename="$(find xela_models)/urdf/materials.xacro" />
       <xacro:include filename="$(find xela_models)/urdf/taxel_n.xacro" />
@@ -13,12 +13,12 @@
 
    <xacro:property name="initial_positions_file" default="$(arg initial_positions_file)"/>
     
-    <joint name="$(arg base_prefix)${sequence}_uspr2f_fixed" type="fixed">
+    <joint name="$(arg base_prefix)${sequence}_uSPr2F_fixed" type="fixed">
       <origin xyz="${x} ${y} ${z}" rpy="${radians(rx)} ${radians(ry)} ${radians(rz)}"/>
       <parent link="${parent}" />
-      <child link="$(arg base_prefix)${sequence}_uspr2f_link" />
+      <child link="$(arg base_prefix)${sequence}_uSPr2F_link" />
     </joint>
-    <link name="$(arg base_prefix)${sequence}_uspr2f_link">
+    <link name="$(arg base_prefix)${sequence}_uSPr2F_link">
       <collision>
         <origin xyz="0 0 0" rpy="0 1.57 1.57" />
         <geometry>
@@ -43,35 +43,35 @@
       </xacro:if>
     </link>
     
-    <gazebo reference="$(arg base_prefix)${sequence}_uspr2f_link">
+    <gazebo reference="$(arg base_prefix)${sequence}_uSPr2F_link">
       <material>Gazebo/Red</material>
     </gazebo>
 
     <xacro:if value="${taxels == 1}">
-      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uspr2f_01" x="${1*txstep+xoff}" y="${4*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uspr2f_link" />
-      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uspr2f_02" x="${2*txstep+xoff}" y="${4*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uspr2f_link" />
-      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uspr2f_03" x="${3*txstep+xoff}" y="${4*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uspr2f_link" />
-      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uspr2f_04" x="${4*txstep+xoff}" y="${4*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uspr2f_link" />
-      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uspr2f_05" x="${5*txstep+xoff}" y="${4*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uspr2f_link" />
-      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uspr2f_06" x="${6*txstep+xoff}" y="${4*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uspr2f_link" />
-      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uspr2f_07" x="${1*txstep+xoff}" y="${3*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uspr2f_link" />
-      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uspr2f_08" x="${2*txstep+xoff}" y="${3*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uspr2f_link" />
-      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uspr2f_09" x="${3*txstep+xoff}" y="${3*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uspr2f_link" />
-      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uspr2f_10" x="${4*txstep+xoff}" y="${3*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uspr2f_link" />
-      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uspr2f_11" x="${5*txstep+xoff}" y="${3*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uspr2f_link" />
-      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uspr2f_12" x="${6*txstep+xoff}" y="${3*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uspr2f_link" />
-      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uspr2f_13" x="${1*txstep+xoff}" y="${2*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uspr2f_link" />
-      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uspr2f_14" x="${2*txstep+xoff}" y="${2*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uspr2f_link" />
-      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uspr2f_15" x="${3*txstep+xoff}" y="${2*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uspr2f_link" />
-      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uspr2f_16" x="${4*txstep+xoff}" y="${2*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uspr2f_link" />
-      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uspr2f_17" x="${5*txstep+xoff}" y="${2*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uspr2f_link" />
-      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uspr2f_18" x="${6*txstep+xoff}" y="${2*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uspr2f_link" />
-      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uspr2f_19" x="${1*txstep+xoff}" y="${1*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uspr2f_link" />
-      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uspr2f_20" x="${2*txstep+xoff}" y="${1*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uspr2f_link" />
-      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uspr2f_21" x="${3*txstep+xoff}" y="${1*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uspr2f_link" />
-      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uspr2f_22" x="${4*txstep+xoff}" y="${1*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uspr2f_link" />
-      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uspr2f_23" x="${5*txstep+xoff}" y="${1*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uspr2f_link" />
-      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uspr2f_24" x="${6*txstep+xoff}" y="${1*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uspr2f_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uSPa46_01" x="${1*txstep+xoff}" y="${4*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uSPr2F_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uSPa46_02" x="${2*txstep+xoff}" y="${4*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uSPr2F_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uSPa46_03" x="${3*txstep+xoff}" y="${4*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uSPr2F_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uSPa46_04" x="${4*txstep+xoff}" y="${4*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uSPr2F_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uSPa46_05" x="${5*txstep+xoff}" y="${4*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uSPr2F_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uSPa46_06" x="${6*txstep+xoff}" y="${4*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uSPr2F_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uSPa46_07" x="${1*txstep+xoff}" y="${3*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uSPr2F_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uSPa46_08" x="${2*txstep+xoff}" y="${3*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uSPr2F_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uSPa46_09" x="${3*txstep+xoff}" y="${3*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uSPr2F_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uSPa46_10" x="${4*txstep+xoff}" y="${3*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uSPr2F_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uSPa46_11" x="${5*txstep+xoff}" y="${3*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uSPr2F_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uSPa46_12" x="${6*txstep+xoff}" y="${3*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uSPr2F_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uSPa46_13" x="${1*txstep+xoff}" y="${2*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uSPr2F_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uSPa46_14" x="${2*txstep+xoff}" y="${2*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uSPr2F_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uSPa46_15" x="${3*txstep+xoff}" y="${2*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uSPr2F_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uSPa46_16" x="${4*txstep+xoff}" y="${2*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uSPr2F_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uSPa46_17" x="${5*txstep+xoff}" y="${2*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uSPr2F_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uSPa46_18" x="${6*txstep+xoff}" y="${2*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uSPr2F_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uSPa46_19" x="${1*txstep+xoff}" y="${1*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uSPr2F_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uSPa46_20" x="${2*txstep+xoff}" y="${1*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uSPr2F_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uSPa46_21" x="${3*txstep+xoff}" y="${1*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uSPr2F_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uSPa46_22" x="${4*txstep+xoff}" y="${1*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uSPr2F_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uSPa46_23" x="${5*txstep+xoff}" y="${1*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uSPr2F_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uSPa46_24" x="${6*txstep+xoff}" y="${1*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uSPr2F_link" />
     </xacro:if>
   </xacro:macro>
 

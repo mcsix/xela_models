@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<robot name="uSPrHE35" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  
+  <xacro:arg name="sensor_prefix" default="x_taxel_" />
+  <xacro:arg name="base_prefix" default="x_base_" />
+
+  <!-- uSPr HE35 model -->
+  <xacro:macro name="uSPrHE35" params="sequence parent x:=0.0 y:=0.0 z:=0.0 rx:=0.0 ry:=0.0 rz:=0.0 col:='blue' body:=1 taxels:=1 skipinertia:=0 xoff=-0.019 yoff=0.0095 zoff=-0.0062 txstep=0.0048 tystep=0.0048 standalone:=0">
+    <xacro:if value="${standalone == 1}">
+      <xacro:include filename="$(find xela_models)/urdf/materials.xacro" />
+      <xacro:include filename="$(find xela_models)/urdf/taxel_n.xacro" />
+    </xacro:if>
+
+   <xacro:property name="initial_positions_file" default="$(arg initial_positions_file)"/>
+    
+    <joint name="$(arg base_prefix)${sequence}_uSPrHE35_fixed" type="fixed">
+      <origin xyz="${x} ${y} ${z}" rpy="${radians(rx)} ${radians(ry)} ${radians(rz)}"/>
+      <parent link="${parent}" />
+      <child link="$(arg base_prefix)${sequence}_uSPrHE35_link" />
+    </joint>
+    <link name="$(arg base_prefix)${sequence}_uSPrHE35_link">
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 -1.57" />
+        <geometry>
+          <mesh filename="package://xela_models/mesh/uSPrHE35.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </collision>
+      <xacro:if value="${body == 1}">
+        <visual>
+          <origin xyz="0 0 0" rpy="0 0 -1.57" />
+          <geometry>
+            <mesh filename="package://xela_models/mesh/uSPrHE35.stl" scale="0.001 0.001 0.001"/>
+          </geometry>
+          <material name="${col}"/>
+        </visual>
+        <xacro:unless value="${skipinertia == 1}">
+          <inertial>
+            <origin xyz="0.001258 -0.020107 -0.010350" rpy="0 0 0"/>
+            <mass value="0.020553"/>
+            <inertia ixx="5.819471e-06" ixy="5.367372e-07" ixz="-8.146625e-08"
+                    iyy="8.883230e-07" iyz="-3.681331e-08" izz="6.455063e-06"/>
+          </inertial>
+        </xacro:unless>
+      </xacro:if>
+    </link>
+    
+    <gazebo reference="$(arg base_prefix)${sequence}_uSPrHE35_link">
+      <material>Gazebo/Red</material>
+    </gazebo>
+
+    <xacro:if value="${taxels == 1}">
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uSPa35_01" x="${1*txstep+xoff}" y="${3*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uSPrHE35_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uSPa35_02" x="${2*txstep+xoff}" y="${3*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uSPrHE35_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uSPa35_03" x="${3*txstep+xoff}" y="${3*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uSPrHE35_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uSPa35_04" x="${4*txstep+xoff}" y="${3*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uSPrHE35_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uSPa35_05" x="${5*txstep+xoff}" y="${3*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uSPrHE35_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uSPa35_06" x="${1*txstep+xoff}" y="${2*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uSPrHE35_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uSPa35_07" x="${2*txstep+xoff}" y="${2*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uSPrHE35_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uSPa35_08" x="${3*txstep+xoff}" y="${2*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uSPrHE35_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uSPa35_09" x="${4*txstep+xoff}" y="${2*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uSPrHE35_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uSPa35_10" x="${5*txstep+xoff}" y="${2*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uSPrHE35_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uSPa35_11" x="${1*txstep+xoff}" y="${1*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uSPrHE35_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uSPa35_12" x="${2*txstep+xoff}" y="${1*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uSPrHE35_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uSPa35_13" x="${3*txstep+xoff}" y="${1*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uSPrHE35_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uSPa35_14" x="${4*txstep+xoff}" y="${1*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uSPrHE35_link" />
+      <xacro:taxel_n sequence="$(arg sensor_prefix)${sequence}_uSPa35_15" x="${5*txstep+xoff}" y="${1*tystep-yoff}" z="${zoff}" parent="$(arg base_prefix)${sequence}_uSPrHE35_link" />
+    </xacro:if>
+  </xacro:macro>
+
+</robot>

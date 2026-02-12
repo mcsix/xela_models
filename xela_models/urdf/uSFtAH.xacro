@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<robot name="allegro_fingertip_flat" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:arg name="base_prefix" default="base_" />
+  <xacro:macro name="uSFtAH" params="sequence parent x:=0.0 y:=0.0 z:=0.0 rx:=0.0 ry:=0.0 rz:=0.0 col:='blue' taxels:=0 skipinertia:=0 standalone:=0 sensor_collision:=1 ">
+
+    <xacro:if value="${standalone == 1}">
+      <xacro:include filename="$(find xela_models)/urdf/materials.xacro" />
+      <xacro:include filename="$(find xela_models)/urdf/taxel_n.xacro" />
+      <xacro:include filename="$(find xela_models)/urdf/uSPa44.xacro" />
+    </xacro:if>
+
+    <xacro:property name="bseq" value="$(arg base_prefix)${sequence}"/>
+
+    <joint name="${bseq}_uSFtAH_fixed" type="fixed">
+      <origin xyz="${x} ${y} ${z}" rpy="${radians(rx)} ${radians(ry)} ${radians(rz)}"/>
+      <parent link="${parent}" />
+      <child link="${bseq}_uSFtAH_link" />
+    </joint>
+    <link name="${bseq}_uSFtAH_link">
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://xela_models/mesh/uSFtAH.stl"/>
+        </geometry>
+      </collision>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://xela_models/mesh/uSFtAH.stl"/>
+        </geometry>
+        <material name="${col}"/>
+      </visual>
+      <xacro:if value="${skipinertia == 0}">
+        <inertial>
+          <mass value="0.0142" />
+          <origin xyz="0 0 0" rpy="0 0 0"/>
+          <inertia ixx="3.45e-07" ixy="0.0" ixz="0.0" iyy="3.32e-07" iyz="1.14e-08" izz="3.88e-07" />
+        </inertial>
+      </xacro:if>
+      
+    </link>
+
+    <link name="${bseq}_uSFtAH_sensorbase_link">
+      <visual>
+        <geometry>
+          <sphere radius="0.001"/>
+        </geometry>
+        <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+        <material name="black" />
+      </visual>
+      <collision>
+        <geometry>
+          <sphere radius="0.001"/>
+        </geometry>
+      </collision>
+    </link>
+    <link name="${bseq}_uSFtAH_sensorbase_pos_link">
+      <visual>
+        <geometry>
+          <sphere radius="0.00001"/>
+        </geometry>
+        <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+        <material name="black" />
+      </visual>
+      <collision>
+        <geometry>
+          <sphere radius="0.00001"/>
+        </geometry>
+      </collision>
+    </link>
+    <joint name="${bseq}_uSFtAH_sensor_pos_joint" type="prismatic">
+      <origin xyz="0.0 0.0140 0.0010" rpy="${radians(-25)} 0.0 0.0"/>
+      <parent link="${bseq}_uSFtAH_link"/>
+      <child link="${bseq}_uSFtAH_sensorbase_pos_link"/>
+      <axis xyz="0 0 1"/>
+      <limit effort="100.0" lower="0.000" upper="0.000" velocity="0.5"/>
+    </joint>
+    <joint name="${bseq}_uSFtAH_sensor_joint" type="prismatic">
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 ${radians(-90)}"/>
+      <parent link="${bseq}_uSFtAH_sensorbase_pos_link"/>
+      <child link="${bseq}_uSFtAH_sensorbase_link"/>
+      <axis xyz="0 0 1"/>
+      <limit effort="100.0" lower="0.000" upper="0.000" velocity="0.5"/>
+    </joint>
+    <xacro:if value="${taxels==1}">
+      <xacro:uSPa44 sequence="${sequence}_uSPa44" x="-0.0111665" y="-0.0116665" parent="${bseq}_uSFtAH_sensorbase_link" body="0" sensor_collision="${sensor_collision}" />
+    </xacro:if>
+  </xacro:macro>
+
+</robot>

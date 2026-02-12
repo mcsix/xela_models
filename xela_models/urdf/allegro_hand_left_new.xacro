@@ -4,11 +4,10 @@
   <xacro:include filename="$(find xela_models)/urdf/materials.xacro" />
   <xacro:include filename="$(find xela_models)/urdf/taxel_n.xacro" />
 
-  <xacro:include filename="$(find xela_models)/urdf/4x4n.xacro" />
-  <xacro:include filename="$(find xela_models)/urdf/4x6base.xacro" />
-  <xacro:include filename="$(find xela_models)/urdf/uspa46_2409.xacro" />
-  <xacro:include filename="$(find xela_models)/urdf/aftcn.xacro" />
-  <xacro:include filename="$(find xela_models)/urdf/aftfn.xacro" />
+  <xacro:include filename="$(find xela_models)/urdf/uSPa44.xacro" />
+  <xacro:include filename="$(find xela_models)/urdf/uSPa46_2409.xacro" />
+  <xacro:include filename="$(find xela_models)/urdf/uSCuAH.xacro" />
+  <xacro:include filename="$(find xela_models)/urdf/uSFtAH.xacro" />
   <xacro:include filename="$(find xela_models)/urdf/aftdn.xacro" />
 
 
@@ -79,9 +78,9 @@
     </joint>
 
     <xacro:if value="${palm == 1}">
-      <xacro:uspa46_2409 sequence="${seq}16" col="red" parent="${bseq}palm_link" x="0.014" y="0.0249" z="-0.0204"  rz="90" rx="90" ry="180" taxels="${taxels}" skipinertia="1" sensor_collision="${sensor_collision}" />
-      <xacro:uspa46_2409 sequence="${seq}17" col="green" parent="${bseq}palm_link" x="0.014" y="-0.0249" z="-0.0204"  rz="90" rx="90" ry="0" taxels="${taxels}" skipinertia="1" sensor_collision="${sensor_collision}" />
-      <xacro:uspa46_2409 sequence="${seq}18" col="blue" parent="${bseq}palm_link" x="0.014" y="0.0249" z="-0.0515" rz="90" rx="90" ry="180" taxels="${taxels}" skipinertia="1" sensor_collision="${sensor_collision}" />
+      <xacro:uSPa46_2409 sequence="${seq}16" col="red" parent="${bseq}palm_link" x="0.014" y="0.0249" z="-0.0204"  rz="90" rx="90" ry="180" taxels="${taxels}" skipinertia="1" sensor_collision="${sensor_collision}" />
+      <xacro:uSPa46_2409 sequence="${seq}17" col="green" parent="${bseq}palm_link" x="0.014" y="-0.0249" z="-0.0204"  rz="90" rx="90" ry="0" taxels="${taxels}" skipinertia="1" sensor_collision="${sensor_collision}" />
+      <xacro:uSPa46_2409 sequence="${seq}18" col="blue" parent="${bseq}palm_link" x="0.014" y="0.0249" z="-0.0515" rz="90" rx="90" ry="180" taxels="${taxels}" skipinertia="1" sensor_collision="${sensor_collision}" />
     </xacro:if>
     <xacro:if value="${defaultnames == 1}">
       <!-- Index Finger -->
@@ -314,8 +313,8 @@
       </xacro:if>
 
       <xacro:if value="${phalanges == 1}">
-        <xacro:sensor4x4n sequence="${x_seq}${finger_num*4+1}" col="red" parent="${sequence}link_${finger_num*4+1}" ry="-90" rz="180" z="0.033" y="0.012" x="0.0108" body="1" taxels="${taxels}" skipinertia="1" sensor_collision="${sensor_collision}" />
-        <xacro:sensor4x4n sequence="${x_seq}${finger_num*4+0}" col="red" parent="${sequence}link_${finger_num*4+1}" ry="90" z="0.021" y="-0.012" x="0.0108" body="1" taxels="${taxels}" skipinertia="1" sensor_collision="${sensor_collision}" />
+        <xacro:uSPa44 sequence="${x_seq}${finger_num*4+1}" col="red" parent="${sequence}link_${finger_num*4+1}" ry="-90" rz="180" z="0.033" y="0.012" x="0.0108" body="1" taxels="${taxels}" skipinertia="1" sensor_collision="${sensor_collision}" />
+        <xacro:uSPa44 sequence="${x_seq}${finger_num*4+0}" col="red" parent="${sequence}link_${finger_num*4+1}" ry="90" z="0.021" y="-0.012" x="0.0108" body="1" taxels="${taxels}" skipinertia="1" sensor_collision="${sensor_collision}" />
       </xacro:if>
 
       <joint name="joint_${finger_num*4+1}.0" type="revolute">
@@ -390,7 +389,7 @@
       </xacro:if>
 
       <xacro:if value="${phalanges == 1}">
-        <xacro:sensor4x4n sequence="${x_seq}${finger_num*4+2}" col="red" parent="${sequence}link_${finger_num*4+2}" ry="90" z="0.0445" y="-0.012" x="0.01" body="1" taxels="${taxels}" skipinertia="1" sensor_collision="${sensor_collision}" />
+        <xacro:uSPa44 sequence="${x_seq}${finger_num*4+2}" col="red" parent="${sequence}link_${finger_num*4+2}" ry="90" z="0.0445" y="-0.012" x="0.01" body="1" taxels="${taxels}" skipinertia="1" sensor_collision="${sensor_collision}" />
       </xacro:if>
 
       <joint name="joint_${finger_num*4+2}.0" type="revolute">
@@ -444,10 +443,10 @@
       </joint>
 
     <xacro:if value="${tip == 'flat'}">
-      <xacro:sensoraftfn sequence="${x_seq}${finger_num*4+3}" col="red" parent="${sequence}link_${finger_num*4+3}" rx="90" rz="90" z="0.016" taxels="${taxels}" skipinertia="1"/>
+      <xacro:uSFtAH sequence="${x_seq}${finger_num*4+3}" col="red" parent="${sequence}link_${finger_num*4+3}" rx="90" rz="90" z="0.016" taxels="${taxels}" skipinertia="1"/>
     </xacro:if>
     <xacro:if value="${tip == 'curved'}">
-      <xacro:sensoraftcn sequence="${x_seq}${finger_num*4+3}" col="red" parent="${sequence}link_${finger_num*4+3}" rx="90" rz="90" z="0.016" taxels="${taxels}" skipinertia="1" sensor_collision="${sensor_collision}" />
+      <xacro:uSCuAH sequence="${x_seq}${finger_num*4+3}" col="red" parent="${sequence}link_${finger_num*4+3}" rx="90" rz="90" z="0.016" taxels="${taxels}" skipinertia="1" sensor_collision="${sensor_collision}" />
     </xacro:if>
     <xacro:if value="${tip == 'default'}">
       <xacro:aftdn sequence="${x_seq}${finger_num*4+3}" col="white" parent="${sequence}link_${finger_num*4+3}" rx="0" rz="0" z="0.027" x="0.013" skipinertia="1"/>
@@ -600,7 +599,7 @@
     </xacro:if>
 
     <xacro:if value="${phalanges == 1}">
-      <xacro:sensor4x4n sequence="${x_seq}${finger_num*4+1}" parent="${sequence}link_${finger_num*4+2}" ry="90" z="0.023" y="-0.012" x="0.011" body="1" taxels="${taxels}" skipinertia="1" sensor_collision="${sensor_collision}" />
+      <xacro:uSPa44 sequence="${x_seq}${finger_num*4+1}" parent="${sequence}link_${finger_num*4+2}" ry="90" z="0.023" y="-0.012" x="0.011" body="1" taxels="${taxels}" skipinertia="1" sensor_collision="${sensor_collision}" />
     </xacro:if>
 
     <joint name="joint_${finger_num*4+2}.0" type="revolute">
@@ -703,7 +702,7 @@
     </link>
 
     <xacro:if value="${phalanges == 1}">
-      <xacro:sensor4x4n sequence="${x_seq}${finger_num*4+2}" parent="${sequence}link_${finger_num*4+3}" ry="90" z="0.021" y="-0.012" x="0.011" body="1" taxels="${taxels}" skipinertia="1" sensor_collision="${sensor_collision}" />
+      <xacro:uSPa44 sequence="${x_seq}${finger_num*4+2}" parent="${sequence}link_${finger_num*4+3}" ry="90" z="0.021" y="-0.012" x="0.011" body="1" taxels="${taxels}" skipinertia="1" sensor_collision="${sensor_collision}" />
     </xacro:if>
 
     <joint name="joint_${finger_num*4+3}.0" type="revolute">
@@ -715,10 +714,10 @@
       <dynamics damping="3" friction="12"/>
     </joint>
     <xacro:if value="${tip == 'flat'}">
-      <xacro:sensoraftfn sequence="${x_seq}${finger_num*4+3}" col="green" parent="${sequence}link_${finger_num*4+3}" rx="90" rz="90" z="0.0315" taxels="${taxels}" skipinertia="1" sensor_collision="${sensor_collision}" />
+      <xacro:uSFtAH sequence="${x_seq}${finger_num*4+3}" col="green" parent="${sequence}link_${finger_num*4+3}" rx="90" rz="90" z="0.0315" taxels="${taxels}" skipinertia="1" sensor_collision="${sensor_collision}" />
     </xacro:if>
     <xacro:if value="${tip == 'curved'}">
-      <xacro:sensoraftcn sequence="${x_seq}${finger_num*4+3}" col="green" parent="${sequence}link_${finger_num*4+3}" rx="90" rz="90" z="0.0315" taxels="${taxels}" skipinertia="1" sensor_collision="${sensor_collision}" />
+      <xacro:uSCuAH sequence="${x_seq}${finger_num*4+3}" col="green" parent="${sequence}link_${finger_num*4+3}" rx="90" rz="90" z="0.0315" taxels="${taxels}" skipinertia="1" sensor_collision="${sensor_collision}" />
     </xacro:if>
     <xacro:if value="${tip == 'default'}">
       <xacro:aftdn sequence="${x_seq}${finger_num*4+3}" col="white" parent="${sequence}link_${finger_num*4+3}" rx="0" rz="0" z="0.042" x="0.013" skipinertia="1" />

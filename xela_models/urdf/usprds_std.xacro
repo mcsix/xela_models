@@ -20,7 +20,7 @@
         <xacro:property name="parent" value="$(arg parent)"/>
     </xacro:unless>
 
-  	<xacro:usprds
+  	<xacro:uSPrDS
 		sequence="0" 
 		col="green" 
 		parent="${parent}" 

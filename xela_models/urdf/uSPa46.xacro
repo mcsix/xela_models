@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<robot name="uSPa46" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <!-- <xacro:include filename="$(find xela_models)/urdf/materials.xacro" />
+  <xacro:include filename="$(find xela_models)/urdf/taxel_n.xacro" /> -->
+
+  <!-- uSPa46 new model -->
+  <xacro:macro name="uSPa46" params="sequence parent x:=0.0 y:=0.0 z:=0.0 rx:=0.0 ry:=0.0 rz:=0.0 col:='blue' body:=1 taxels:=1 skipinertia:=0 xoff=0.003 yoff=0.002175 zoff=0.005 txstep=0.00724 tystep=0.00717 standalone:=0" >
+
+    <xacro:if value="${standalone == 1}">
+      <xacro:include filename="$(find xela_models)/urdf/materials.xacro" />
+      <xacro:include filename="$(find xela_models)/urdf/taxel_n.xacro" />
+    </xacro:if>
+
+    <joint name="${sequence}_uSPa46_fixed" type="fixed">
+      <origin xyz="${x} ${y} ${z}" rpy="${radians(rx)} ${radians(ry)} ${radians(rz)}"/>
+      <parent link="${parent}" />
+      <child link="${sequence}_uSPa46_link" />
+    </joint>
+    <link name="${sequence}_uSPa46_link">
+      <collision>
+        <origin xyz="0.026 0.0155 0" rpy="3.14 0 3.14" />
+        <geometry>
+          <mesh filename="package://xela_models/mesh/uSPa46.stl" scale="0.001 0.001 0.001" />
+        </geometry>
+      </collision>
+      <xacro:if value="${body == 1}">
+        <visual>
+          <origin xyz="0.026 0.0155 0" rpy="3.14 0 3.14" />
+          <geometry>
+            <mesh filename="package://xela_models/mesh/uSPa46.stl" scale="0.001 0.001 0.001"/>
+          </geometry>
+          <material name="${col}"/>
+        </visual>
+        <xacro:unless value="${skipinertia == 1}">
+          <inertial>
+            <mass value="0.0108" />
+            <origin xyz="0.026 0.0155 0" rpy="3.14 0 3.14"/>
+            <inertia ixx="1.11e-07" ixy="0.0" ixz="0.0" iyy="2.97e-07" iyz="0.0" izz="4.03e-07" />
+          </inertial>
+        </xacro:unless>
+      </xacro:if>
+    </link>
+    
+    <gazebo reference="${sequence}_uSPa46_link">
+      <material>Gazebo/Red</material>
+    </gazebo>
+
+    <xacro:if value="${taxels == 1}">
+      <xacro:taxel_n sequence="${sequence}_uSPa46_01" x="${1*txstep+xoff}" y="${4*tystep-yoff}" z="${zoff}" parent="${sequence}_uSPa46_link" />
+      <xacro:taxel_n sequence="${sequence}_uSPa46_02" x="${2*txstep+xoff}" y="${4*tystep-yoff}" z="${zoff}" parent="${sequence}_uSPa46_link" />
+      <xacro:taxel_n sequence="${sequence}_uSPa46_03" x="${3*txstep+xoff}" y="${4*tystep-yoff}" z="${zoff}" parent="${sequence}_uSPa46_link" />
+      <xacro:taxel_n sequence="${sequence}_uSPa46_04" x="${4*txstep+xoff}" y="${4*tystep-yoff}" z="${zoff}" parent="${sequence}_uSPa46_link" />
+      <xacro:taxel_n sequence="${sequence}_uSPa46_05" x="${5*txstep+xoff}" y="${4*tystep-yoff}" z="${zoff}" parent="${sequence}_uSPa46_link" />
+      <xacro:taxel_n sequence="${sequence}_uSPa46_06" x="${6*txstep+xoff}" y="${4*tystep-yoff}" z="${zoff}" parent="${sequence}_uSPa46_link" />
+      <xacro:taxel_n sequence="${sequence}_uSPa46_07" x="${1*txstep+xoff}" y="${3*tystep-yoff}" z="${zoff}" parent="${sequence}_uSPa46_link" />
+      <xacro:taxel_n sequence="${sequence}_uSPa46_08" x="${2*txstep+xoff}" y="${3*tystep-yoff}" z="${zoff}" parent="${sequence}_uSPa46_link" />
+      <xacro:taxel_n sequence="${sequence}_uSPa46_09" x="${3*txstep+xoff}" y="${3*tystep-yoff}" z="${zoff}" parent="${sequence}_uSPa46_link" />
+      <xacro:taxel_n sequence="${sequence}_uSPa46_10" x="${4*txstep+xoff}" y="${3*tystep-yoff}" z="${zoff}" parent="${sequence}_uSPa46_link" />
+      <xacro:taxel_n sequence="${sequence}_uSPa46_11" x="${5*txstep+xoff}" y="${3*tystep-yoff}" z="${zoff}" parent="${sequence}_uSPa46_link" />
+      <xacro:taxel_n sequence="${sequence}_uSPa46_12" x="${6*txstep+xoff}" y="${3*tystep-yoff}" z="${zoff}" parent="${sequence}_uSPa46_link" />
+      <xacro:taxel_n sequence="${sequence}_uSPa46_13" x="${1*txstep+xoff}" y="${2*tystep-yoff}" z="${zoff}" parent="${sequence}_uSPa46_link" />
+      <xacro:taxel_n sequence="${sequence}_uSPa46_14" x="${2*txstep+xoff}" y="${2*tystep-yoff}" z="${zoff}" parent="${sequence}_uSPa46_link" />
+      <xacro:taxel_n sequence="${sequence}_uSPa46_15" x="${3*txstep+xoff}" y="${2*tystep-yoff}" z="${zoff}" parent="${sequence}_uSPa46_link" />
+      <xacro:taxel_n sequence="${sequence}_uSPa46_16" x="${4*txstep+xoff}" y="${2*tystep-yoff}" z="${zoff}" parent="${sequence}_uSPa46_link" />
+      <xacro:taxel_n sequence="${sequence}_uSPa46_17" x="${5*txstep+xoff}" y="${2*tystep-yoff}" z="${zoff}" parent="${sequence}_uSPa46_link" />
+      <xacro:taxel_n sequence="${sequence}_uSPa46_18" x="${6*txstep+xoff}" y="${2*tystep-yoff}" z="${zoff}" parent="${sequence}_uSPa46_link" />
+      <xacro:taxel_n sequence="${sequence}_uSPa46_19" x="${1*txstep+xoff}" y="${1*tystep-yoff}" z="${zoff}" parent="${sequence}_uSPa46_link" />
+      <xacro:taxel_n sequence="${sequence}_uSPa46_20" x="${2*txstep+xoff}" y="${1*tystep-yoff}" z="${zoff}" parent="${sequence}_uSPa46_link" />
+      <xacro:taxel_n sequence="${sequence}_uSPa46_21" x="${3*txstep+xoff}" y="${1*tystep-yoff}" z="${zoff}" parent="${sequence}_uSPa46_link" />
+      <xacro:taxel_n sequence="${sequence}_uSPa46_22" x="${4*txstep+xoff}" y="${1*tystep-yoff}" z="${zoff}" parent="${sequence}_uSPa46_link" />
+      <xacro:taxel_n sequence="${sequence}_uSPa46_23" x="${5*txstep+xoff}" y="${1*tystep-yoff}" z="${zoff}" parent="${sequence}_uSPa46_link" />
+      <xacro:taxel_n sequence="${sequence}_uSPa46_24" x="${6*txstep+xoff}" y="${1*tystep-yoff}" z="${zoff}" parent="${sequence}_uSPa46_link" />
+    </xacro:if>
+  </xacro:macro>
+
+</robot>

@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<robot name="uSPa22" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- uSPa22 new model -->
+  <xacro:arg name="base_prefix" default="base_" />
+
+  <xacro:macro name="uSPa22" params="sequence parent x:=0.0 y:=0.0 z:=0.0 rx:=0.0 ry:=0.0 rz:=0.0 col:='blue' body:=1 taxels:=1 skipinertia:=0 xoff=-0.0009 yoff=0.0011 zoff=0.003 txstep=0.0046666 tystep=0.00466666 standalone:=0 sensor_collision:=1">
+
+    <xacro:if value="${standalone == 1}">
+      <xacro:include filename="$(find xela_models)/urdf/materials.xacro" />
+      <xacro:include filename="$(find xela_models)/urdf/taxel_n.xacro" />
+    </xacro:if>
+
+    <xacro:property name="bseq" value="$(arg base_prefix)${sequence}"/>
+
+    <joint name="${bseq}_uSPa22_fixed" type="fixed">
+      <origin xyz="${x} ${y} ${z}" rpy="${radians(rx)} ${radians(ry)} ${radians(rz)}"/>
+      <parent link="${parent}" />
+      <child link="${bseq}_uSPa22_link" />
+    </joint>
+    <link name="${bseq}_uSPa22_link">
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://xela_models/mesh/uSPa22.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </collision>
+      <xacro:if value="${body == 1}">
+        <visual>
+          <origin xyz="0 0 0" rpy="0 0 0" />
+          <geometry>
+            <mesh filename="package://xela_models/mesh/uSPa22.stl" scale="0.001 0.001 0.001"/>
+          </geometry>
+          <material name="${col}"/>
+        </visual>
+        <xacro:unless value="${skipinertia == 1}">
+          <inertial>
+            <mass value="0.0036" />
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <inertia ixx="5.76e-09" ixy="0.0" ixz="0.0" iyy="6.55e-09" iyz="1.44e-10" izz="1.20e-08" />
+          </inertial>
+        </xacro:unless>
+      </xacro:if>
+    </link>
+
+    <gazebo reference="${bseq}_uSPa22_link">
+      <material>Gazebo/Green</material>
+    </gazebo>
+
+    <xacro:if value="${taxels == 1}">
+      <xacro:taxel_n sequence="${sequence}_uSPa22_01"  x="${1*txstep+xoff}" y="${2*tystep+yoff}" z="${zoff}" parent="${bseq}_uSPa22_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_uSPa22_02"  x="${2*txstep+xoff}" y="${2*tystep+yoff}" z="${zoff}" parent="${bseq}_uSPa22_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_uSPa22_03"  x="${1*txstep+xoff}" y="${1*tystep+yoff}" z="${zoff}" parent="${bseq}_uSPa22_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_uSPa22_04"  x="${2*txstep+xoff}" y="${1*tystep+yoff}" z="${zoff}" parent="${bseq}_uSPa22_link" sensor_collision="${sensor_collision}" />
+    </xacro:if>
+  </xacro:macro>
+
+</robot>

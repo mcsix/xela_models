@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<robot name="allegro_fingertip_curved" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  
+  <xacro:arg name="base_prefix" default="base_" />
+
+  <xacro:macro name="uSCuAH" params="sequence parent x:=0.0 y:=0.0 z:=0.0 rx:=0.0 ry:=0.0 rz:=0.0 col:='blue' taxels:=1 skipinertia:=0 standalone:=0 sensor_collision:=1" >
+
+    <xacro:if value="${standalone == 1}">
+      <xacro:include filename="$(find xela_models)/urdf/materials.xacro" />
+      <xacro:include filename="$(find xela_models)/urdf/taxel_n.xacro" />
+    </xacro:if>
+
+    <xacro:property name="bseq" value="$(arg base_prefix)${sequence}"/>
+
+    <joint name="${bseq}_uSCuAH_fixed" type="fixed">
+      <origin xyz="${x-0.013} ${y} ${z}" rpy="${radians(rx)} ${radians(ry)} ${radians(rz)}"/>
+      <parent link="${parent}" />
+      <child link="${bseq}_uSCuAH_link" />
+    </joint>
+    <link name="${bseq}_uSCuAH_link">
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://xela_models/mesh/uSCuAH.stl"/>
+        </geometry>
+      </collision>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://xela_models/mesh/uSCuAH.stl" scale="0.93 0.93 0.93"/>
+        </geometry>
+        <material name="${col}"/>
+      </visual>
+      <xacro:if value="${skipinertia == 0}">
+        <inertial>
+          <mass value="0.0266" />
+          <origin xyz="0 0 0" rpy="0 0 0"/>
+          <inertia ixx="1.66e-06" ixy="0.0" ixz="0.0" iyy="1.23e-06" iyz="0.0" izz="1.70e-06" />
+        </inertial>
+      </xacro:if>
+    </link>
+    <xacro:if value="${taxels == 1}">
+      <xacro:taxel_n sequence="${sequence}_uSCuAH_01" x="0.0101" y="0.0306" z="0.01254" ry="90" rz="30" parent="${bseq}_uSCuAH_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_uSCuAH_02" x="0.0126" y="0.0236" z="0.01254" ry="90" rz="10" parent="${bseq}_uSCuAH_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_uSCuAH_03" x="0.0138" y="0.0173" z="0.01254" ry="90" rz="10" parent="${bseq}_uSCuAH_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_uSCuAH_04" x="0.0143" y="0.0103" z="0.01254" ry="90" parent="${bseq}_uSCuAH_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_uSCuAH_05" x="0.0143" y="0.0038" z="0.01254" ry="90" parent="${bseq}_uSCuAH_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_uSCuAH_06" x="0.0098" y="0.0230" z="0.02000" ry="50" rz="10" parent="${bseq}_uSCuAH_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_uSCuAH_07" x="0.0110" y="0.0167" z="0.02000" ry="50" rz="10" parent="${bseq}_uSCuAH_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_uSCuAH_08" x="0.0115" y="0.0103" z="0.02000" ry="50" parent="${bseq}_uSCuAH_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_uSCuAH_09" x="0.0115" y="0.0038" z="0.02000" ry="50" parent="${bseq}_uSCuAH_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_uSCuAH_10" x="0.0037" y="0.0338" z="0.01730" ry="29" rx="-48" parent="${bseq}_uSCuAH_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_uSCuAH_11" x="0.0039" y="0.0296" z="0.02155" ry="26" rx="-31" parent="${bseq}_uSCuAH_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_uSCuAH_12" x="0.0039" y="0.0230" z="0.02444" ry="22" rx="-10" parent="${bseq}_uSCuAH_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_uSCuAH_13" x="0.0039" y="0.0169" z="0.02544" ry="21" rx="-10" parent="${bseq}_uSCuAH_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_uSCuAH_14" x="0.0039" y="0.0103" z="0.02574" ry="18" parent="${bseq}_uSCuAH_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_uSCuAH_15" x="0.0039" y="0.0038" z="0.02574" ry="18" parent="${bseq}_uSCuAH_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_uSCuAH_16" x="-0.0037" y="0.0338" z="0.01730" ry="-29" rx="-48" parent="${bseq}_uSCuAH_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_uSCuAH_17" x="-0.0039" y="0.0296" z="0.02155" ry="-26" rx="-31" parent="${bseq}_uSCuAH_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_uSCuAH_18" x="-0.0039" y="0.0230" z="0.02444" ry="-22" rx="-10" parent="${bseq}_uSCuAH_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_uSCuAH_19" x="-0.0039" y="0.0169" z="0.02544" ry="-21" rx="-10" parent="${bseq}_uSCuAH_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_uSCuAH_20" x="-0.0039" y="0.0103" z="0.02574" ry="-18" parent="${bseq}_uSCuAH_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_uSCuAH_21" x="-0.0039" y="0.0038" z="0.02574" ry="-18" parent="${bseq}_uSCuAH_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_uSCuAH_22" x="-0.0098" y="0.0230" z="0.02000" ry="-50" rz="-10" parent="${bseq}_uSCuAH_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_uSCuAH_23" x="-0.0110" y="0.0167" z="0.02000" ry="-50" rz="-10" parent="${bseq}_uSCuAH_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_uSCuAH_24" x="-0.0115" y="0.0103" z="0.02000" ry="-50" parent="${bseq}_uSCuAH_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_uSCuAH_25" x="-0.0115" y="0.0038" z="0.02000" ry="-50" parent="${bseq}_uSCuAH_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_uSCuAH_26" x="-0.0101" y="0.0306" z="0.01254" ry="-90" rz="-30" parent="${bseq}_uSCuAH_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_uSCuAH_27" x="-0.0126" y="0.0236" z="0.01254" ry="-90" rz="-10" parent="${bseq}_uSCuAH_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_uSCuAH_28" x="-0.0138" y="0.0173" z="0.01254" ry="-90" rz="-10" parent="${bseq}_uSCuAH_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_uSCuAH_29" x="-0.0143" y="0.0103" z="0.01254" ry="-90" parent="${bseq}_uSCuAH_link" sensor_collision="${sensor_collision}" />
+      <xacro:taxel_n sequence="${sequence}_uSCuAH_30" x="-0.0143" y="0.0038" z="0.01254" ry="-90" parent="${bseq}_uSCuAH_link" sensor_collision="${sensor_collision}" />
+    </xacro:if>
+  </xacro:macro>
+
+</robot>

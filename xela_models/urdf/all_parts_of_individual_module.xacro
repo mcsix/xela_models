@@ -4,16 +4,17 @@
 <xacro:include filename="$(find xela_models)/urdf/materials.xacro" />
 <xacro:include filename="$(find xela_models)/urdf/taxel_n.xacro" />
 
-<xacro:include filename="$(find xela_models)/urdf/1x1n.xacro" />
+<xacro:include filename="$(find xela_models)/urdf/uSPa11.xacro" />
 <xacro:include filename="$(find xela_models)/urdf/1x6n.xacro" />
-<xacro:include filename="$(find xela_models)/urdf/2x1n.xacro" />
-<xacro:include filename="$(find xela_models)/urdf/2x2n.xacro" />
-<xacro:include filename="$(find xela_models)/urdf/4x4n.xacro" />
-<xacro:include filename="$(find xela_models)/urdf/4x6n.xacro" />
+<xacro:include filename="$(find xela_models)/urdf/uSPa21.xacro" />
+<xacro:include filename="$(find xela_models)/urdf/uSPa22.xacro" />
+<xacro:include filename="$(find xela_models)/urdf/uSPa44.xacro" />
+<xacro:include filename="$(find xela_models)/urdf/uSPa46.xacro" />
 <xacro:include filename="$(find xela_models)/urdf/uSPr2F.xacro" />
+<xacro:include filename="$(find xela_models)/urdf/uSPrHE35.xacro" />
 <xacro:include filename="$(find xela_models)/urdf/uSPrDS.xacro" />
-<xacro:include filename="$(find xela_models)/urdf/aftcn.xacro" />
-<xacro:include filename="$(find xela_models)/urdf/aftfn.xacro" />
+<xacro:include filename="$(find xela_models)/urdf/uSCuAH.xacro" />
+<xacro:include filename="$(find xela_models)/urdf/uSFtAH.xacro" />
 <xacro:include filename="$(find xela_models)/urdf/aftdn.xacro" />
 
 	<link name="world" />
@@ -37,16 +38,16 @@
 		</collision>
 	</link>
 
-	<xacro:sensoraftcn 	sequence="1" col="red" parent="base_link" taxels="1" x="0.0" y="0.0" />    
-  	<xacro:sensoraftfn 	sequence="2" col="red" parent="base_link" taxels="1" x="0.1" y="0.0" />
+	<xacro:uSCuAH 		sequence="1" col="red" parent="base_link" taxels="1" x="0.0" y="0.0" />    
+  	<xacro:uSFtAH 		sequence="2" col="red" parent="base_link" taxels="1" x="0.1" y="0.0" />
   	<xacro:aftdn 		sequence="3" col="red" parent="base_link"  x="0.2" y="0.0" />
-  	<xacro:uspref2  	sequence="4" col="red" parent="base_link" taxels="1" x="-0.15" y="0.015" />
-  	<xacro:sensor1x1n 	sequence="5" col="red" parent="base_link" taxels="1" x="0.17" y="0.1" />
-  	<xacro:sensor2x1n 	sequence="6" col="red" parent="base_link" taxels="1" x="0.12" y="0.1" />
-  	<xacro:sensor2x2n 	sequence="7" col="red" parent="base_link" taxels="1" x="0.07" y="0.1" />
-  	<xacro:sensor4x4n 	sequence="8" col="red" parent="base_link" taxels="1" x="0.0" y="0.1" />
-  	<xacro:sensor4x6n	sequence="9" col="red" parent="base_link" taxels="1" x="-0.15" y="0.1" />
-  	<xacro:usprds  	    sequence="10" col="green" parent="base_link" taxels="1" x="-0.25" y="0.015" />
-
+  	<xacro:uSPr2F  		sequence="4" col="red" parent="base_link" taxels="1" x="-0.15" y="0.015" />
+  	<xacro:uSPa11 		sequence="5" col="red" parent="base_link" taxels="1" x="0.17" y="0.1" />
+  	<xacro:uSPa21 		sequence="6" col="red" parent="base_link" taxels="1" x="0.12" y="0.1" />
+  	<xacro:uSPa22 		sequence="7" col="red" parent="base_link" taxels="1" x="0.07" y="0.1" />
+  	<xacro:uSPa44 		sequence="8" col="red" parent="base_link" taxels="1" x="0.0" y="0.1" />
+  	<xacro:uSPa46		sequence="9" col="red" parent="base_link" taxels="1" x="-0.15" y="0.1" />
+  	<xacro:uSPrDS  	    sequence="10" col="green" parent="base_link" taxels="1" x="0" y="0.2" />
+  	<xacro:uSPrHE35     sequence="11" col="green" parent="base_link" taxels="1" x="0.1" y="0.2" z="0.0062" />
 </robot>
 
