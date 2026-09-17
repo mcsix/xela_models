@@ -4,7 +4,7 @@
   <!-- uSPa44 new model -->
   <xacro:arg name="base_prefix" default="base_" />
 
-  <xacro:macro name="uSPa44" params="sequence parent x:=0.0 y:=0.0 z:=0.0 rx:=0.0 ry:=0.0 rz:=0.0 col:='blue' body:=1 taxels:=1 skipinertia:=0 xoff=0.0007 yoff=0.00015 zoff=0.004 txstep=0.0046666 tystep=0.00466666 standalone:=0 sensor_collision:=1">
+  <xacro:macro name="uSPa44" params="sequence parent x:=0.0 y:=0.0 z:=0.0 rx:=0.0 ry:=0.0 rz:=0.0 mesh_rz:=0.0 col:='blue' body:=1 taxels:=1 skipinertia:=0 xoff=0.0007 yoff=0.00015 zoff=0.004 txstep=0.0046666 tystep=0.00466666 standalone:=0 sensor_collision:=1">
 
     <xacro:if value="${standalone == 1}">
       <xacro:include filename="$(find xela_models)/urdf/materials.xacro" />
@@ -12,6 +12,24 @@
     </xacro:if>
 
     <xacro:property name="bseq" value="$(arg base_prefix)${sequence}"/>
+
+    <!-- uSPa44.stl bounding box (measured directly from the mesh file, meters). The mesh's
+         own local origin (0,0,0) sits at one corner, not its center — so mesh_rz can't just
+         rotate rpy in place, or the mesh swings away from the taxel array (which is placed
+         via xoff/yoff below, unaware of the mesh's own footprint). We rotate the mesh about
+         its OWN bounding-box center instead, by rotating around (0,0,0) and adding back a
+         compensating translation so the footprint lands back where it started. -->
+    <xacro:property name="mesh_min_x" value="0.0"/>
+    <xacro:property name="mesh_max_x" value="0.026"/>
+    <xacro:property name="mesh_min_y" value="-0.000064"/>
+    <xacro:property name="mesh_max_y" value="0.023736"/>
+    <xacro:property name="mesh_cx" value="${(mesh_min_x + mesh_max_x) / 2.0}"/>
+    <xacro:property name="mesh_cy" value="${(mesh_min_y + mesh_max_y) / 2.0}"/>
+    <xacro:property name="mesh_rz_rad" value="${radians(mesh_rz)}"/>
+    <xacro:property name="mesh_visual_x"
+      value="${mesh_cx - (mesh_cx * cos(mesh_rz_rad) - mesh_cy * sin(mesh_rz_rad))}"/>
+    <xacro:property name="mesh_visual_y"
+      value="${mesh_cy - (mesh_cx * sin(mesh_rz_rad) + mesh_cy * cos(mesh_rz_rad))}"/>
 
     <joint name="${bseq}_uSPa44_fixed" type="fixed">
       <origin xyz="${x} ${y} ${z}" rpy="${radians(rx)} ${radians(ry)} ${radians(rz)}"/>
@@ -26,8 +44,12 @@
         </geometry>
       </collision>
       <xacro:if value="${body == 1}">
+        <!-- mesh_rz: visual-only rotation (default 0, no effect on existing usages) — lets a
+             caller correct the base mesh's appearance (e.g. cable-exit notch orientation)
+             independently of the taxel array layout, which is placed relative to this same
+             link's origin below and is unaffected by this rotation. -->
         <visual>
-          <origin xyz="0 0 0" rpy="0 0 0" />
+          <origin xyz="${mesh_visual_x} ${mesh_visual_y} 0" rpy="0 0 ${mesh_rz_rad}" />
           <geometry>
             <mesh filename="package://xela_models/mesh/uSPa44.stl"/>
           </geometry>
